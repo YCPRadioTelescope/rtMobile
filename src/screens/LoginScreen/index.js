@@ -3,6 +3,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from "react-redux";
 import {login} from './AuthActions';
+import { AsyncStorage } from "react-native";
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;

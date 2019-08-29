@@ -27,8 +27,9 @@ export const login = (email, password) => {
     return axios
       .post(`${url}/login?email=${email}&password=${password}`)
       .then(response => {
-        //AsyncStorage.setItem("user", JSON.stringify(response.data));
+        AsyncStorage.setItem("user", {"email": email, "password": password});
         console.log(JSON.stringify(response));
+        this.setState;
         return dispatch(loginSuccess(response.data));
       })
       .catch(error => {
