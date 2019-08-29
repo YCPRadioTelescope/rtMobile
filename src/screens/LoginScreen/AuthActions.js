@@ -8,7 +8,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const loginSuccess = user => {
-  //alert("after : " + JSON.stringify(user));
   return {
     type: LOGIN_SUCCESS,
     user
@@ -39,34 +38,4 @@ export const login = (email, password) => {
   };
 };
 
-/*
-export const LOGOUT = "LOGOUT";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
-*/
-
-/*export const logoutSuccess = () => {
-  return {
-    type: LOGOUT_SUCCESS
-  };
-};
-
-export const logoutFailure = error => {
-  return {
-    type: LOGOUT_FAILURE,
-    error
-  };
-};*/
-
-/*export const logout = () => {
-  return dispatch => {
-    return AsyncStorage.removeItem("user")
-      .then(() => {
-        dispatch(logoutSuccess());
-      })
-      .catch(error => {
-        dispatch(logoutFailure(error));
-      });
-  };
-};*/
 

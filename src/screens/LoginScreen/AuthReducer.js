@@ -6,7 +6,6 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT_SUCCESS,
 } from "./AuthActions";
 
 const INITIAL_STATE = {
@@ -20,8 +19,6 @@ const INITIAL_STATE = {
   loginError: false,
   loadingUser: true,
   errorResponse: false
-  //profilePhotoUrl: null,
-  //profileThumbUrl: null
 };
 async function storeJwt({ jwt }) {
   try {

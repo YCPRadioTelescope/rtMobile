@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import AuthReducer from "./src/screens/DetailScreen/AuthReducer";
+import AuthReducer from "./src/screens/LoginScreen/AuthReducer";
 
 const reducer = combineReducers({
   user: AuthReducer,

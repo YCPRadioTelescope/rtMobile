@@ -1,11 +1,11 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from "./src/screens/HomeScreen";
-import DetailsScreen from './src/screens/DetailScreen';
+import LoginScreen from './src/screens/LoginScreen';
 
 const screens = (
   {
     Home: HomeScreen,
-    Detail: DetailsScreen
+    Login: LoginScreen,
   }
 );
 

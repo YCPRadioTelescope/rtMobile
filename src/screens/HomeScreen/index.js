@@ -6,7 +6,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Homesss Screen</Text>
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Detail')}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Login')}>
           <View>
             <Text> Press To Nav </Text>
           </View>
