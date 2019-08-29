@@ -51,7 +51,8 @@ class DetailsScreen extends React.Component {
               width: deviceWidth * 0.6,
               borderBottomWidth: 1,
               height: 40,
-              fontSize: 18
+              fontSize: 18,
+              color: 'white'
             }}
           />
           <TextInput
@@ -65,7 +66,8 @@ class DetailsScreen extends React.Component {
               width: deviceWidth * 0.6,
               borderBottomWidth: 1,
               height: 40,
-              fontSize: 18
+              fontSize: 18,
+              color: 'white',
             }}
           />
           <TouchableHighlight onPress={this.login} style={styles.button}>
