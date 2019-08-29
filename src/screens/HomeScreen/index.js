@@ -8,7 +8,7 @@ class HomeScreen extends React.Component {
         <Text>Homesss Screen</Text>
         <TouchableHighlight onPress={() => this.props.navigation.navigate('Login')}>
           <View>
-            <Text> Press To Nav </Text>
+            <Text> Press To Return to Login </Text>
           </View>
         </TouchableHighlight>
       </View>

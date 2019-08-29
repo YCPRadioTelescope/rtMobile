@@ -12,7 +12,7 @@ const screens = (
 
 const config = {
   headerMode: 'none',
-  initialRouteName: 'Home'
+  initialRouteName: 'Login'
 };
 
 const MainNavigator = createStackNavigator(screens,config);

@@ -21,7 +21,15 @@ class DetailsScreen extends React.Component {
 
 
   login = async () => {
-    await this.props.login(this.state.emailAddress, this.state.password);
+    await this.props.login(this.state.emailAddress, this.state.password).then(response => {
+      console.log('response', response);
+      if(response.type === "LOGIN_SUCCESS"){
+        this.props.navigation.navigate("Home");
+      }
+      else{
+        alert("Looks like the stars did not align correctly!  Please try to login again.")
+      }
+    })
   };
 
   render() {
@@ -36,11 +44,6 @@ class DetailsScreen extends React.Component {
       >
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{color: 'white', fontSize: 32}}> YCP Radio Telescope </Text>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Home')}>
-            <View>
-              <Text> Press To Nav Back to Home </Text>
-            </View>
-          </TouchableHighlight>
           <TextInput
             placeholder="Email"
             autoCapitalize="none"

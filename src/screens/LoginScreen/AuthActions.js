@@ -28,12 +28,12 @@ export const login = (email, password) => {
       .post(`${url}/login?email=${email}&password=${password}`)
       .then(response => {
         //AsyncStorage.setItem("user", JSON.stringify(response.data));
-        alert(JSON.stringify(response));
-        dispatch(loginSuccess(response.data));
+        console.log(JSON.stringify(response));
+        return dispatch(loginSuccess(response.data));
       })
       .catch(error => {
-        alert(error.response.data.message);
-        dispatch(loginFailure(error.response.data));
+        console.log(error.response.data.message);
+        return dispatch(loginFailure(error.response.data));
       });
   };
 };
