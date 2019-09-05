@@ -1,4 +1,4 @@
-import {Text, View, TouchableHighlight, TextInput, Dimensions, ImageBackground, StyleSheet} from 'react-native';
+import {Text, View, TouchableHighlight, TextInput, Dimensions, ImageBackground, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from "react-redux";
@@ -44,7 +44,7 @@ class DetailsScreen extends React.Component {
         source={require("../../../assets/images/skyy.jpg")}
         resizeMode="cover"
       >
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <KeyboardAvoidingView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{color: 'white', fontSize: 32}}> YCP Radio Telescope </Text>
           <TextInput
             placeholder="Email"
@@ -80,7 +80,7 @@ class DetailsScreen extends React.Component {
               <Text> login </Text>
             </View>
           </TouchableHighlight>
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     );
   }
