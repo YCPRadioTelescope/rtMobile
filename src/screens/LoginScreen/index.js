@@ -3,6 +3,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from "react-redux";
 import {login} from './AuthActions';
+import styles from "./styles";
 import { AsyncStorage } from "react-native";
 
 const deviceWidth = Dimensions.get("window").width;
@@ -25,7 +26,7 @@ class DetailsScreen extends React.Component {
     await this.props.login(this.state.emailAddress, this.state.password).then(response => {
       console.log('response', response);
       if(response.type === "LOGIN_SUCCESS"){
-        this.props.navigation.navigate("Home");
+        this.props.navigation.navigate("TempNav");
       }
       else{
         alert("Looks like the stars did not align correctly!  Please try to login again.")
@@ -84,18 +85,6 @@ class DetailsScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: "#cbd7dd",
-    borderRadius: 14,
-    paddingVertical: 6,
-    paddingHorizontal: 13,
-    alignItems: 'center'
-  },
-});
 
 const mapStateToProps = state => {
   const { user } = state;
