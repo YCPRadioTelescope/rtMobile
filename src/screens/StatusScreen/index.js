@@ -8,21 +8,41 @@ class StatusScreen extends React.Component {
 
 constructor() {
    super();
+   this.state = {
+     statusLightStyle: {
+       width: 50,
+       height: 50,
+       backgroundColor: 'green',
+       borderWidth: 10,
+       borderColor: 'transparent',
+       borderRadius: 30,
+       top: '9.5%',
+       right: '25%',
+       position: 'absolute',
+     },
+   }
  }
 
-let statuslightstyle {};
-
-swapstatuscolor () {
+  swapstatuscolor = () => {
     console.log('Yellow Pressed');
-    statuslightstyle = {};
-}
+    this.setState({statusLightStyle: {
+        width: 50,
+        height: 50,
+        backgroundColor: 'yellow',
+        borderWidth: 10,
+        borderColor: 'transparent',
+        borderRadius: 30,
+        top: '9.5%',
+        right: '25%',
+        position: 'absolute'
+      }})
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Text style= {styles.header}>Status</Text>
-
-        <View style={statuslightstyle} />
+        <View style={this.state.statusLightStyle} />
         <Text style= {styles.sensorlistheader}>Sensors</Text>
         <View style={styles.sensorlistcontainer}>
             <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}}>
