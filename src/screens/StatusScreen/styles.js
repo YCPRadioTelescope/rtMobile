@@ -26,6 +26,17 @@ export default StyleSheet.create({
   right: '25%',
   position: 'absolute',
   },
+  statuslightyellow: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'yellow',
+    borderWidth: 10,
+    borderColor: 'transparent',
+    borderRadius: 30,
+    top: '9.5%',
+    right: '25%',
+    position: 'absolute',
+    },
   sensorlistheader:{
     position: 'absolute',
     top: '20%',
