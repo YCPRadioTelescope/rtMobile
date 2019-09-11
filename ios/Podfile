@@ -29,6 +29,8 @@ target 'rtMobile' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'rtMobileTests' do
     inherit! :search_paths
     # Pods for testing
