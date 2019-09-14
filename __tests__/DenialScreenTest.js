@@ -1,12 +1,12 @@
 import React from 'react';
-import TempNav from '../src/screens/TempNavScreen';
+import Denial from '../src/screens/DenialScreen';
 import ErrorBoundary from '../components/ErrorBoundary';
 import renderer from 'react-test-renderer';
 
 test('renders correctly', () => {
   const tree = renderer.create(
     <ErrorBoundary>
-      <TempNav />
+      <Denial />
     </ErrorBoundary>).toJSON();
   expect(tree).toMatchSnapshot();
 });
