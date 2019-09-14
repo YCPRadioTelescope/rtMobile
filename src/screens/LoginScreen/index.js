@@ -9,7 +9,7 @@ import { AsyncStorage } from "react-native";
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
-class DetailsScreen extends React.Component {
+class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -106,4 +106,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DetailsScreen);
+)(LoginScreen);
