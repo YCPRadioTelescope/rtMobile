@@ -4,9 +4,6 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import renderer from 'react-test-renderer';
 
 test('renders correctly', () => {
-  const tree = renderer.create(
-    <ErrorBoundary>
-      <Status />
-    </ErrorBoundary>).toJSON();
+  const tree = renderer.create(<Status />).toJSON();
   expect(tree).toMatchSnapshot();
 });
