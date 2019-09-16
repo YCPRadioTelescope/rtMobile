@@ -72,7 +72,7 @@ constructor() {
         <View style={{marginTop: '20%', alignItems: 'center'}}>
           <Text>Sensors</Text>
         </View>
-          <View style={this.state.statusLightStyle} />
+        <View style={this.state.statusLightStyle} />
         <Divider style={styles.sectionDivider}/>
         <View style={styles.container}>
           <Text style= {styles.sensorlistheader}>Sensors</Text>
