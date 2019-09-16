@@ -1,6 +1,6 @@
 import mockStore from 'redux-mock-store';
 import {login} from '../src/screens/LoginScreen/AuthActions';
-const store = mockStore();
+const store = mockStore() ;
 
 describe('Testing log in authentication', () => {
   beforeEach(() => {
