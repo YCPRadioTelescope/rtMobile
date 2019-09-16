@@ -19,7 +19,7 @@ constructor() {
        borderWidth: 10,
        borderColor: 'transparent',
        borderRadius: 30,
-       top: '9.5%',
+       top: '15.5%',
        right: '25%',
        position: 'absolute',
      },
@@ -55,7 +55,7 @@ constructor() {
         borderWidth: 10,
         borderColor: 'transparent',
         borderRadius: 30,
-        top: '9.5%',
+        top: '15.5%',
         right: '25%',
         position: 'absolute'
       }})
@@ -63,30 +63,34 @@ constructor() {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style= {styles.header}>Status</Text>
-          <Divider/>
-        <View style={this.state.statusLightStyle} />
-        <Text style= {styles.sensorlistheader}>Sensors</Text>
-        <View style={styles.sensorlistcontainer}>
-            {this.state.sensorArr.map( sensorInfo => {
-                return (
-                    <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}}>
-                    <Text>{sensorInfo.text}</Text>
-                    </TouchableHighlight>
-                );
-            })}
-        </View>
-         <TouchableHighlight onPress={this.swapstatuscolor}>
-                <Text>Yellow</Text>
-         </TouchableHighlight>
-          <Divider/>
-        {/*Back Arrow*/}
+      <View>
         <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-         <Image
-           source={require("../../../assets/images/back.png")}
-         />
+          <Image
+            source={require("../../../assets/images/back.png")}
+          />
         </TouchableHighlight>
+        <View style={{marginTop: '20%', alignItems: 'center'}}>
+          <Text>Sensors</Text>
+        </View>
+          <View style={this.state.statusLightStyle} />
+        <Divider style={styles.sectionDivider}/>
+        <View style={styles.container}>
+          <Text style= {styles.sensorlistheader}>Sensors</Text>
+          <View style={styles.sensorlistcontainer}>
+              {this.state.sensorArr.map( sensorInfo => {
+                  return (
+                      <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}}>
+                      <Text>{sensorInfo.text}</Text>
+                      </TouchableHighlight>
+                  );
+              })}
+          </View>
+          <View style={{marginTop: '50%'}}>
+           <TouchableHighlight onPress={this.swapstatuscolor}>
+                  <Text>Yellow</Text>
+           </TouchableHighlight>
+          </View>
+        </View>
       </View>
     );
   }

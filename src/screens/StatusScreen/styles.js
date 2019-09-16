@@ -4,16 +4,17 @@ var statuslightsize = 50;
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   header:{
     position: 'absolute',
     top: '10%',
     fontWeight: 'bold',
     fontSize: 30,
-    borderBottomWidth: 5,
+    //borderBottomWidth: 5,
 
   },
   sensorlistheader:{
@@ -29,6 +30,11 @@ export default StyleSheet.create({
   back:{
     position: 'absolute',
     left: '10%',
-    top: '10%',
+    top: '15%',
+  },
+  sectionDivider: {
+    height: 1,
+    marginTop: 10,
+    marginBottom: 5
   }
 });
