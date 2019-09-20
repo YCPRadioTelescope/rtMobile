@@ -1,13 +1,3 @@
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-
-
-
-Running the tests
-
-Navigate to the project directory in the terminal and run yarn test
-
 # Radio telescope Mobile App
 
 A Mobile app for the admins of the radio telescope
