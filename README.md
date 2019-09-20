@@ -15,6 +15,7 @@ If on a mac<br/>
 cd pod<br/>
 run pod install<br/>
 cd ..<br/>
+If some libraries don't install, you can also run yarn add
 
 Go to https://facebook.github.io/react-native/docs/getting-started and follow their React Native CLI Quickstart guide. 
 
