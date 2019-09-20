@@ -29,6 +29,7 @@ If you get an error similar to this, Keystore file '/Project-Folder/android/app/
 Generate a keystore file with this command -> keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 –<br/>
 Place the new file in rtMobile/android/app folder<br/>
 If keytool is not recognized as a command, you will have to navigate to where your keytool is an executable file somewhere in your java jdk folder, and create run the command while in that folder.  Cut and paste the new keystore file in rtMobile/android/app<br/>
+<br/>
 Other common issues can be found here https://facebook.github.io/react-native/docs/troubleshooting
 
 ## Deployment
