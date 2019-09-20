@@ -18,13 +18,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-Clone the project.
-In the terminal navigate into the project folder.
-run npm install 
-If on a mac
-cd pod
-run pod install
-cd ..
+Clone the project<br/>
+In the terminal navigate into the project folder<br/>
+run npm install<br/> 
+If on a mac<br/>
+cd pod<br/>
+run pod install<br/>
+cd ..<br/>
 
 Go to https://facebook.github.io/react-native/docs/getting-started and follow their React Native CLI Quickstart guide. 
 
