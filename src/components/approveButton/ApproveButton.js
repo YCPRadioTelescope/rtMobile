@@ -9,9 +9,23 @@ class ApproveButton extends Component {
       userID: this.props.userID,
     };
   }
+  
+  sendEmail(email, subject, body){
+    console.log('Sending approval email');
+    console.log('To:'+email);
+    console.log('Subject:'+subject);
+    console.log('Body: '+body);
+  }
 
   onPress = () => {
-    console.log('pressed Accept by ', this.props.userID );
+    var ID = this.props.userID;
+    // TODO: get email from userID
+    var email = 'amcdevitt97@gmail.com';
+    // TODO: get name from userID
+    var name = 'Alyssa McDevitt';
+    var subject = 'Congrats, you\'ve been approved!';
+    var body = "Dear "+name+",  \nYour account for the YCAS radio telescope been approved. You may now sign in.";
+    this.sendEmail(email, subject, body);
   }
 
  render() {
@@ -27,6 +41,7 @@ class ApproveButton extends Component {
     )
   }
 }
+
 
 const styles = StyleSheet.create({
   button: {

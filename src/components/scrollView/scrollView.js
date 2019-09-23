@@ -7,6 +7,7 @@ import styles from './styles';
 // cayNMPU2$B9Q
 
 class ScrollElements extends Component {
+   
    state = {
       names: [
          {'name': 'Ben', 'id': 1, 'email': 'test@test.com', 'level': 'Member', 'reason':'because'},
@@ -23,7 +24,13 @@ class ScrollElements extends Component {
          {'name': 'Olivia', 'id': 12, 'email': 'test@test.com', 'level': 'Member', 'reason':'because'}
       ]
    }
+
+   onPress = () => {
+      console.log('pressed deny by ', this.props.userID );
+   }
+
    render() {
+      const navigation = this.props.navigation;
       return (
          <View>
             <ScrollView style = {styles.element}>
@@ -38,7 +45,7 @@ class ScrollElements extends Component {
                         </View>
                         <View style = {styles.buttons}>
                            <ApproveButton style = {styles.approveButton} userID = {item.id} />
-                           <DenyButton style = {styles.denyButton} userID = {item.id} />
+                           <DenyButton style={styles.denyButton} userID={item.id} navigation={this.props.navigation} onPress={this.onPress} />
                         </View>
                      </View>
                   ))
@@ -48,4 +55,5 @@ class ScrollElements extends Component {
       )
    }
 }
-export default ScrollElements
+
+export default ScrollElements;

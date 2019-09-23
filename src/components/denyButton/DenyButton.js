@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
-import {StyleSheet, Image, View, TouchableHighlight} from 'react-native'
+import React, { Component } from 'react';
+import {StyleSheet, Image, View, TouchableHighlight} from 'react-native';
 
 class DenyButton extends Component {
-
-  constructor(props) {
+  /*constructor(props) {
     super(props);
     this.state = {
       userID: this.props.userID,
     };
-  }
+  }*/
 
-  onPress = () => {
+  /*onPress = () => {
     console.log('pressed deny by ', this.props.userID );
     // TODO: Route to denial page
-  }
+  }*/
 
  render() {
+  const navigation = this.props.navigation;
     return (
         <View>
-            <TouchableHighlight onPress={this.onPress}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('Denial')}>
                 <Image
                     style={styles.button}
                     source={require('../../../assets/images/xButton.png')}
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default DenyButton
+export default DenyButton;

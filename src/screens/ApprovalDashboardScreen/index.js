@@ -5,16 +5,14 @@ import ScrollElements from '../../components/scrollView/scrollView.js';
 
 
 class ApprovalDashboardScreen extends React.Component {
-
+  
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navTitle}>Approve Users</Text>
         </View>
-        <ScrollElements style={styles.scroll}/>
-
-        
+        <ScrollElements style={styles.scroll} navigation={this.props.navigation} />
         <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
           <Image
             source={require("../../../assets/images/back.png")}
