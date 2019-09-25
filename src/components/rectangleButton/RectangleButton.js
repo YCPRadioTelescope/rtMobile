@@ -46,19 +46,18 @@ class RectangleButton extends Component {
 
 const styles = StyleSheet.create({
   button: {
+    position:'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
-    width: 350,
-    height:100,
+    marginTop:'10%',
+    height:50,
     backgroundColor: '#444063',
     borderRadius: 5,
-    marginLeft:15,
-    marginTop:25,
   },
   buttonText:{
     color:'white',
     fontSize:18,
+    marginBottom:'10%',
   },
 })
 

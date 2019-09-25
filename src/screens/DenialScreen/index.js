@@ -11,13 +11,13 @@ class DenialScreen extends React.Component {
         <View style={styles.navBar}>
           <Text style={styles.navTitle}>Deny User?</Text>
         </View>
-
-        <RectangleButton text="Improper permissions" reason="Improper permissions" navigation={this.props.navigation}/>
-        <RectangleButton text="Vulgar Name" reason="Vulgar Name" onavigation={this.props.navigation}/>
-        <RectangleButton text="Reason 3" reason="reason3" navigation={this.props.navigation}/>
-        <RectangleButton text="Reason 4" reason="reason4" navigation={this.props.navigation}/>
-        <RectangleButton text="Reason 5" reason="reason5" navigation={this.props.navigation}/>
-
+        <View style={styles.buttonHolder}>
+            <RectangleButton text="Improper permissions" reason="Improper permissions" navigation={this.props.navigation}/>
+            <RectangleButton text="Vulgar Name" reason="Vulgar Name" navigation={this.props.navigation}/>
+            <RectangleButton text="Reason 3" reason="reason3" navigation={this.props.navigation}/>
+            <RectangleButton text="Reason 4" reason="reason4" navigation={this.props.navigation}/>
+            <RectangleButton text="Reason 5" reason="reason5" navigation={this.props.navigation}/>
+        </View>
         <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
           <Image
             source={require("../../../assets/images/back.png")}
