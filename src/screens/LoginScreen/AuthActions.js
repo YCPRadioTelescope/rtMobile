@@ -28,7 +28,7 @@ export const login = (email, password) => {
       .post(`${url}/login?email=${email}&password=${password}`)
       .then(response => {
         AsyncStorage.setItem("user", {"email": email, "password": password});
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         this.setState;
         return dispatch(loginSuccess(response.data));
       })

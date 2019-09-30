@@ -24,7 +24,7 @@ class LoginScreen extends React.Component {
 
   login = async () => {
     await this.props.login(this.state.emailAddress, this.state.password).then(response => {
-      console.log('response', response);
+      //console.log('response', response);
       if(response.type === "LOGIN_SUCCESS"){
         this.props.navigation.navigate("TempNav");
       }
