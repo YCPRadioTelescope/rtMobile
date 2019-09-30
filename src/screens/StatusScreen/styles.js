@@ -10,8 +10,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   header:{
-    position: 'absolute',
-    top: '10%',
+    //position: 'absolute',
+    //top: '10%',
     fontWeight: 'bold',
     fontSize: 30,
     //borderBottomWidth: 5,
@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
   sensorlistheader:{
     position: 'absolute',
-    top: '20%',
+    top: '15%',
   },
   sensorlistcontainer: {
     position: 'absolute',
