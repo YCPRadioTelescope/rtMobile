@@ -22,10 +22,12 @@ export default StyleSheet.create({
     top: '15%',
   },
   sensorlistcontainer: {
-    position: 'absolute',
-    top: '25%',
+    //position: 'absolute',
+    //top: '25%',
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '100%'
+
   },
   back:{
     position: 'absolute',

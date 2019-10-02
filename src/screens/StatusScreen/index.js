@@ -1,4 +1,4 @@
-import {Image, Text, TouchableHighlight, View} from 'react-native';
+import {Image, Text, TouchableHighlight, View, ScrollView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
@@ -10,14 +10,17 @@ const Sensor = ({
     name,
     style
     })=>(
-    <View style = {{flexDirection: 'row'}}>
-        <Text>{name + "       Tempertature: "+temp+"    "}</Text>
-        <Image
-        source={require("../../../assets/images/mediumyellowstatus.png")}
-        style = {style}
-        />
-        
-    </View>
+        <View>
+            <View style = {{flexDirection: 'row'}}>
+                <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%'}}>{name}</Text>
+                <Image
+                source={require("../../../assets/images/mediumyellowstatus.png")}
+                style = {style}
+                />
+
+            </View>
+            <Divider style={styles.sectionDivider}/>
+        </View>
 
 
 );
@@ -28,25 +31,25 @@ constructor() {
    super();
    this.state = {
      statusLightStyle: {
-       //width: 50,
-       //height: 50,
+       width: 50,
+       height: 50,
        //backgroundColor: 'green',
        //borderWidth: 10,
        //borderColor: 'transparent',
        //borderRadius: 30,
-       top: '20.0%',
+       top: '15.0%',
        right: '22.5%',
        position: 'absolute',
      },
      sensorLightStyle: {
-         width: 40,
-         height: 40,
+         width: 30,
+         height: 30,
          backgroundColor: 'green',
          borderWidth: 10,
          borderColor: 'transparent',
          borderRadius: 50,
-
-         //right: '25%',
+         alignSelf: 'flex-end',
+         left: '800%',
          //position: 'absolute',
      },
      sensorArr: [
@@ -67,6 +70,24 @@ constructor() {
          temp: 50,
          name: "test3",
          status: "0",
+       },
+       {
+         key: 4,
+         temp: 50,
+         name: "test4",
+         status: "0",
+       },
+       {
+       key: 5,
+       temp: 50,
+       name: "test5",
+       status: "0",
+       },
+       {
+       key: 6,
+       temp: 50,
+       name: "test6",
+       status: "0",
        },
      ],
    }
@@ -97,7 +118,7 @@ constructor() {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
           <Image
             source={require("../../../assets/images/back.png")}
@@ -107,7 +128,7 @@ constructor() {
           <Text style = {styles.header}>Status</Text>
         </View>
           <Image
-              source={require("../../../assets/images/mediumgreenstatus.png")}
+              source={require("../../../assets/images/largegreenstatus.png")}
               style={this.state.statusLightStyle}
           />
         <Divider style={styles.sectionDivider}/>
@@ -120,19 +141,15 @@ constructor() {
                       <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}}>
                             <Sensor name = {sensorInfo.name} temp={sensorInfo.temp}
                             style={this.state.sensorLightStyle}/>
-
                       </TouchableHighlight>
-
                   );
               })}
           </View>
-          <View style={{marginTop: '50%'}}>
-           <TouchableHighlight onPress={this.swapstatuscolor}>
-                  <Text>Yellow</Text>
-           </TouchableHighlight>
-          </View>
+
+
+
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
