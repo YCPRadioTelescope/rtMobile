@@ -14,12 +14,13 @@ export default StyleSheet.create({
     //top: '10%',
     fontWeight: 'bold',
     fontSize: 30,
-    //borderBottomWidth: 5,
-
   },
   sensorlistheader:{
     position: 'absolute',
-    top: '15%',
+    top: '16.5%',
+    alignSelf: 'center',
+    marginTop: '15%',
+
   },
   sensorlistcontainer: {
     //position: 'absolute',
@@ -38,5 +39,11 @@ export default StyleSheet.create({
     height: 1,
     marginTop: 10,
     marginBottom: 5
+  },
+  listheaderDivider: {
+    height: 1,
+    marginTop: 20,
+    marginBottom: 5
   }
+
 });
