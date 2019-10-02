@@ -20,15 +20,11 @@ export default StyleSheet.create({
     top: '16.5%',
     alignSelf: 'center',
     marginTop: '15%',
-
   },
   sensorlistcontainer: {
-    //position: 'absolute',
-    //top: '25%',
     flex: 1,
     flexDirection: 'column',
     width: '100%'
-
   },
   back:{
     position: 'absolute',
@@ -44,6 +40,24 @@ export default StyleSheet.create({
     height: 1,
     marginTop: 20,
     marginBottom: 5
-  }
+  },
+  sensorLightStyle: {
+    width: 30,
+    height: 30,
+    backgroundColor: 'green',
+    borderWidth: 10,
+    borderColor: 'transparent',
+    borderRadius: 50,
+    alignSelf: 'flex-end',
+    left: '800%',
+    //position: 'absolute',
+  },
+  statusLightStyle: {
+    width: 50,
+    height: 50,
+    top: '15.0%',
+    right: '22.5%',
+    position: 'absolute',
+  },
 
 });

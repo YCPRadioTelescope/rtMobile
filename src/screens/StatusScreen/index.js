@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
 
-
+//component to render each of the sensors in sensorlistcontainer
 const Sensor = ({
                     key,
                     temp,
@@ -14,10 +14,9 @@ const Sensor = ({
         <View style = {{flexDirection: 'row'}}>
             <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%'}}>{name}</Text>
             <Image
-                source={require("../../../assets/images/mediumyellowstatus.png")}
+                source={require("../../../assets/images/meduimgreenstatus.png")}
                 style = {style}
             />
-
         </View>
         <Divider style={styles.sectionDivider}/>
     </View>
@@ -30,24 +29,7 @@ class StatusScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            statusLightStyle: {
-                width: 50,
-                height: 50,
-                top: '15.0%',
-                right: '22.5%',
-                position: 'absolute',
-            },
-            sensorLightStyle: {
-                width: 30,
-                height: 30,
-                backgroundColor: 'green',
-                borderWidth: 10,
-                borderColor: 'transparent',
-                borderRadius: 50,
-                alignSelf: 'flex-end',
-                left: '800%',
-                //position: 'absolute',
-            },
+            //this is the array that holds information the the sensor components
             sensorArr: [
                 {
                     key: 0,
@@ -121,7 +103,7 @@ class StatusScreen extends React.Component {
                 </View>
                 <Image
                     source={require("../../../assets/images/largegreenstatus.png")}
-                    style={this.state.statusLightStyle}
+                    style={styles.statusLightStyle}
                 />
                 <Divider style={styles.sectionDivider}/>
                 <Text style= {styles.sensorlistheader}>Sensors</Text>
@@ -132,7 +114,7 @@ class StatusScreen extends React.Component {
                             return (
                                 <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}}>
                                     <Sensor name = {sensorInfo.name} temp={sensorInfo.temp}
-                                            style={this.state.sensorLightStyle}/>
+                                            style={styles.sensorLightStyle}/>
                                 </TouchableHighlight>
                             );
                         })}
