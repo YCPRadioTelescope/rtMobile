@@ -1,4 +1,4 @@
-import {Image, Text, TouchableHighlight, View,Animate} from 'react-native';
+import {Image, Text, TouchableHighlight, View, Animate, ScrollView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
