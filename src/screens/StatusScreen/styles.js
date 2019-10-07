@@ -15,9 +15,17 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
   },
+  statusLightStyle: {
+    width: 50,
+    height: 50,
+    //top: '9.0%',
+    //marginRight: '10%',
+    right: '22.5%',
+    position: 'absolute',
+  },
   sensorlistheader:{
     position: 'absolute',
-    top: '16.5%',
+    top: '9.0%',
     alignSelf: 'center',
     marginTop: '15%',
   },
@@ -29,7 +37,7 @@ export default StyleSheet.create({
   back:{
     position: 'absolute',
     left: '10%',
-    top: '15%',
+    top: '10%',
   },
   sectionDivider: {
     height: 1,
@@ -49,15 +57,9 @@ export default StyleSheet.create({
     borderColor: 'transparent',
     borderRadius: 50,
     alignSelf: 'flex-end',
-    left: '800%',
+
+    marginLeft: '75%',
     //position: 'absolute',
-  },
-  statusLightStyle: {
-    width: 50,
-    height: 50,
-    top: '15.0%',
-    right: '22.5%',
-    position: 'absolute',
   },
 
 });

@@ -98,13 +98,13 @@ class StatusScreen extends React.Component {
                         source={require("../../../assets/images/back.png")}
                     />
                 </TouchableHighlight>
-                <View style={{marginTop: '20%', alignItems: 'center'}}>
+                <View style={{marginTop: '10%', alignItems: 'center'}}>
                     <Text style = {styles.header}>Status</Text>
+                    <Image
+                        source={require("../../../assets/images/largegreenstatus.png")}
+                        style={styles.statusLightStyle}
+                    />
                 </View>
-                <Image
-                    source={require("../../../assets/images/largegreenstatus.png")}
-                    style={styles.statusLightStyle}
-                />
                 <Divider style={styles.sectionDivider}/>
                 <Text style= {styles.sensorlistheader}>Sensors</Text>
                 <Divider style={styles.listheaderDivider}/>
