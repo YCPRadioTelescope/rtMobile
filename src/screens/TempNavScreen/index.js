@@ -15,7 +15,7 @@ class TempNavScreen extends React.Component {
   };
 
   render() {
-    console.log('user', this.props.auth);
+    console.log('user');
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{marginBottom: 20, fontSize: 32}}>Temporary Screen</Text>
@@ -57,9 +57,9 @@ class TempNavScreen extends React.Component {
 const mapStateToProps = state => {
   const { user } = state;
   return {
-    auth: user.auth,
+    /*auth: user.auth,
     errorResponse: user.auth.errorResponse,
-    errorMessage: user.auth.errorMessage
+    errorMessage: user.auth.errorMessage*/
   };
 };
 
