@@ -9,7 +9,7 @@ import { AsyncStorage } from "react-native";
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
-class DetailsScreen extends React.Component {
+class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class DetailsScreen extends React.Component {
 
   login = async () => {
     await this.props.login(this.state.emailAddress, this.state.password).then(response => {
-      console.log('response', response);
+      //console.log('response', response);
       if(response.type === "LOGIN_SUCCESS"){
         this.props.navigation.navigate("TempNav");
       }
@@ -106,4 +106,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DetailsScreen);
+)(LoginScreen);
