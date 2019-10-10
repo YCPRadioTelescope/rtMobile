@@ -1,45 +1,501 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
->
-  <Text>
-    Status Screen
-  </Text>
-  <View
-    accessible={true}
-    clickable={true}
-    isTVSelectable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "left": "10%",
-        "position": "absolute",
-        "top": "10%",
-      }
-    }
-  >
-    <Image
-      source={
+<RCTScrollView>
+  <View>
+    <View
+      accessible={true}
+      clickable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
         Object {
-          "testUri": "../../../assets/images/back.png",
+          "left": "10%",
+          "position": "absolute",
+          "top": "10%",
         }
       }
-      style={null}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/back.png",
+          }
+        }
+        style={null}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "marginTop": "10%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 30,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Status
+      </Text>
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/largegreenstatus.png",
+          }
+        }
+        style={
+          Object {
+            "height": 40,
+            "position": "absolute",
+            "right": "22.5%",
+            "top": "1.0%",
+            "width": 40,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#bcbbc1",
+          "height": 1,
+          "marginBottom": 5,
+          "marginTop": 10,
+        }
+      }
     />
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "marginTop": "15%",
+          "position": "absolute",
+          "top": "9.0%",
+        }
+      }
+    >
+      Sensors
+    </Text>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#bcbbc1",
+          "height": 1,
+          "marginBottom": 5,
+          "marginTop": 20,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "flexDirection": "column",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "paddingLeft": "5%",
+                  }
+                }
+              >
+                text0
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/meduimgreenstatus.png",
+                  }
+                }
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                    "backgroundColor": "green",
+                    "borderColor": "transparent",
+                    "borderRadius": 50,
+                    "borderWidth": 10,
+                    "height": 30,
+                    "marginLeft": "75%",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#bcbbc1",
+                  "height": 1,
+                  "marginBottom": 5,
+                  "marginTop": 10,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "paddingLeft": "5%",
+                  }
+                }
+              >
+                test1
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/meduimgreenstatus.png",
+                  }
+                }
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                    "backgroundColor": "green",
+                    "borderColor": "transparent",
+                    "borderRadius": 50,
+                    "borderWidth": 10,
+                    "height": 30,
+                    "marginLeft": "75%",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#bcbbc1",
+                  "height": 1,
+                  "marginBottom": 5,
+                  "marginTop": 10,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "paddingLeft": "5%",
+                  }
+                }
+              >
+                test2
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/meduimgreenstatus.png",
+                  }
+                }
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                    "backgroundColor": "green",
+                    "borderColor": "transparent",
+                    "borderRadius": 50,
+                    "borderWidth": 10,
+                    "height": 30,
+                    "marginLeft": "75%",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#bcbbc1",
+                  "height": 1,
+                  "marginBottom": 5,
+                  "marginTop": 10,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "paddingLeft": "5%",
+                  }
+                }
+              >
+                test3
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/meduimgreenstatus.png",
+                  }
+                }
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                    "backgroundColor": "green",
+                    "borderColor": "transparent",
+                    "borderRadius": 50,
+                    "borderWidth": 10,
+                    "height": 30,
+                    "marginLeft": "75%",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#bcbbc1",
+                  "height": 1,
+                  "marginBottom": 5,
+                  "marginTop": 10,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "paddingLeft": "5%",
+                  }
+                }
+              >
+                test4
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/meduimgreenstatus.png",
+                  }
+                }
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                    "backgroundColor": "green",
+                    "borderColor": "transparent",
+                    "borderRadius": 50,
+                    "borderWidth": 10,
+                    "height": 30,
+                    "marginLeft": "75%",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#bcbbc1",
+                  "height": 1,
+                  "marginBottom": 5,
+                  "marginTop": 10,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          clickable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "paddingLeft": "5%",
+                  }
+                }
+              >
+                test5
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/meduimgreenstatus.png",
+                  }
+                }
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                    "backgroundColor": "green",
+                    "borderColor": "transparent",
+                    "borderRadius": 50,
+                    "borderWidth": 10,
+                    "height": 30,
+                    "marginLeft": "75%",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#bcbbc1",
+                  "height": 1,
+                  "marginBottom": 5,
+                  "marginTop": 10,
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
   </View>
-</View>
+</RCTScrollView>
 `;

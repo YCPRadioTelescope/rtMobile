@@ -21,7 +21,7 @@ class TempNavScreen extends React.Component {
         <Text style={{marginBottom: 20, fontSize: 32}}>Temporary Screen</Text>
         <TouchableHighlight onPress={() => {this.props.navigation.navigate('Home')}} style={styles.button}>
           <View>
-            <Text> Home Screen </Text>
+            <Text> Home Screen  </Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}} style={styles.button}>
