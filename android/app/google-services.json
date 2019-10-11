@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "534723067035",
+    "firebase_url": "https://rtmobile.firebaseio.com",
+    "project_id": "rtmobile",
+    "storage_bucket": "rtmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534723067035:android:f5edea45bed3006d8b9a3e",
+        "android_client_info": {
+          "package_name": "com.rtmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534723067035-5mbnhe21jbmjicrvpkfvpittg8rphsn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8sEoGw-R0ZCiczbka57eBPzaEK1n6cww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534723067035-5mbnhe21jbmjicrvpkfvpittg8rphsn4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "534723067035-snie8hor5856om48q9bt9boj0c526a2b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.rtMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
