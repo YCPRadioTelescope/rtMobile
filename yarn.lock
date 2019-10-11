@@ -1063,10 +1063,10 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.2.tgz#0e58ae66773d7fd7c372a493aff740878ec9ceaa"
   integrity sha512-f8JzJNWVhKtc9dg/dyDNfliTKNOJSLa7Oht/ElZdF/UbMUmAH3rLmAk3ODNjw0mZajDEgatA03tRjB4+Dp/tzA==
 
-"@types/react-native-vector-icons@^6.4.1":
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.2.tgz#e50eb062ebac4a293b1efe0343b5748f8ff82b51"
-  integrity sha512-UljqnOw2gqbiT6sBWKQYjYWPfx5hgqmQOCSuus9IIF5ykPc15E66jLQ4pYgu3psc2Ik82G/ngpgo55cBa144Jg==
+"@types/react-native-vector-icons@^6.4.4":
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.4.tgz#f81dcc371b74a9c408ce12f95b8f494d7543146b"
+  integrity sha512-G1Iry/8i23IPjZzNjydMt/WcjV+T1Xu3cTXDwSsP9lpKu0bA0j+c7AACJ1aIka8HVnWXS41NoZnKkHImO0SMkw==
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"
@@ -5408,12 +5408,12 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
-react-native-elements@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.2.0.tgz#37f2562ca227d79dcb97ce0d869600f371041318"
-  integrity sha512-D6El6WXtKRGavHPgqJAk1UPMeDqxxfPDDjcuZ7S62uSg6CmyfXrPJLfQuSmJDC85Pm++oBq0Z5GRyymvvQObig==
+react-native-elements@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.2.6.tgz#fda0f49ddf87abdb287de1ec9bc057c103430455"
+  integrity sha512-f0HRW41qb2x8MJUjR9b5FtRX9gnychtZ3P4O7AX3HV2pxx5c6pFqE+Q38mv8vMDU0QB9X+l/iz6bapbTd9HCvA==
   dependencies:
-    "@types/react-native-vector-icons" "^6.4.1"
+    "@types/react-native-vector-icons" "^6.4.4"
     color "^3.1.0"
     deepmerge "^3.1.0"
     hoist-non-react-statics "^3.1.0"
