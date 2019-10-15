@@ -112,7 +112,9 @@ class StatusScreen extends React.Component {
                     <View style={styles.sensorlistcontainer}>
                         {this.state.sensorArr.map( sensorInfo => {
                             return (
-                                <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}}>
+                                <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor',
+                                    {sensorname: sensorInfo.name,}
+                                    )}}>
                                     <Sensor name = {sensorInfo.name} temp={sensorInfo.temp}
                                             style={styles.sensorLightStyle}/>
                                 </TouchableHighlight>
