@@ -22,6 +22,12 @@ class SensorScreen extends React.Component {
                 />
             </View>
             <Divider style={styles.sectionDivider}/>
+            <View style={styles.container}>
+                <View style={styles.detailslistcontainer}>
+                    <Text>Testing alignment</Text>
+                    <Text>this should be on the right</Text>
+                </View>
+            </View>
         </ScrollView>
     );
   }

@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -30,5 +30,10 @@ export default StyleSheet.create({
     height: 1,
     marginTop: 10,
     marginBottom: 5
+  },
+  detailslistcontainer: {
+    flex: 1,
+    flexDirection: 'column',
+    width: '100%'
   },
 });

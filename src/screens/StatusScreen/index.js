@@ -20,8 +20,6 @@ const Sensor = ({
         </View>
         <Divider style={styles.sectionDivider}/>
     </View>
-
-
 );
 
 class StatusScreen extends React.Component {
