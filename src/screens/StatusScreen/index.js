@@ -8,7 +8,8 @@ const Sensor = ({
                     key,
                     temp,
                     name,
-                    style
+                    style,
+                    details
                 })=>(
     <View>
         <View style = {{flexDirection: 'row'}}>
@@ -34,36 +35,133 @@ class StatusScreen extends React.Component {
                     temp: 82,
                     name: "text0",
                     status: "0",
+                    details: [
+                        {
+                            name: "test1",
+                            detail: 'detailtest1',
+                        },
+                    ],
                 },
                 {
                     key: 1,
                     temp: 40,
                     name: "test1",
                     status: "0",
+                    details: [
+                        {
+                            name: "test1",
+                            detail: 'detailtest1',
+                        },
+                        {
+                            name: "test2",
+                            detail: 'detailtest2',
+                        },
+                    ],
                 },
                 {
                     key: 2,
                     temp: 50,
                     name: "test2",
                     status: "0",
+                    details: [
+                        {
+                            name: "test1",
+                            detail: 'detailtest1',
+                        },
+                        {
+                            name: "test2",
+                            detail: 'detailtest2',
+                        },
+                        {
+                            name: "test3",
+                            detail: 'detailtest3',
+                        },
+                    ],
                 },
                 {
                     key: 3,
                     temp: 50,
                     name: "test3",
                     status: "0",
+                    details: [
+                        {
+                            name: "test1",
+                            detail: 'detailtest1',
+                        },
+                        {
+                            name: "test2",
+                            detail: 'detailtest2',
+                        },
+                        {
+                            name: "test3",
+                            detail: 'detailtest3',
+                        },
+                        {
+                            name: "test4",
+                            detail: 'detailtest4',
+                        },
+                    ],
                 },
                 {
                     key: 4,
                     temp: 50,
                     name: "test4",
                     status: "0",
+                    details: [
+                        {
+                            name: "test1",
+                            detail: 'detailtest1',
+                        },
+                        {
+                            name: "test2",
+                            detail: 'detailtest2',
+                        },
+                        {
+                            name: "test3",
+                            detail: 'detailtest3',
+                        },
+                        {
+                            name: "test4",
+                            detail: 'detailtest4',
+                        },
+                        {
+                            name: "test5",
+                            detail: 'detailtest5',
+                        },
+
+                    ],
                 },
                 {
                     key: 5,
                     temp: 50,
                     name: "test5",
                     status: "0",
+                    details: [
+                        {
+                            name: "test1",
+                            detail: 'detailtest1',
+                        },
+                        {
+                            name: "test2",
+                            detail: 'detailtest2',
+                        },
+                        {
+                            name: "test3",
+                            detail: 'detailtest3',
+                        },
+                        {
+                            name: "test4",
+                            detail: 'detailtest4',
+                        },
+                        {
+                            name: "test5",
+                            detail: 'detailtest5',
+                        },
+                        {
+                            name: "test6",
+                            detail: 'detailtest6',
+                        },
+                    ],
                 },
             ],
         }
@@ -111,7 +209,10 @@ class StatusScreen extends React.Component {
                         {this.state.sensorArr.map( sensorInfo => {
                             return (
                                 <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor',
-                                    {sensorname: sensorInfo.name,}
+                                    {
+                                        sensorname: sensorInfo.name,
+                                        details: sensorInfo.details,
+                                    }
                                     )}}>
                                     <Sensor name = {sensorInfo.name} temp={sensorInfo.temp}
                                             style={styles.sensorLightStyle}/>

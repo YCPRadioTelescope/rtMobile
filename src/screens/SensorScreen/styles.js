@@ -10,7 +10,7 @@ export default StyleSheet.create({
     position: 'absolute',
     left: '10%',
     top: '10%',
-    marginTop: '10%',
+    //marginTop: '10%',
   },
   statusLightStyle: {
     width: 40,
@@ -35,5 +35,15 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     width: '100%'
+  },
+  button: {
+    marginTop: 30,
+    borderWidth: 1,
+    borderColor: "#cbd7dd",
+    borderRadius: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 13,
+    backgroundColor: 'red',
+    alignItems: 'center',
   },
 });
