@@ -28,7 +28,7 @@ export const getUsers = () => {
     };*/
     return dispatch => {
         return axios
-            .post(`${url}/user`)
+            .get(`${url}/user`)
             .then(response => {
                 console.log(JSON.stringify(response));
                 return dispatch(getUsersSuccess(response.data));
