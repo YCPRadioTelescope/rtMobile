@@ -12,22 +12,18 @@ class ApprovalDashboardScreen extends React.Component {
 
     state = {
         users:[]
-    }
-
+    };
 
     async getData(){
         await this.props.getUsers();
     }
 
     componentDidMount() {
-        //console.log("here");
         this.getData();
     }
-
-
-
+    
   render() {
-    console.log('props.Users', this.props.user);
+    console.log('props.Users', this.props.user); /// alyssa, pass this.props.user to your component/////
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
