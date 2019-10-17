@@ -21,7 +21,7 @@ class ApprovalDashboardScreen extends React.Component {
     componentDidMount() {
         this.getData();
     }
-    
+
   render() {
     console.log('props.Users', this.props.user); /// alyssa, pass this.props.user to your component/////
     return (
