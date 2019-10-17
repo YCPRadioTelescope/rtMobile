@@ -1,48 +1,32 @@
 import { combineReducers } from "redux";
 
-import {
-    EMAIL,
-    EMAIL_SUCCESS,
-    EMAIL_FAILURE,
-} from "../actions/emailAction";
 import {GET_USERS, GET_USERS_FAILURE, GET_USERS_SUCCESS} from "../actions/getUsersAction";
 
 const INITIAL_STATE = {
-    id: null,
-    first_name: null,
-    last_name: null,
-    email_address: null,
-    company: null,
-    phone_number: false,
-    password: null,
-    active: null,
-    status: null,
+    user:[],
+    loading: false,
+    error: false,
+    errorMessage: null,
 };
 
 const getUsersReducer = (state = INITIAL_STATE, action) => {
+    console.log("ACTION users", action);
     switch (action.type) {
-        // Don't think this gets called
-        case GET_USERS:
-            return {
-                ...state,
-                loading: true
-                //loader: true
-            };
         // Take all returned user info and put it in store
         case GET_USERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isLoading: false,
-                errorResponse: false,
+                error: false,
+                errorMessage: null,
+                user: action.user,
             };
         // Extract error message to display
         case GET_USERS_FAILURE:
             return {
                 ...state,
                 loading: false,
-                isLoading: false,
-                errorResponse: true,
+                error: true,
                 errorMessage: action.error
             };
         // Don't think this gets called
@@ -52,5 +36,5 @@ const getUsersReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default combineReducers({
-    getUsers: getUsersReducer
+    user: getUsersReducer
 });
