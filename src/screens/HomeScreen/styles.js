@@ -16,10 +16,12 @@ export default StyleSheet.create({
     marginLeft:0,
     marginRight:0,
   },
-  navTitle:{
+  navContainer:{
     position: 'absolute',
     top:'30%',
     left:'35%',
+  },
+  navTitle:{
     fontSize:25,
     fontWeight:'bold',
   },

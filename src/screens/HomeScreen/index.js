@@ -7,6 +7,11 @@ import ScrollElements from "../../components/scrollView/scrollView";
 
 class HomeScreen extends React.Component {
 
+  nav = ( ) => {
+    console.log('inNav')
+    this.props.navigation.navigate("Dpad");
+  }
+
   dpad = () => {
     Alert.alert(
       'Wait',
@@ -17,17 +22,35 @@ class HomeScreen extends React.Component {
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        {text: 'Yes', onPress: () => console.log('OK Pressed')},
+        {text: 'Yes', onPress: this.nav},
       ],
       {cancelable: false},
     );
-  }
+  };
+
+  stop = () => {
+    Alert.alert(
+      'Wait',
+      'Are you sure you want to stop the telescope?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'Yes', onPress: () => console.log('yes Pressed')},
+      ],
+      {cancelable: false},
+    );
+  };
 
   render() {
     return (
         <View style={styles.container}>
             <View style={styles.navBar}>
+              <TouchableHighlight style={styles.navContainer}>
                 <Text style={styles.navTitle}>Status: </Text>
+              </TouchableHighlight>
                 <Image
                     source={require("../../../assets/images/redStatus.png")}
                     style={styles.mainStatusLight}/>
