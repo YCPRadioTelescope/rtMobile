@@ -10,23 +10,23 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#cebaff',
-    height:120,
+    height:'12%',
     marginLeft:0,
     marginRight:0,
   },
   navTitle:{
     position: 'absolute',
-    top:'54%',
+    top:'35%',
     fontSize:20,
     fontWeight:'bold',
   },
   back:{
     position: 'absolute',
     left: '10%',
-    top: '9%',
+    top: '5%',
   },
   scroll:{
     flex:5,
-    marginBottom:100,
+    marginBottom:'1%',
   },
 });

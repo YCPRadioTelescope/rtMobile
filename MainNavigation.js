@@ -1,4 +1,5 @@
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import {createAppContainer, createSwitchNavigator } from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from "./src/screens/HomeScreen";
 import LoginScreen from './src/screens/LoginScreen';
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen';
@@ -7,6 +8,7 @@ import DenialScreen from './src/screens/DenialScreen';
 import SensorScreen from './src/screens/SensorScreen';
 import StatusScreen from './src/screens/StatusScreen';
 import TempNavScreen from './src/screens/TempNavScreen';
+import DpadScreen from './src/screens/DpadScreen';
 
 
 const AuthStack = createStackNavigator(
@@ -27,6 +29,8 @@ const AppStack = createStackNavigator(
     Denial: DenialScreen,
     Sensor: SensorScreen,
     Status: StatusScreen,
+    Dpad: DpadScreen,
+
   },
   {
     initialRouteName: "TempNav",
