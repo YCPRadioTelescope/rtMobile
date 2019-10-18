@@ -44,7 +44,10 @@ class HomeScreen extends React.Component {
               <Text style={{fontWeight:'bold', fontSize: 18}}>Temperature: 67</Text>
             </TouchableHighlight>
             <TouchableHighlight style={{position: 'absolute', top: 10, right: 5}}>
-              <Text style={{fontWeight:'bold', fontSize: 18}}>Ra Dec: 17</Text>
+              <Text style={{fontWeight:'bold', fontSize: 18}}>Ra: 45</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={{position: 'absolute', top: 30, right: 5}}>
+              <Text style={{fontWeight:'bold', fontSize: 18}}>Dec: 15</Text>
             </TouchableHighlight>
             <TouchableHighlight style={{position: 'absolute', bottom: 10, left: 5}}>
               <Text style={{color: 'white', fontWeight:'bold', fontSize: 18}}>Wind: 3 mph NNW</Text>
@@ -54,12 +57,12 @@ class HomeScreen extends React.Component {
             </TouchableHighlight>
           </View>
           <View style={{alignItems: 'center'}}>
-            <TouchableHighlight onPress={this.login} style={styles.button}>
+            <TouchableHighlight onPress={this.stop} style={styles.button}>
               <View>
                 <Text> Stop Telescope </Text>
               </View>
             </TouchableHighlight>
-            <TouchableHighlight onPress={this.login} style={styles.button}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard")} style={styles.button}>
               <View>
                 <Text> Approve Users </Text>
               </View>
