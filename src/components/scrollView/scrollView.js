@@ -12,35 +12,33 @@ import {login} from "../../screens/LoginScreen/AuthActions";
 // cayNMPU2$B9Q
 
 class ScrollElements extends Component {
-   
+
 
 
    render() {
       const navigation = this.props.navigation;
-
+      const users = this.props.users;
       return (
          <View>
             <ScrollView style = {styles.element}>
                {
-                  this.state.users.map((item, index) => (
-                     <View key = {item.id} style = {styles.item}>
+                  this.props.users.map(item => {
+                    return(
                         <View style = {styles.text}>
-                           <Text style = {styles.name}>{item.name}</Text>
-                           <Text style = {styles.email}>{item.email}</Text>
-                           <Text style = {styles.level}> Permission Level: {item.level}</Text>
-                           <Text style = {styles.reason}> Reason: {item.reason}</Text>
+                          <Text style = {styles.name}>{item.first_name}</Text>
+                          <Text style = {styles.email}>{item.email_address}</Text>
                         </View>
-                        <View style = {styles.buttons}>
-                           <ApproveButton style = {styles.approveButton} userID = {item.id} navigation={this.props.navigation} />
-                           <DenyButton style={styles.denyButton} userID={item.id} navigation={this.props.navigation} />
-                        </View>
-                     </View>
-                  ))
+                        /*<View style = {styles.buttons}>
+                          <ApproveButton style = {styles.approveButton} userID = {item.id} navigation={this.props.navigation} />
+                          <DenyButton style={styles.denyButton} userID={item.id} navigation={this.props.navigation} />
+                        </View>*/
+                    )
+                  })
                }
-            </ScrollView>
+           </ScrollView>
          </View>
       )
    }
 }
 
-export default ScrollView;
+export default ScrollElements;

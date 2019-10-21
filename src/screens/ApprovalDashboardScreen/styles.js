@@ -29,4 +29,9 @@ export default StyleSheet.create({
     flex:5,
     marginBottom:'1%',
   },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
