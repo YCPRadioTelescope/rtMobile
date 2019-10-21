@@ -16,8 +16,8 @@ const Sensor = ({
                     details
                 })=>(
     <View>
-        <View style = {{flexDirection: 'row'}}>
-            <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%'}}>{name}</Text>
+        <View style = {{flexDirection: 'row',justifyContent: 'space-between',}}>
+            <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%',}}>{name}</Text>
             <Image
                 source={require("../../../assets/images/meduimgreenstatus.png")}
                 style = {style}
@@ -41,141 +41,7 @@ class StatusScreen extends React.Component {
         super();
         this.state = {
             //this is the array that holds information the the sensor components
-            sensorArr: [
-                {
-                    key: 0,
-                    temp: 82,
-                    name: "text0",
-                    status: "0",
-                    details: [
-                        {
-                            name: "nametest1",
-                            detail: 'detailtest1',
-                        },
-                    ],
-                },
-                {
-                    key: 1,
-                    temp: 40,
-                    name: "test1",
-                    status: "0",
-                    details: [
-                        {
-                            name: "test1",
-                            detail: 'detailtest1',
-                        },
-                        {
-                            name: "test2",
-                            detail: 'detailtest2',
-                        },
-                    ],
-                },
-                {
-                    key: 2,
-                    temp: 50,
-                    name: "test2",
-                    status: "0",
-                    details: [
-                        {
-                            name: "test1",
-                            detail: 'detailtest1',
-                        },
-                        {
-                            name: "test2",
-                            detail: 'detailtest2',
-                        },
-                        {
-                            name: "test3",
-                            detail: 'detailtest3',
-                        },
-                    ],
-                },
-                {
-                    key: 3,
-                    temp: 50,
-                    name: "test3",
-                    status: "0",
-                    details: [
-                        {
-                            name: "test1",
-                            detail: 'detailtest1',
-                        },
-                        {
-                            name: "test2",
-                            detail: 'detailtest2',
-                        },
-                        {
-                            name: "test3",
-                            detail: 'detailtest3',
-                        },
-                        {
-                            name: "test4",
-                            detail: 'detailtest4',
-                        },
-                    ],
-                },
-                {
-                    key: 4,
-                    temp: 50,
-                    name: "test4",
-                    status: "0",
-                    details: [
-                        {
-                            name: "test1",
-                            detail: 'detailtest1',
-                        },
-                        {
-                            name: "test2",
-                            detail: 'detailtest2',
-                        },
-                        {
-                            name: "test3",
-                            detail: 'detailtest3',
-                        },
-                        {
-                            name: "test4",
-                            detail: 'detailtest4',
-                        },
-                        {
-                            name: "test5",
-                            detail: 'detailtest5',
-                        },
 
-                    ],
-                },
-                {
-                    key: 5,
-                    temp: 50,
-                    name: "test5",
-                    status: "0",
-                    details: [
-                        {
-                            name: "test1",
-                            detail: 'detailtest1',
-                        },
-                        {
-                            name: "test2",
-                            detail: 'detailtest2',
-                        },
-                        {
-                            name: "test3",
-                            detail: 'detailtest3',
-                        },
-                        {
-                            name: "test4",
-                            detail: 'detailtest4',
-                        },
-                        {
-                            name: "test5",
-                            detail: 'detailtest5',
-                        },
-                        {
-                            name: "test6",
-                            detail: 'detailtest6',
-                        },
-                    ],
-                },
-            ],
         }
     }
 
@@ -199,7 +65,7 @@ class StatusScreen extends React.Component {
 
 
     render() {
-        console.log("sensor data received", this.props.sensor);
+        console.log("sensor data received", this.props.sensor.sensor);
         return (
             <ScrollView>
                 <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -217,9 +83,9 @@ class StatusScreen extends React.Component {
                 <Divider style={styles.sectionDivider}/>
                 <Text style= {styles.sensorlistheader}>Sensors</Text>
                 <Divider style={styles.listheaderDivider}/>
-                <View style={styles.container}>
+
                     <View style={styles.sensorlistcontainer}>
-                        {this.state.sensorArr.map( sensorInfo => {
+                        { this.props.sensor.sensor.map( sensorInfo => {
                             return (
                                 <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor',
                                     {
@@ -233,7 +99,7 @@ class StatusScreen extends React.Component {
                             );
                         })}
                     </View>
-                </View>
+
             </ScrollView>
         );
     }

@@ -12,9 +12,12 @@ const Detail = ({
                     style
                 })=>(
     <View>
-        <View style = {{flexDirection: 'row'}}>
+        <View style = {{flexDirection: 'row',justifyContent: 'space-between',}}>
             <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%'}}>{name}</Text>
-            <Text style = {{alignSelf: 'flex-end', paddingLeft: '55%'}}>{detail}</Text>
+            <Image
+                source={require("../../../assets/images/meduimgreenstatus.png")}
+                style = {style}
+            />
         </View>
         <Divider style={styles.sectionDivider}/>
     </View>
@@ -24,7 +27,7 @@ class SensorScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const details = navigation.getParam('details', [{name: 'fallback', detail: 'falldetail'}])
+    const details = navigation.getParam('details', 'fallback_detail')
     return (
         <ScrollView>
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -32,23 +35,18 @@ class SensorScreen extends React.Component {
                     source={require("../../../assets/images/back.png")}
                 />
             </TouchableHighlight>
-            <View style={{marginTop: '10%', alignItems: 'center'}}>
+            <View style={{marginTop: '10%', alignItems: 'center',}}>
                 <Text style = {styles.header}> {navigation.getParam('sensorname', 'Sensor')}</Text>
-                <Image
-                    source={require("../../../assets/images/largegreenstatus.png")}
-                    style={styles.statusLightStyle}
-                />
+
             </View>
             <Divider style={styles.sectionDivider}/>
             <View style={styles.container}>
                 <View style={styles.detailslistcontainer}>
-                    {details.map( detailsInfo => {
-                        return (
-                        <TouchableHighlight onPress={() => {}}>
-                            <Detail name = {detailsInfo.name} detail={detailsInfo.detail}/>
-                        </TouchableHighlight>
-                        );
-                    })}
+                    <TouchableHighlight onPress={() => {}}>
+                        <Detail name = {navigation.getParam('sensorname', 'Sensor')} detail={details}
+                        style = {styles.statusLightStyle}
+                        />
+                    </TouchableHighlight>
                 </View>
             </View>
             <TouchableHighlight onPress={() => {}} style={styles.button}>

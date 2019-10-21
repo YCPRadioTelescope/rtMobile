@@ -57,9 +57,13 @@ export default StyleSheet.create({
     borderColor: 'transparent',
     borderRadius: 50,
     alignSelf: 'flex-end',
-
-    marginLeft: '75%',
     //position: 'absolute',
+    //marginLeft: '50%',
+    marginRight: '5%',
+   // top: '0.0005%',
+    //bottom: '100%',
+    //left: '80%',
+    //marginRight: 10,
   },
 
 });

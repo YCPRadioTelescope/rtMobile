@@ -27,7 +27,7 @@ export const getSensorData = (email, password) => {
         return axios
             .get(`${url}/sensorStatus`)
             .then(response => {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 return dispatch(sensorSuccess(response.data));
             })
             .catch(error => {
