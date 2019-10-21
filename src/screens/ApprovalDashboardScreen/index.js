@@ -1,4 +1,4 @@
-import {Image, Text, View, TouchableHighlight, ScrollView} from 'react-native';
+import {Image, Text, View, TouchableHighlight, ScrollView, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import ScrollElements from '../../components/scrollView/scrollView.js';
@@ -11,32 +11,47 @@ import axios from "axios";
 class ApprovalDashboardScreen extends React.Component {
 
     state = {
-        users:[]
+        users:[],
+        isLoading: true,
     };
 
-    async getData(){
-        await this.props.getUsers();
+    async getData() {
+      await this.props.getUsers().then(response => {
+        this.setState({isLoading: false});
+      })
     }
+
 
     componentDidMount() {
         this.getData();
     }
 
   render() {
-    console.log('props.Users', this.props.user); /// alyssa, pass this.props.user to your component/////
-    return (
-      <View style={styles.container}>
-        <View style={styles.navBar}>
-          <Text style={styles.navTitle}>Approve Users</Text>
-        </View>
-        <ScrollElements style={styles.scroll} navigation={this.props.navigation} />
-        <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-          <Image
-            source={require("../../../assets/images/back.png")}
-          />
-        </TouchableHighlight>
-      </View>
-    );
+      if(this.state.isLoading){
+        return(
+          <View style={styles.loading}>
+            <ActivityIndicator />
+            <StatusBar barStyle="default" />
+          </View>
+        )
+      }
+      else {
+        console.log('hereeeeee');
+        return (
+          <View style={styles.container}>
+            <View style={styles.navBar}>
+              <Text style={styles.navTitle}>Approve Users</Text>
+            </View>
+            {/*<Text>{this.props.user[0].id}</Text>*/}
+            <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.props.user} />
+            <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+              <Image
+                source={require("../../../assets/images/back.png")}
+              />
+            </TouchableHighlight>
+          </View>
+        );
+      }
   }
 }
 
