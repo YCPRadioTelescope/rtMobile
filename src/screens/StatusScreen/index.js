@@ -2,6 +2,10 @@ import {Image, Text, TouchableHighlight, View, Animate, ScrollView} from 'react-
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
+import {bindActionCreators} from "redux";
+import {login} from "../LoginScreen/AuthActions";
+import {connect} from "react-redux";
+import {getSensorData} from "../SensorScreen/SensorActions";
 
 //component to render each of the sensors in sensorlistcontainer
 const Sensor = ({
@@ -24,6 +28,14 @@ const Sensor = ({
 );
 
 class StatusScreen extends React.Component {
+    async getData(){
+        await this.props.getSensorData();
+
+    }
+
+    componentDidMount() {
+        this.getData();
+    }
 
     constructor() {
         super();
@@ -37,7 +49,7 @@ class StatusScreen extends React.Component {
                     status: "0",
                     details: [
                         {
-                            name: "test1",
+                            name: "nametest1",
                             detail: 'detailtest1',
                         },
                     ],
@@ -187,6 +199,7 @@ class StatusScreen extends React.Component {
 
 
     render() {
+        console.log("sensor data received", this.props.sensor);
         return (
             <ScrollView>
                 <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -214,7 +227,7 @@ class StatusScreen extends React.Component {
                                         details: sensorInfo.details,
                                     }
                                     )}}>
-                                    <Sensor name = {sensorInfo.name} temp={sensorInfo.temp}
+                                    <Sensor name = {sensorInfo.name}
                                             style={styles.sensorLightStyle}/>
                                 </TouchableHighlight>
                             );
@@ -226,6 +239,31 @@ class StatusScreen extends React.Component {
     }
 }
 
+/*
+This will get a unchecked promise error and will not return the array properly
+unless if these commands are ran in a cmd:
+adb shell input keyevent 82
+adb reverse tcp:3000 tcp:3000
 
+ */
+const mapStateToProps = state => {
+    const { sensor } = state;
+    return {
+        sensor: sensor.sensor,
+    errorResponse: sensor.errorResponse,
+    errorMessage: sensor.errorMessage
+    };
+};
 
-export default StatusScreen;
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            getSensorData,
+        },
+        dispatch
+    );
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(StatusScreen);
