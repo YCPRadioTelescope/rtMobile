@@ -7,7 +7,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Home Screen</Text>
+        <Text>Override Screen</Text>
         <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
           <Image
             source={require("../../../assets/images/back.png")}

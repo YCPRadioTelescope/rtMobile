@@ -7,6 +7,7 @@ import DenialScreen from './src/screens/DenialScreen';
 import SensorScreen from './src/screens/SensorScreen';
 import StatusScreen from './src/screens/StatusScreen';
 import TempNavScreen from './src/screens/TempNavScreen';
+import OverrideScreen from "./src/screens/OverrideScreen";
 
 
 const AuthStack = createStackNavigator(
@@ -27,6 +28,7 @@ const AppStack = createStackNavigator(
     Denial: DenialScreen,
     Sensor: SensorScreen,
     Status: StatusScreen,
+    Override: OverrideScreen,
   },
   {
     initialRouteName: "TempNav",

@@ -42,14 +42,14 @@ class SensorScreen extends React.Component {
             <Divider style={styles.sectionDivider}/>
             <View style={styles.container}>
                 <View style={styles.detailslistcontainer}>
-                    <TouchableHighlight onPress={() => {}}>
+                    <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}}>
                         <Detail name = {navigation.getParam('sensorname', 'Sensor')} detail={details}
                         style = {styles.statusLightStyle}
                         />
                     </TouchableHighlight>
                 </View>
             </View>
-            <TouchableHighlight onPress={() => {}} style={styles.button}>
+            <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}} style={styles.button}>
                 <View>
                     <Text style={{color: 'white'}}> Add New Override </Text>
                 </View>
