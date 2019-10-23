@@ -12,7 +12,7 @@ class ApproveButton extends Component {
       userID: this.props.userID,
     };
   }
-  
+
   sendEmail(email, subject, body){
     console.log('Sending approval email');
     console.log('To:'+email);
