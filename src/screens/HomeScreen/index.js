@@ -79,11 +79,6 @@ class HomeScreen extends React.Component {
                     source={require("../../../assets/images/redStatus.png")}
                     style={styles.mainStatusLight}/>
             </View>
-            <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-                <Image
-                    source={require("../../../assets/images/back.png")}
-                />
-            </TouchableHighlight>
           <View>
             <Image
                 source={require("../../../assets/images/footage.jpg")}  style={styles.footageScreen}/>
