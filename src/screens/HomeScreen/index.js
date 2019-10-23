@@ -48,7 +48,7 @@ class HomeScreen extends React.Component {
     return (
         <View style={styles.container}>
             <View style={styles.navBar}>
-              <TouchableHighlight style={styles.navContainer}>
+              <TouchableHighlight style={styles.navContainer} onPress={() => this.props.navigation.navigate("Status")}>
                 <Text style={styles.navTitle}>Status: </Text>
               </TouchableHighlight>
                 <Image

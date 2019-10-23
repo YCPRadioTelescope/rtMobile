@@ -73,7 +73,7 @@ class StatusScreen extends React.Component {
 
     handlepress = ()=>{
         this.props.navigation.navigate('Sensor');
-    }
+    };
 
     swapstatuscolor = () => {
         console.log('Yellow Pressed');
