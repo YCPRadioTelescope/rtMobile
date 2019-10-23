@@ -55,6 +55,6 @@ export default StyleSheet.create({
     backgroundColor: 'red',
     alignItems: 'center',
     width: '50%',
-    marginLeft: '25%',
+
   },
 });

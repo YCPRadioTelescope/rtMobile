@@ -9,6 +9,7 @@ import SensorScreen from './src/screens/SensorScreen';
 import StatusScreen from './src/screens/StatusScreen';
 import TempNavScreen from './src/screens/TempNavScreen';
 import DpadScreen from './src/screens/DpadScreen';
+import OverrideScreen from "./src/screens/OverrideScreen";
 
 
 const AuthStack = createStackNavigator(
@@ -29,6 +30,7 @@ const AppStack = createStackNavigator(
     Denial: DenialScreen,
     Sensor: SensorScreen,
     Status: StatusScreen,
+    Override: OverrideScreen,
     Dpad: DpadScreen,
 
   },
