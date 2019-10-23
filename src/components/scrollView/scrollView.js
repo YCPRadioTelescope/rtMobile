@@ -18,6 +18,7 @@ class ScrollElements extends Component {
    render() {
       const navigation = this.props.navigation;
       const users = this.props.users;
+      console.log(users);
       return (
          <View>
             <ScrollView style = {styles.element}>
@@ -25,7 +26,7 @@ class ScrollElements extends Component {
                   this.props.users.map(item => {
                     return(
                         <View>
-                            <View style = {styles.text, styles.item}>
+                            <View style = {[styles.text, styles.item]}>
                               <Text style = {styles.name}>{item.first_name} {item.last_name}</Text>
                               <Text style = {styles.email}>{item.email_address}</Text>
                               <Text style = {styles.reason}>{item.company}</Text>
