@@ -43,26 +43,26 @@ class DpadScreen extends React.Component {
     let horizontalNum = this.state.azimuth;
     //while loop is very very bad here
     if(y < -.75 && x < .25 && x > -.25){ //up
-      if(verticalNum < 1 ) {
-        verticalNum = verticalNum + .01;  // bar goes right
+      if(verticalNum < 90 ) {
+        verticalNum = verticalNum + .5;
       }
       this.setState({elevation: verticalNum});
     }
     if(y > .75 && x < .25 && x > -.25){ // down
-      if(verticalNum > -1) {
-        verticalNum = verticalNum - .01; // bar goes left
+      if(verticalNum > -10) {
+        verticalNum = verticalNum - .5;
       }
       this.setState({elevation: verticalNum})
     }
     if(x < -.75 && y > -.25 && y < .25){  // left
-      if(horizontalNum > -1) {
-        horizontalNum = horizontalNum - .01;
+      if(horizontalNum > 0) {
+        horizontalNum = horizontalNum - .5;
       }
       this.setState({azimuth: horizontalNum})
     }
     if(x > .75 && y > -.25 && y < .25){ // right
-      if(horizontalNum > -1) {
-        horizontalNum = horizontalNum + .01;
+      if(horizontalNum < 360) {
+        horizontalNum = horizontalNum + .5;
       }
       this.setState({azimuth: horizontalNum})
     }
@@ -85,26 +85,28 @@ class DpadScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{marginTop: '3%'}}>
-          <Text>Declination</Text>
+        <View>
+          <Text>Azimuth : {this.state.azimuth} </Text>
           <Slider
-            style={{width: 300, height: 40}}
+            style={{width: 300, height: 40, marginRight: '20%'}}
             minimumValue={0}
-            maximumValue={1}
+            maximumValue={360}
+            value={this.state.azimuth}
             disabled={true}
-            value={this.state.sliderVerticalVal}
-            thumbImage={require("../../../assets/images/redStatus.png")}
+            thumbImage={this.state.sliderHorizontalPic}
             minimumTrackTintColor="#0f0f0f"
             maximumTrackTintColor="#000000"
           />
-          <Text>Right Ascension</Text>
+        </View>
+        <Text style={{marginLeft: '60%'}}>Elevation : {this.state.elevation} </Text>
+        <View style={{ marginLeft:'80%', transform: [{ rotate: '270deg'}]}}>
           <Slider
             style={{width: 300, height: 40}}
-            minimumValue={0}
-            maximumValue={1}
-            value={this.state.sliderHorizontalVal}
+            minimumValue={-10}
+            maximumValue={90}
             disabled={true}
-            thumbImage={require("../../../assets/images/redStatus.png")}
+            value={this.state.elevation}
+            thumbImage={this.state.sliderVerticalPic}
             minimumTrackTintColor="#0f0f0f"
             maximumTrackTintColor="#000000"
           />

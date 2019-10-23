@@ -7,10 +7,34 @@ import ScrollElements from "../../components/scrollView/scrollView";
 
 class HomeScreen extends React.Component {
 
-  nav = ( ) => {
-    console.log('inNav')
-    this.props.navigation.navigate("Dpad");
+
+  state={
+    azimuth: this.props.navigation.getParam("azimuth", 45),
+    elevation: this.props.navigation.getParam("elevation", 45),
+  };
+
+  componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      console.log('az in h0me', this.props.navigation.getParam("azimuth"));
+      let azimuth = this.props.navigation.getParam("azimuth", 45);
+      let elevation = this.props.navigation.getParam("elevation", 45);
+      this.setState({azimuth: azimuth});
+      this.setState({elevation: elevation});
+    });
+    /*this.focusListener = this.props.navigation.addListener("didBlur", () => {
+      this.setState({isLoading: true})
+    });*/
   }
+
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+
+  nav = ( ) => {
+    console.log('inNav');
+    console.log('az', this.state.azimuth);
+    this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
+  };
 
   dpad = () => {
     Alert.alert(
@@ -67,10 +91,10 @@ class HomeScreen extends React.Component {
               <Text style={{fontWeight:'bold', fontSize: 18}}>Temperature: 67</Text>
             </TouchableHighlight>
             <TouchableHighlight style={{position: 'absolute', top: 10, right: 5}}>
-              <Text style={{fontWeight:'bold', fontSize: 18}}>Ra: 45</Text>
+              <Text style={{fontWeight:'bold', fontSize: 18}}>Azimuth: {this.state.azimuth}</Text>
             </TouchableHighlight>
             <TouchableHighlight style={{position: 'absolute', top: 30, right: 5}}>
-              <Text style={{fontWeight:'bold', fontSize: 18}}>Dec: 15</Text>
+              <Text style={{fontWeight:'bold', fontSize: 18}}>Elevation: {this.state.elevation}</Text>
             </TouchableHighlight>
             <TouchableHighlight style={{position: 'absolute', bottom: 10, left: 5}}>
               <Text style={{color: 'white', fontWeight:'bold', fontSize: 18}}>Wind: 3 mph NNW</Text>
