@@ -35,7 +35,7 @@ const AppStack = createStackNavigator(
 
   },
   {
-    initialRouteName: "TempNav",
+    initialRouteName: "Home",
     headerMode: "none"
   }
 );
