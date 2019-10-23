@@ -24,14 +24,18 @@ class ScrollElements extends Component {
                {
                   this.props.users.map(item => {
                     return(
-                        <View style = {styles.text}>
-                          <Text style = {styles.name}>{item.first_name}</Text>
-                          <Text style = {styles.email}>{item.email_address}</Text>
+                        <View>
+                            <View style = {styles.text, styles.item}>
+                              <Text style = {styles.name}>{item.first_name} {item.last_name}</Text>
+                              <Text style = {styles.email}>{item.email_address}</Text>
+                              <Text style = {styles.reason}>{item.company}</Text>
+                            </View>
+
+                            <View style = {styles.buttons}>
+                              <ApproveButton style = {styles.approveButton} userID = {item.id} navigation={this.props.navigation}  />
+                              <DenyButton style={styles.denyButton} userID={item.id} navigation={this.props.navigation} />
+                            </View>
                         </View>
-                        /*<View style = {styles.buttons}>
-                          <ApproveButton style = {styles.approveButton} userID = {item.id} navigation={this.props.navigation} />
-                          <DenyButton style={styles.denyButton} userID={item.id} navigation={this.props.navigation} />
-                        </View>*/
                     )
                   })
                }

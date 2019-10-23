@@ -30,7 +30,6 @@
     "redux-saga": "^1.0.5",
     "redux-thunk": "^2.3.0",
     "react-navigation-stack": "latest",
-    "redux-thunk": "^2.3.0",
     "rn-nodeify": "^10.1.0",
     "rn-vertical-slider": "^1.0.4"
   },
