@@ -2,7 +2,7 @@ import {Dimensions, Image, Text, TouchableHighlight, TouchableOpacity, View, Ale
 import React from 'react';
 import styles from './styles';
 import ScrollElements from "../../components/scrollView/scrollView";
-
+import { firebase } from '@react-native-firebase/messaging';
 
 
 class HomeScreen extends React.Component {
@@ -13,7 +13,24 @@ class HomeScreen extends React.Component {
     elevation: this.props.navigation.getParam("elevation", 45),
   };
 
+
+   async getToken () {
+    const fcmToken = await firebase.messaging().getToken();
+    console.log('token', fcmToken);
+     const hasPermission = await firebase.messaging().hasPermission();
+     console.log('has permission', hasPermission);
+
+     const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
+       console.log('FCM Message Data:', remoteMessage.data);
+     });
+
+// Unsubscribe from further message events
+     unsubscribe();
+  }
   componentDidMount() {
+
+     this.getToken();
+
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       console.log('az in h0me', this.props.navigation.getParam("azimuth"));
       let azimuth = this.props.navigation.getParam("azimuth", 45);
