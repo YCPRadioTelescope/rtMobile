@@ -33,8 +33,8 @@ class ScrollElements extends Component {
                             </View>
 
                             <View style = {styles.buttons}>
-                              <ApproveButton style = {styles.approveButton} userID = {item.id} navigation={this.props.navigation}  />
-                              <DenyButton style={styles.denyButton} userID={item.id} navigation={this.props.navigation} />
+                              <ApproveButton style = {styles.approveButton} user={item} navigation={this.props.navigation}  />
+                              <DenyButton style={styles.denyButton} user={item} navigation={this.props.navigation} />
                             </View>
                         </View>
                     )

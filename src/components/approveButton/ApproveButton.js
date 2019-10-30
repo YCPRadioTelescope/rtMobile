@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {StyleSheet, Image, View, TouchableHighlight} from 'react-native'
 import {email} from '../../actions/emailAction.js'
+import {approveUser} from "../../actions/approveUserAction";
 import {bindActionCreators} from "redux";
 import connect from "react-redux/lib/connect/connect";
 
@@ -13,19 +14,14 @@ class ApproveButton extends Component {
     };
   }
 
-  sendEmail(email, subject, body){
-    console.log('Sending approval email');
-    console.log('To:'+email);
-    console.log('Subject:'+subject);
-    console.log('Body: '+body);
-  }
 
   onPress = () => {
-    var ID = this.props.userID;
+    var user = this.props.user;
+    this.props.approveUser(user.id);
     // TODO: get email from userID
-    var email = 'amcdevitt97@gmail.com';
+    var email = user.email_address;
     // TODO: get name from userID
-    var name = 'Alyssa McDevitt';
+    var name = user.first_name+" "+user.last_name;
     var subject = 'Congrats, you\'ve been approved!';
     var body = "Dear "+name+",  \nYour account for the YCAS radio telescope been approved. You may now sign in.";
     this.props.email(email, subject, body);
@@ -63,8 +59,10 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
 
-        errorResponse: email.errorResponse,
+        /*errorResponse: email.errorResponse,
         errorMessage: email.errorMessage,
+        errorResponse: approveUser.errorResponse,
+        errorMessage: approveUser.errorMessage,*/
     };
 };
 
@@ -72,6 +70,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             email,
+            approveUser,
         },
         dispatch
     );

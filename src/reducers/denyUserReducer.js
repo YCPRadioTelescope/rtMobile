@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import {DENY_USER_SUCCESS} from "../actions/denyUserAction";
+import {DENY_USER_FAILURE} from "../actions/denyUserAction";
 
 let INITIAL_STATE ={
     "id": null ,

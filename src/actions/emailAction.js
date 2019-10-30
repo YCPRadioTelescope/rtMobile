@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const url = "http://YcpTelesopeWebService-env.mbdnxjscuy.us-east-1.elasticbeanstalk.com";
+const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 export const EMAIL = "EMAIL";
 export const EMAIL_SUCCESS = "EMAIL_SUCCESS";
 export const EMAIL_FAILURE = "EMAIL_FAILURE";

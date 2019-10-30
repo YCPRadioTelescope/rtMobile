@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import {APPROVE_USER_SUCCESS} from "../actions/approveUserAction";
+import {APPROVE_USER_FAILURE} from "../actions/approveUserAction";
 
 let INITIAL_STATE ={
     "id": null ,
