@@ -28,7 +28,7 @@ class HomeScreen extends React.Component {
   }
   componentDidMount() {
 
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android') { 
       this.getToken();
     }
 
