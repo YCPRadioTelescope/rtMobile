@@ -13,23 +13,24 @@ class HomeScreen extends React.Component {
     elevation: this.props.navigation.getParam("elevation", 45),
   };
 
-
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
     console.log('token', fcmToken);
-     const hasPermission = await firebase.messaging().hasPermission();
-     console.log('has permission', hasPermission);
+    const hasPermission = await firebase.messaging().hasPermission();
+    console.log('has permission', hasPermission);
 
-     const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
+    const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
        console.log('FCM Message Data:', remoteMessage.data);
-     });
+    });
 
 // Unsubscribe from further message events
      unsubscribe();
   }
   componentDidMount() {
 
-     this.getToken();
+    if (Platform.OS === 'android') {
+      this.getToken();
+    }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       console.log('az in h0me', this.props.navigation.getParam("azimuth"));
