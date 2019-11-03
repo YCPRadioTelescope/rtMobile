@@ -1,45 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
->
-  <Text>
-    Denial Screen
-  </Text>
-  <View
-    accessible={true}
-    clickable={true}
-    isTVSelectable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "left": "10%",
-        "position": "absolute",
-        "top": "10%",
-      }
-    }
-  >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../assets/images/back.png",
-        }
-      }
-      style={null}
-    />
-  </View>
-</View>
+<h1>
+  Something went wrong.
+</h1>
 `;
