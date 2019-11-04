@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import config from "../../config.json";
 
 const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 //const url = "http://127.0.0.1:3000";
@@ -24,10 +24,13 @@ export const getUsersFailure = error => {
 export const getUsers = () => {
 
     console.log('getuser action');
+    let reqBody = {
+        "UUID":config.UUID,
+    };
     return dispatch => {
         axios.defaults.headers.common["Content-Type"] = "application/json";
         return axios
-            .get(`${url}/pendingUsers`)
+            .post(`${url}/pendingUsers`,reqBody)
             .then(response => {
                 console.log('inside axios return');
                 console.log(JSON.stringify(response));

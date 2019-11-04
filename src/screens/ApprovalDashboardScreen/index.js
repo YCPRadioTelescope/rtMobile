@@ -1,11 +1,11 @@
-import {Image, Text, View, TouchableHighlight, ScrollView, ActivityIndicator, StatusBar} from 'react-native';
+import {Image, Text, View, TouchableHighlight, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import ScrollElements from '../../components/scrollView/scrollView.js';
 import {bindActionCreators} from "redux";
 import {getUsers} from "../../actions/getUsersAction";
 import connect from "react-redux/lib/connect/connect";
-import axios from "axios";
+
 
 
 class ApprovalDashboardScreen extends React.Component {
@@ -23,7 +23,14 @@ class ApprovalDashboardScreen extends React.Component {
 
 
     componentDidMount() {
+        this.focusListener = this.props.navigation.addListener("didFocus", () => {
+            this.getData();
+        });
         this.getData();
+    }
+
+    componentWillUnmount() {
+        this.focusListener.remove();
     }
 
   render() {

@@ -18,15 +18,13 @@ class ApproveButton extends Component {
   onPress = () => {
     var user = this.props.user;
     this.props.approveUser(user.id);
-    // TODO: get email from userID
     var email = user.email_address;
-    // TODO: get name from userID
     var name = user.first_name+" "+user.last_name;
     var subject = 'Congrats, you\'ve been approved!';
     var body = "Dear "+name+",  \nYour account for the YCAS radio telescope been approved. You may now sign in.";
     this.props.email(email, subject, body);
-    this.props.navigation.goBack();
-  }
+
+  };
 
 
  render() {
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
     height:40,
     borderRadius: 20,
   },
-})
+});
 
 // Need the below code for responses when using a reducer
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../../config";
 
 
 const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
@@ -24,6 +25,7 @@ export const approveUserFailure = error => {
 export const approveUser = (id) => {
     let reqBody = {
         "id": id ,
+        "UUID":config.UUID,
     };
     return dispatch => {
         return axios

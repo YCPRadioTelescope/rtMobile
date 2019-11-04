@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import ApproveButton from '../approveButton/ApproveButton.js';
 import DenyButton from '../denyButton/DenyButton.js';
 import styles from './styles';
-import {getUsers} from "../../actions/getUsersAction";
-import {email} from "../../actions/emailAction";
-import {bindActionCreators} from "redux";
-import connect from "react-redux/lib/connect/connect";
-import {login} from "../../screens/LoginScreen/AuthActions";
 
 // cayNMPU2$B9Q
 
@@ -33,6 +28,8 @@ class ScrollElements extends Component {
                             </View>
 
                             <View style = {styles.buttons}>
+                                // TODO: researching passing state of the button from a child from a child to a parent
+                                // https://towardsdatascience.com/passing-data-between-react-components-parent-children-siblings-a64f89e24ecf
                               <ApproveButton style = {styles.approveButton} user={item} navigation={this.props.navigation}  />
                               <DenyButton style={styles.denyButton} user={item} navigation={this.props.navigation} />
                             </View>
