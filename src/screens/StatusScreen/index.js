@@ -1,4 +1,4 @@
-import {Image, Text, TouchableHighlight, View, Animate, ScrollView} from 'react-native';
+import {Image, Text, TouchableHighlight, View, Animate, ScrollView, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
@@ -29,8 +29,10 @@ const Sensor = ({
 
 class StatusScreen extends React.Component {
     async getData(){
-        await this.props.getSensorData();
 
+        await this.props.getSensorData().then(response => {
+            this.setState({isLoading: false});
+        })
     }
 
     componentDidMount() {
@@ -41,7 +43,7 @@ class StatusScreen extends React.Component {
         super();
         this.state = {
             //this is the array that holds information the the sensor components
-
+            isloading: false,
         }
     }
 
@@ -65,43 +67,55 @@ class StatusScreen extends React.Component {
 
 
     render() {
-        console.log("sensor data received", this.props.sensor.sensor);
-        return (
-            <ScrollView>
-                <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-                    <Image
-                        source={require("../../../assets/images/back.png")}
-                    />
-                </TouchableHighlight>
-                <View style={{marginTop: '10%', alignItems: 'center'}}>
-                    <Text style = {styles.header}>Status</Text>
-                    <Image
-                        source={require("../../../assets/images/largegreenstatus.png")}
-                        style={styles.statusLightStyle}
-                    />
+        if (this.state.isLoading) {
+            console.log("Loading data from database");
+            return (
+                <View style={styles.loading}>
+                    <ActivityIndicator/>
+                    <StatusBar barStyle="default"/>
                 </View>
-                <Divider style={styles.sectionDivider}/>
-                <Text style= {styles.sensorlistheader}>Sensors</Text>
-                <Divider style={styles.listheaderDivider}/>
+            )
+        } else {
+            console.log("Done Loading! Sensor Data", this.props.sensor.sensor);
+            return (
+                <ScrollView>
+                    <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+                        <Image
+                            source={require("../../../assets/images/back.png")}
+                        />
+                    </TouchableHighlight>
+                    <View style={{marginTop: '10%', alignItems: 'center'}}>
+                        <Text style={styles.header}>Status</Text>
+                        <Image
+                            source={require("../../../assets/images/largegreenstatus.png")}
+                            style={styles.statusLightStyle}
+                        />
+                    </View>
+                    <Divider style={styles.sectionDivider}/>
+                    <Text style={styles.sensorlistheader}>Sensors</Text>
+                    <Divider style={styles.listheaderDivider}/>
 
                     <View style={styles.sensorlistcontainer}>
-                        { this.props.sensor.sensor.map( sensorInfo => {
+                        {this.props.sensor.sensor.map(sensorInfo => {
                             return (
-                                <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor',
-                                    {
-                                        sensorname: sensorInfo.name,
-                                        details: sensorInfo.details,
-                                    }
-                                    )}}>
-                                    <Sensor name = {sensorInfo.name}
+                                <TouchableHighlight onPress={() => {
+                                    this.props.navigation.navigate('Sensor',
+                                        {
+                                            sensorname: sensorInfo.name,
+                                            details: sensorInfo.details,
+                                        }
+                                    )
+                                }}>
+                                    <Sensor name={sensorInfo.name}
                                             style={styles.sensorLightStyle}/>
                                 </TouchableHighlight>
                             );
                         })}
                     </View>
 
-            </ScrollView>
-        );
+                </ScrollView>
+            );
+        }
     }
 }
 
@@ -114,7 +128,9 @@ adb reverse tcp:3000 tcp:3000
  */
 const mapStateToProps = state => {
     const { sensor } = state;
+    console.log("Getting sensor = state in MapStateToProps",sensor);
     return {
+
         sensor: sensor.sensor,
     errorResponse: sensor.errorResponse,
     errorMessage: sensor.errorMessage
