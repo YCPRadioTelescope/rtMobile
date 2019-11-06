@@ -67,7 +67,7 @@ class WeatherScreen extends React.Component {
 
     render() {
         if (this.state.isLoading) {
-            console.log("Loading data from database");
+            console.log("Loading data from database in Weather screen");
 
             return (
                 <View style={styles.loading}>
@@ -76,7 +76,7 @@ class WeatherScreen extends React.Component {
                 </View>
             )
         } else {
-            console.log("Done Loading! Weather Data", this.props.weather);
+            console.log("Done Loading Weather Screen! Weather Data", this.props.weather);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -85,7 +85,7 @@ class WeatherScreen extends React.Component {
                         />
                     </TouchableHighlight>
                     <View style={{marginTop: '10%', alignItems: 'center'}}>
-                        <Text style={styles.header}>Weather</Text>
+                        <Text style={styles.header}>Weather Station</Text>
                     </View>
                     <Divider style={styles.sectionDivider}/>
 
@@ -93,12 +93,7 @@ class WeatherScreen extends React.Component {
                         {this.props.weather.map(sensorInfo => {
                             return (
                                 <TouchableHighlight onPress={() => {
-                                    this.props.navigation.navigate('Sensor',
-                                        {
-                                            sensorname: sensorInfo.name,
-                                            details: sensorInfo.detail,
-                                        }
-                                    )
+
                                 }}>
                                     <Sensor name={sensorInfo.name}
                                             style={styles.sensorLightStyle}

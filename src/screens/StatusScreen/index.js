@@ -43,7 +43,7 @@ class StatusScreen extends React.Component {
         super();
         this.state = {
             //this is the array that holds information the the sensor components
-            isloading: true,
+            isLoading: true
         }
     }
 
@@ -68,7 +68,7 @@ class StatusScreen extends React.Component {
 
     render() {
         if (this.state.isLoading) {
-            console.log("Loading data from database");
+            console.log("isLoading is ",this.state.isLoading);
             return (
                 <View style={styles.loading}>
                     <ActivityIndicator/>
@@ -76,6 +76,7 @@ class StatusScreen extends React.Component {
                 </View>
             )
         } else {
+            console.log("isLoading is ",this.state.isLoading);
             console.log("Done Loading! Sensor Data", this.props.sensor.sensor);
             return (
                 <ScrollView>
@@ -130,8 +131,7 @@ const mapStateToProps = state => {
     const { sensor } = state;
     console.log("Getting sensor = state in MapStateToProps",sensor);
     return {
-
-        sensor: sensor.sensor,
+    sensor: sensor.sensor,
     errorResponse: sensor.errorResponse,
     errorMessage: sensor.errorMessage
     };

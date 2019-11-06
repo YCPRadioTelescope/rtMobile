@@ -34,9 +34,9 @@ class HomeScreen extends React.Component {
     azimuth: this.props.navigation.getParam("azimuth", 45),
     elevation: this.props.navigation.getParam("elevation", 45),
     isLoading: true,
-    windspeed: "test",
-    winddir: "none",
-    temperature: "degrees",
+    windSpeed: "initial",
+    windDirection: "initial",
+    temperature: "initial",
   };
 
   componentDidMount() {
@@ -95,10 +95,27 @@ class HomeScreen extends React.Component {
       {cancelable: false},
     );
   };
-  updateweather = () =>{
-    this.state.temperature =this.props.weather[temperature].detail;
-    this.state.windspeed = this.props.weather[windspeed].detail;
-    this.state.winddir = this.props.weather[winddirection].detail;
+  updateState = () =>{
+    /*when navigating to Weather (but not ApprovalDashboard)
+    for some reason render() is called again and that can cause
+    the app to pull data from props.weather, which would now be
+    undefined and cause a crash. This function fixes that
+    and should be called before return
+     */
+    console.log("Updating weather state");
+    if(this.props.weather != undefined){
+      if(this.props.weather[temperature].detail != undefined){
+        this.state.temperature =this.props.weather[temperature].detail;
+      }
+      if(this.props.weather[windspeed].detail != undefined){
+        this.state.windSpeed = this.props.weather[windspeed].detail;
+      }
+      if(this.props.weather[winddirection].detail != undefined){
+        this.state.windDirection = this.props.weather[winddirection].detail;
+      }
+    }
+
+
   };
 
   render() {
@@ -111,6 +128,8 @@ class HomeScreen extends React.Component {
           </View>
       )
     } else {
+      console.log("Done loading: updateing weather variables then rendering page");
+      this.updateState();
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -137,7 +156,7 @@ class HomeScreen extends React.Component {
               </TouchableHighlight>
               <TouchableHighlight onPress={() => this.props.navigation.navigate('Weather')} style={{position: 'absolute', bottom: 10, left: 5} }>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
-                    Wind: {this.state.windspeed} mph {this.state.winddir}
+                    Wind: {this.state.windSpeed} mph {this.state.windDirection}
                 </Text>
               </TouchableHighlight>
               <TouchableHighlight style={{position: 'absolute', bottom: 10, right: 5}}>
