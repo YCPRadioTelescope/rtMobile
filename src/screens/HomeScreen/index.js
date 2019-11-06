@@ -25,6 +25,7 @@ class HomeScreen extends React.Component {
   async getData(){
     await this.props.getWeatherData().then(response => {
       this.setState({isLoading: false});
+
     })
   }
 
@@ -33,6 +34,9 @@ class HomeScreen extends React.Component {
     azimuth: this.props.navigation.getParam("azimuth", 45),
     elevation: this.props.navigation.getParam("elevation", 45),
     isLoading: true,
+    windspeed: "test",
+    winddir: "none",
+    temperature: "degrees",
   };
 
   componentDidMount() {
@@ -43,6 +47,7 @@ class HomeScreen extends React.Component {
       this.setState({azimuth: azimuth});
       this.setState({elevation: elevation});
       this.getData();
+
     });
     /*this.focusListener = this.props.navigation.addListener("didBlur", () => {
       this.setState({isLoading: true})
@@ -90,6 +95,11 @@ class HomeScreen extends React.Component {
       {cancelable: false},
     );
   };
+  updateweather = () =>{
+    this.state.temperature =this.props.weather[temperature].detail;
+    this.state.windspeed = this.props.weather[windspeed].detail;
+    this.state.winddir = this.props.weather[winddirection].detail;
+  };
 
   render() {
     if (this.state.isLoading) {
@@ -114,9 +124,9 @@ class HomeScreen extends React.Component {
             <View>
               <Image
                   source={require("../../../assets/images/footage.jpg")} style={styles.footageScreen}/>
-              <TouchableHighlight style={{position: 'absolute', top: 10, left: 5}}>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate("Weather")} style={{position: 'absolute', top: 10, left: 5}}>
                 <Text style={{fontWeight: 'bold', fontSize: 18}}>
-                     Temperature: {this.props.weather[temperature].detail}
+                     Temperature: {this.state.temperature}
                 </Text>
               </TouchableHighlight>
               <TouchableHighlight style={{position: 'absolute', top: 10, right: 5}}>
@@ -125,9 +135,9 @@ class HomeScreen extends React.Component {
               <TouchableHighlight style={{position: 'absolute', top: 30, right: 5}}>
                 <Text style={{fontWeight: 'bold', fontSize: 18}}>Elevation: {this.state.elevation}</Text>
               </TouchableHighlight>
-              <TouchableHighlight style={{position: 'absolute', bottom: 10, left: 5}}>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('Weather')} style={{position: 'absolute', bottom: 10, left: 5} }>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
-                    Wind: {this.props.weather[windspeed].detail} mph {this.props.weather[winddirection].detail}
+                    Wind: {this.state.windspeed} mph {this.state.winddir}
                 </Text>
               </TouchableHighlight>
               <TouchableHighlight style={{position: 'absolute', bottom: 10, right: 5}}>

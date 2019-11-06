@@ -9,7 +9,20 @@ import {
 
 
 const INITIAL_STATE = {
-    weather: [{name: "WEATHER_NOT_FOUND", details: "INITIAL_STATE"}],
+    weather: [
+        {
+          name: "WEATHER_NOT_FOUND",
+          detail: "INITIAL_STATE"
+        },
+        {
+            name: "WEATHER_NOT_FOUND",
+            detail: "INITIAL_STATE"
+        },
+        {
+            name: "WEATHER_NOT_FOUND",
+            detail: "INITIAL_STATE"
+        },
+                ],
     loading: false,
     errorMessage: null,
     errorResponse: false
