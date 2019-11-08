@@ -60,3 +60,4 @@ buck-out/
 sendgrid.env
 
 google-services.json
+config.json
