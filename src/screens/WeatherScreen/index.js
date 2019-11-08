@@ -1,4 +1,14 @@
-import {Image, Text, TouchableHighlight, View, Animate, ScrollView, ActivityIndicator, StatusBar} from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+  Animate,
+  ScrollView,
+  ActivityIndicator,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
@@ -26,6 +36,16 @@ const Sensor = ({
 );
 
 class WeatherScreen extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      //this is the array that holds information the the sensor components
+      isLoading: true,
+
+    }
+  }
+
     async getData(){
 
         await this.props.getWeatherData().then(response => {
@@ -37,14 +57,6 @@ class WeatherScreen extends React.Component {
         this.getData();
     }
 
-    constructor() {
-        super();
-        this.state = {
-            //this is the array that holds information the the sensor components
-            isloading: false,
-
-        }
-    }
 
     handlepress = ()=>{
         this.props.navigation.navigate('Sensor');
@@ -67,8 +79,7 @@ class WeatherScreen extends React.Component {
 
     render() {
         if (this.state.isLoading) {
-            console.log("Loading data from database in Weather screen");
-
+            //console.log("Loading data from database in Weather screen");
             return (
                 <View style={styles.loading}>
                     <ActivityIndicator/>
@@ -76,7 +87,7 @@ class WeatherScreen extends React.Component {
                 </View>
             )
         } else {
-            console.log("Done Loading Weather Screen! Weather Data", this.props.weather);
+            //console.log("Done Loading Weather Screen! Weather Data", this.props.weather);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -92,14 +103,14 @@ class WeatherScreen extends React.Component {
                     <View style={styles.sensorlistcontainer}>
                         {this.props.weather.map(sensorInfo => {
                             return (
-                                <TouchableHighlight onPress={() => {
+                                <TouchableOpacity onPress={() => {
 
                                 }}>
                                     <Sensor name={sensorInfo.name}
                                             style={styles.sensorLightStyle}
                                             detail={sensorInfo.detail}
                                     />
-                                </TouchableHighlight>
+                                </TouchableOpacity>
                             );
                         })}
                     </View>
