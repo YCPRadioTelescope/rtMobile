@@ -12,34 +12,30 @@ import React from 'react';
 import styles from './styles';
 import ScrollElements from "../../components/scrollView/scrollView";
 import { firebase } from '@react-native-firebase/messaging';
-
 import {getWeatherData} from "../StatusScreen/WeatherActions";
-import {bindActionCreators} from "redux";
 import {getSensorData} from "../SensorScreen/SensorActions";
+import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
-const windspeed = 0;
-const winddirection = 1;
-const temperature = 2;
-
 class HomeScreen extends React.Component {
-
-  async getData(){
-    await this.props.getWeatherData().then(response => {
-      this.setState({isLoading: false});
-
-    })
-  }
-
 
   state={
     azimuth: this.props.navigation.getParam("azimuth", 45),
     elevation: this.props.navigation.getParam("elevation", 45),
     isLoading: true,
-    windSpeed: "initial",
-    windDirection: "initial",
-    temperature: "initial",
+    windSpeed: '',
+    windDirection: '',
+    temperature: '',
   };
+
+  async getData(){
+    await this.props.getWeatherData().then(response => {
+      this.setState({windSpeed: this.props.weather[0].detail});
+      this.setState({windDirection: this.props.weather[1].detail});
+      this.setState({temperature: this.props.weather[2].detail});
+      this.setState({isLoading: false});
+    })
+  }
 
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
@@ -115,28 +111,6 @@ class HomeScreen extends React.Component {
       {cancelable: false},
     );
   };
-  updateState = () =>{
-    /*when navigating to Weather (but not ApprovalDashboard)
-    for some reason render() is called again and that can cause
-    the app to pull data from props.weather, which would now be
-    undefined and cause a crash. This function fixes that
-    and should be called before return
-     */
-    console.log("Updating weather state");
-    if(this.props.weather != undefined){
-      if(this.props.weather[temperature].detail != undefined){
-        this.state.temperature =this.props.weather[temperature].detail;
-      }
-      if(this.props.weather[windspeed].detail != undefined){
-        this.state.windSpeed = this.props.weather[windspeed].detail;
-      }
-      if(this.props.weather[winddirection].detail != undefined){
-        this.state.windDirection = this.props.weather[winddirection].detail;
-      }
-    }
-
-
-  };
 
   render() {
     if (this.state.isLoading) {
@@ -148,8 +122,9 @@ class HomeScreen extends React.Component {
           </View>
       )
     } else {
-      console.log("Done loading: updateing weather variables then rendering page");
-      this.updateState();
+      console.log('windddddd', this.state.windSpeed);
+      //console.log("Done loading: updateing weather variables then rendering page");
+      //this.updateState();
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
