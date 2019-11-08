@@ -65,5 +65,10 @@ export default StyleSheet.create({
     //left: '80%',
     //marginRight: 10,
   },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
 });
