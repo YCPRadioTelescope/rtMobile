@@ -27,7 +27,7 @@ export const getWeatherData = (email, password) => {
         return axios
             .get(`${url}/weather`)
             .then(response => {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 return dispatch(weatherSuccess(response.data));
             })
             .catch(error => {

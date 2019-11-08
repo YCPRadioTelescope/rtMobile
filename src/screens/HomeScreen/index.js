@@ -13,6 +13,7 @@ import styles from './styles';
 import ScrollElements from "../../components/scrollView/scrollView";
 import { firebase } from '@react-native-firebase/messaging';
 import {getWeatherData} from "../StatusScreen/WeatherActions";
+import {getUsers} from "../../actions/getUsersAction";
 import {getSensorData} from "../SensorScreen/SensorActions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
@@ -23,12 +24,20 @@ class HomeScreen extends React.Component {
     azimuth: this.props.navigation.getParam("azimuth", 45),
     elevation: this.props.navigation.getParam("elevation", 45),
     isLoading: true,
+    isLoading2: true,
     windSpeed: '',
     windDirection: '',
     temperature: '',
+    users: 0,
   };
 
   async getData(){
+    await this.props.getUsers().then(response => {
+      console.log('response ===', response)
+      console.log('users props -> ', this.props.users);
+      this.setState({users: response.user.data.length});
+      this.setState({isLoading2: false});
+    })
     await this.props.getWeatherData().then(response => {
       this.setState({windSpeed: this.props.weather[0].detail});
       this.setState({windDirection: this.props.weather[1].detail});
@@ -113,18 +122,22 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    if (this.state.isLoading) {
-      console.log("Loading data from database");
+    if (this.state.isLoading === true || this.state.isLoading2 === true) {
+      //console.log("Loading data from database");
       return (
           <View style={styles.loading}>
             <ActivityIndicator/>
             <StatusBar barStyle="default"/>
           </View>
       )
-    } else {
-      console.log('windddddd', this.state.windSpeed);
+    }
+    if(this.state.isLoading === false && this.state.isLoading2 === false){
+      //console.log('windddddd', this.state.windSpeed);
       //console.log("Done loading: updateing weather variables then rendering page");
       //this.updateState();
+      console.log('user length', this.state.users);
+      console.log('isloading', this.state.isLoading);
+      console.log('loading 2', this.state.isLoading2);
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -170,11 +183,15 @@ class HomeScreen extends React.Component {
                   <Text> Approve Users </Text>
                 </View>
               </TouchableHighlight>
+              {this.state.users > 0 && (
               <Image
                   source={require("../../../assets/images/redStatus.png")}
                   style={styles.users}
               />
-              <Text style={styles.userNum}>3</Text>
+              )}
+              {this.state.users > 0 && (
+                  <Text style={styles.userNum}>{this.state.users}</Text>
+              )}
             </View>
             <View style={styles.dpad}>
               <TouchableOpacity onPress={this.dpad}>
@@ -191,11 +208,13 @@ class HomeScreen extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const { weather } = state;
-  console.log("Getting weather = state in MapStateToProps",weather);
-    console.log("weather.weather is:",weather.weather.weather);
+  const { weather, users } = state;
+  //console.log("Getting weather = state in MapStateToProps",weather);
+  console.log("weather.weather is:",weather.weather.weather);
+  console.log('users bottom -> ', users);
 
   return {
+    users: users,
     weather: weather.weather.weather,
     errorResponse: weather.errorResponse,
     errorMessage: weather.errorMessage
@@ -206,6 +225,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
           getWeatherData,
+          getUsers,
         },
         dispatch
     );

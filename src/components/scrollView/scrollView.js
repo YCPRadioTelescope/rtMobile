@@ -13,7 +13,7 @@ class ScrollElements extends Component {
    render() {
       const navigation = this.props.navigation;
       const users = this.props.users;
-      console.log(users);
+      console.log('users in scrollview' , users);
       return (
          <View>
             <ScrollView style = {styles.element}>
