@@ -16,9 +16,9 @@ class ApprovalDashboardScreen extends React.Component {
     };
 
     async getData() {
-      await this.props.getUsers().then(response => {
-        this.setState({isLoading: false});
-      })
+        await this.props.getUsers().then(response => {
+            this.setState({isLoading: false});
+        });
     }
 
 
@@ -29,11 +29,22 @@ class ApprovalDashboardScreen extends React.Component {
         this.getData();
     }
 
+    componentDidUpdate() {
+        // If buttonPushed was set to 1, reload and test buttonPushed back to 0.
+        /*if (1== this.props.navigation.getParam('buttonPushed')) {
+            this.getData();
+        }
+        this.props.navigation.setParams({ buttonPushed: 0 });*/
+        this.getData();
+    }
+
+
     componentWillUnmount() {
         this.focusListener.remove();
     }
 
   render() {
+        console.log("Parent:",this.props.navigation.getParam('buttonPushed'));
       if(this.state.isLoading){
         return(
           <View style={styles.loading}>
@@ -43,14 +54,13 @@ class ApprovalDashboardScreen extends React.Component {
         )
       }
       else {
-        console.log('hereeeeee');
         return (
           <View style={styles.container}>
             <View style={styles.navBar}>
               <Text style={styles.navTitle}>Approve Users</Text>
             </View>
-            {/*<Text>{this.props.user[0].id}</Text>*/}
-            <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.props.user} />
+
+            <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.props.user} buttonPushed={0}/>
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
               <Image
                 source={require("../../../assets/images/back.png")}

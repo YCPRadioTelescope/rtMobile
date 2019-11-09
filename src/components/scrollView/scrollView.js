@@ -4,16 +4,14 @@ import ApproveButton from '../approveButton/ApproveButton.js';
 import DenyButton from '../denyButton/DenyButton.js';
 import styles from './styles';
 
-// cayNMPU2$B9Q
-
 class ScrollElements extends Component {
 
 
 
    render() {
-      const navigation = this.props.navigation;
       const users = this.props.users;
       console.log(users);
+       console.log("TOP LEVEL ",this.props.buttonPushed);
       return (
          <View>
             <ScrollView style = {styles.element}>
@@ -28,9 +26,8 @@ class ScrollElements extends Component {
                             </View>
 
                             <View style = {styles.buttons}>
-                                // TODO: researching passing state of the button from a child from a child to a parent
-                                // https://towardsdatascience.com/passing-data-between-react-components-parent-children-siblings-a64f89e24ecf
-                              <ApproveButton style = {styles.approveButton} user={item} navigation={this.props.navigation}  />
+
+                              <ApproveButton style = {styles.approveButton} user={item} navigation={this.props.navigation} buttonPushed={this.props.buttonPushed} />
                               <DenyButton style={styles.denyButton} user={item} navigation={this.props.navigation} />
                             </View>
                         </View>
