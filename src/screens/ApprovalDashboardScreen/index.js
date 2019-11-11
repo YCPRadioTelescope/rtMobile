@@ -33,7 +33,7 @@ class ApprovalDashboardScreen extends React.Component {
         // If buttonPushed was set to 1, reload and test buttonPushed back to 0.
         if (1 === this.props.navigation.getParam('buttonPushed')) {
             this.getData();
-          this.props.navigation.setParams({ buttonPushed: 0 });
+            this.props.navigation.setParams({ buttonPushed: 0 });
         }
 
         //this.getData();
