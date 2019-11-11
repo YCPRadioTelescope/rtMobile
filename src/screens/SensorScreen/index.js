@@ -29,6 +29,17 @@ const Detail = ({
 
 class SensorScreen extends React.Component {
 
+
+        state = {
+            //this is the array that holds information the the sensor components
+            buttonText: "Activate Override",
+            //azimuth: this.props.navigation.getParam("azimuth", 45),
+            sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
+            detail:  this.props.navigation.getParam('details', 3),
+            override: this.props.navigation.getParam('override',0)
+        }
+
+
     getLightColor = (detail,override) =>{
         /*
         This function sets the image of the sensor
@@ -37,9 +48,11 @@ class SensorScreen extends React.Component {
         0 returns red, 1 returns yellow, 2 returns green, returns grey if anything else
          */
         if(override){
+            this.state.buttonText = "Remove Override"
             return require("../../../assets/images/orangeStatus.png");
         }
         else{
+            this.state.buttonText = "Activate Override"
             if(detail == 0){//0 = red
                 return require("../../../assets/images/redStatus.png");
             }
@@ -55,6 +68,18 @@ class SensorScreen extends React.Component {
         }
     };
 
+    updateOverride = () =>{
+        if(this.state.override){
+            this.setState({buttonText: "Activate Override"});
+            this.setState({override: 0})
+        }
+        else{
+            this.setState({buttonText: "Remove Override"});
+            this.setState({override: 1})
+        }
+
+    };
+
   render() {
     const { navigation } = this.props;
     const details = navigation.getParam('details', 3)
@@ -66,23 +91,23 @@ class SensorScreen extends React.Component {
                 />
             </TouchableHighlight>
             <View style={{marginTop: '10%', alignItems: 'center',}}>
-                <Text style = {styles.header}> {navigation.getParam('sensorname', 'Sensor')}</Text>
+                <Text style = {styles.header}> {this.state.sensorName}</Text>
 
             </View>
             <Divider style={styles.sectionDivider}/>
             <View style={styles.container}>
                 <View style={styles.detailslistcontainer}>
                     <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}}>
-                        <Detail name = {navigation.getParam('sensorname', 'Sensor')} detail={details}
+                        <Detail name = {this.state.sensorName} detail={this.state.detail}
                         style = {styles.statusLightStyle}
-                        image = {this.getLightColor(details,navigation.getParam('override',0))}
+                        image = {this.getLightColor(this.state.detail,this.state.override)}
                         />
                     </TouchableHighlight>
                 </View>
             </View>
-            <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}} style={styles.button}>
+            <TouchableHighlight onPress={() => {this.updateOverride()}} style={styles.button}>
                 <View>
-                    <Text style={{color: 'white'}}> Override </Text>
+                    <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                 </View>
             </TouchableHighlight>
         </ScrollView>
