@@ -1,4 +1,14 @@
-import {Image, Text, TouchableHighlight, View, Animate, ScrollView, ActivityIndicator, StatusBar} from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+  Animate,
+  ScrollView,
+  ActivityIndicator,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
@@ -6,6 +16,7 @@ import {bindActionCreators} from "redux";
 import {login} from "../LoginScreen/AuthActions";
 import {connect} from "react-redux";
 import {getSensorData} from "../SensorScreen/SensorActions";
+import {getWeatherData} from "../StatusScreen/WeatherActions";
 
 //component to render each of the sensors in sensorlistcontainer
 const Sensor = ({
@@ -13,24 +24,31 @@ const Sensor = ({
                     temp,
                     name,
                     style,
-                    details
+                    detail
                 })=>(
     <View>
         <View style = {{flexDirection: 'row',justifyContent: 'space-between',}}>
             <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%',}}>{name}</Text>
-            <Image
-                source={require("../../../assets/images/meduimgreenstatus.png")}
-                style = {style}
-            />
+            <Text style = {{alignSelf: 'flex-end', paddingRight: '5%',}}>{detail}</Text>
         </View>
         <Divider style={styles.sectionDivider}/>
     </View>
 );
 
-class StatusScreen extends React.Component {
+class WeatherScreen extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      //this is the array that holds information the the sensor components
+      isLoading: true,
+
+    }
+  }
+
     async getData(){
 
-        await this.props.getSensorData().then(response => {
+        await this.props.getWeatherData().then(response => {
             this.setState({isLoading: false});
         })
     }
@@ -39,13 +57,6 @@ class StatusScreen extends React.Component {
         this.getData();
     }
 
-    constructor() {
-        super();
-        this.state = {
-            //this is the array that holds information the the sensor components
-            isLoading: true
-        }
-    }
 
     handlepress = ()=>{
         this.props.navigation.navigate('Sensor');
@@ -68,7 +79,7 @@ class StatusScreen extends React.Component {
 
     render() {
         if (this.state.isLoading) {
-            console.log("isLoading is ",this.state.isLoading);
+            //console.log("Loading data from database in Weather screen");
             return (
                 <View style={styles.loading}>
                     <ActivityIndicator/>
@@ -76,8 +87,7 @@ class StatusScreen extends React.Component {
                 </View>
             )
         } else {
-            console.log("isLoading is ",this.state.isLoading);
-            console.log("Done Loading! Sensor Data", this.props.sensor.sensor);
+            //console.log("Done Loading Weather Screen! Weather Data", this.props.weather);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -86,33 +96,25 @@ class StatusScreen extends React.Component {
                         />
                     </TouchableHighlight>
                     <View style={{marginTop: '10%', alignItems: 'center'}}>
-                        <Text style={styles.header}>Status</Text>
-                        <Image
-                            source={require("../../../assets/images/largegreenstatus.png")}
-                            style={styles.statusLightStyle}
-                        />
+                        <Text style={styles.header}>Weather Station</Text>
                     </View>
                     <Divider style={styles.sectionDivider}/>
-                    <Text style={styles.sensorlistheader}>Sensors</Text>
-                    <Divider style={styles.listheaderDivider}/>
 
                     <View style={styles.sensorlistcontainer}>
-                        {this.props.sensor.sensor.map(sensorInfo => {
+                        {this.props.weather.map(sensorInfo => {
                             return (
-                                <TouchableHighlight onPress={() => {
-                                    this.props.navigation.navigate('Sensor',
-                                        {
-                                            sensorname: sensorInfo.name,
-                                            details: sensorInfo.details,
-                                        }
-                                    )
+                                <TouchableOpacity onPress={() => {
+
                                 }}>
                                     <Sensor name={sensorInfo.name}
-                                            style={styles.sensorLightStyle}/>
-                                </TouchableHighlight>
+                                            style={styles.sensorLightStyle}
+                                            detail={sensorInfo.detail}
+                                    />
+                                </TouchableOpacity>
                             );
                         })}
                     </View>
+
 
                 </ScrollView>
             );
@@ -128,19 +130,20 @@ adb reverse tcp:3000 tcp:3000
 
  */
 const mapStateToProps = state => {
-    const { sensor } = state;
-    console.log("Getting sensor = state in MapStateToProps",sensor);
+    const { weather } = state;
+    console.log("Getting wether = state in MapStateToProps",weather);
     return {
-    sensor: sensor.sensor,
-    errorResponse: sensor.errorResponse,
-    errorMessage: sensor.errorMessage
+
+        weather: weather.weather.weather,
+        errorResponse: weather.errorResponse,
+        errorMessage: weather.errorMessage
     };
 };
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            getSensorData,
+            getWeatherData,
         },
         dispatch
     );
@@ -148,4 +151,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(StatusScreen);
+)(WeatherScreen);

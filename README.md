@@ -15,7 +15,13 @@ If on a mac<br/>
 cd pod<br/>
 run pod install<br/>
 cd ..<br/>
-If some libraries don't install, you can also run yarn add
+If some libraries don't install, you can also run yarn add <br/>
+Go to the firebase console <br/>
+Click on the rtMobile project <br/>
+Click on the setting 'gear' at the top left <br/>
+Click on the general tab in the middle<br/>
+Scroll to the bottom and download the google-services.json file<br/>
+Place this file in rtMobile/android/app... do not commit this file on github <br/>
 
 Go to https://facebook.github.io/react-native/docs/getting-started and follow their React Native CLI Quickstart guide. 
 

@@ -32,7 +32,7 @@ export const getUsers = () => {
         return axios
             .post(`${url}/pendingUsers`,reqBody)
             .then(response => {
-                console.log('inside axios return');
+                console.log('inside axios returnnnnnnnnnn');
                 console.log(JSON.stringify(response));
                 return dispatch(getUsersSuccess(response));
             })

@@ -4,11 +4,14 @@ import ApproveButton from '../approveButton/ApproveButton.js';
 import DenyButton from '../denyButton/DenyButton.js';
 import styles from './styles';
 
+// cayNMPU2$B9Q
+
 class ScrollElements extends Component {
 
 
 
    render() {
+      const navigation = this.props.navigation;
       const users = this.props.users;
       console.log(users);
        console.log("TOP LEVEL ",this.props.buttonPushed);
