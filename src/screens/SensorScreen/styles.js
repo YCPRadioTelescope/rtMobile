@@ -52,7 +52,7 @@ export default StyleSheet.create({
     borderRadius: 14,
     paddingVertical: 6,
     paddingHorizontal: 13,
-    backgroundColor: 'red',
+    backgroundColor: 'orange',
     alignItems: 'center',
     width: '50%',
     marginLeft: '25%',

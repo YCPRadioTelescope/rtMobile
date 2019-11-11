@@ -48,7 +48,7 @@ class OverrideScreen extends React.Component {
 
                     <TouchableHighlight onPress={() => {}} style={styles.button}>
                         <View>
-                            <Text> Set Overrride </Text>
+                            <Text> Overrride Sensor </Text>
                         </View>
                     </TouchableHighlight>
                 </View>
