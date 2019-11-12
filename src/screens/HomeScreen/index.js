@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Image,
   Text,
   TouchableHighlight,
@@ -10,11 +9,9 @@ import {
 } from 'react-native';
 import React from 'react';
 import styles from './styles';
-import ScrollElements from "../../components/scrollView/scrollView";
 import { firebase } from '@react-native-firebase/messaging';
-import {getWeatherData} from "../StatusScreen/WeatherActions";
+import {getWeatherData} from "../../actions/WeatherActions";
 import {getUsers} from "../../actions/getUsersAction";
-import {getSensorData} from "../SensorScreen/SensorActions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 

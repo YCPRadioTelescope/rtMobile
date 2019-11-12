@@ -1,11 +1,9 @@
-import { AsyncStorage } from "react-native";
-
 import { combineReducers } from "redux";
 
 import {
     WEATHER_SUCCESS,
     WEATHER_FAILURE,
-} from "./WeatherActions";
+} from "../actions/WeatherActions";
 
 
 const INITIAL_STATE = {

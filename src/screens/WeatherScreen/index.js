@@ -3,7 +3,6 @@ import {
   Text,
   TouchableHighlight,
   View,
-  Animate,
   ScrollView,
   ActivityIndicator,
   StatusBar,
@@ -13,10 +12,8 @@ import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
 import {bindActionCreators} from "redux";
-import {login} from "../LoginScreen/AuthActions";
 import {connect} from "react-redux";
-import {getSensorData} from "../SensorScreen/SensorActions";
-import {getWeatherData} from "../StatusScreen/WeatherActions";
+import {getWeatherData} from "../../actions/WeatherActions";
 
 //component to render each of the sensors in sensorlistcontainer
 const Sensor = ({
