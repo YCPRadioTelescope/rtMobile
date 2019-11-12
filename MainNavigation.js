@@ -5,6 +5,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen';
 import ApprovalDashboardScreen from './src/screens/ApprovalDashboardScreen';
 import DenialScreen from './src/screens/DenialScreen';
+import CustomDenialScreen from './src/screens/CustomDenialScreen';
 import SensorScreen from './src/screens/SensorScreen';
 import StatusScreen from './src/screens/StatusScreen';
 import TempNavScreen from './src/screens/TempNavScreen';
@@ -28,6 +29,7 @@ const AppStack = createStackNavigator(
     Home: HomeScreen,
     ApprovalDashboard: ApprovalDashboardScreen,
     Denial: DenialScreen,
+    CustomDenial: CustomDenialScreen,
     Sensor: SensorScreen,
     Status: StatusScreen,
     Weather: WeatherScreen,
