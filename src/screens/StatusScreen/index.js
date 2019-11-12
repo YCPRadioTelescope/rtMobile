@@ -36,7 +36,12 @@ class StatusScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.getData();
+        this.focusListener = this.props.navigation.addListener("didFocus", () => {
+            console.log('Status: Listener activated');
+            this.getData();
+        });
+
+
     }
 
     constructor() {
@@ -77,6 +82,9 @@ class StatusScreen extends React.Component {
         }
     };
 
+    componentWillUnmount() {
+        this.focusListener.remove();
+    }
 
     render() {
         if (this.state.isLoading) {
@@ -116,7 +124,9 @@ class StatusScreen extends React.Component {
                                         {
                                             sensorname: sensorInfo.name,
                                             details: sensorInfo.details,
-                                            override: sensorInfo.override
+                                            override: sensorInfo.override,
+                                            id: sensorInfo.id,
+                                            sensor: sensorInfo
                                         }
                                     )
                                 }}>

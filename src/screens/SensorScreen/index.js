@@ -2,7 +2,11 @@ import {Image, Text, TouchableHighlight, View, ScrollView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
-
+import {setOverride} from "./OverrideActions";
+import {bindActionCreators} from "redux";
+import {email} from "../../actions/emailAction";
+import {approveUser} from "../../actions/approveUserAction";
+import connect from "react-redux/lib/connect/connect";
 
 
 const Detail = ({
@@ -36,7 +40,9 @@ class SensorScreen extends React.Component {
             //azimuth: this.props.navigation.getParam("azimuth", 45),
             sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
             detail:  this.props.navigation.getParam('details', 3),
-            override: this.props.navigation.getParam('override',0)
+            override: this.props.navigation.getParam('override',0),
+            id: this.props.navigation.getParam('id',-1),
+            sensor: this.props.navigation.getParam('sensor')
         }
 
 
@@ -70,12 +76,16 @@ class SensorScreen extends React.Component {
 
     updateOverride = () =>{
         if(this.state.override){
+            console.log("Turning off override at sensor ",this.state.id);
             this.setState({buttonText: "Activate Override"});
             this.setState({override: 0})
+            this.props.setOverride(this.state.sensor,0);
         }
         else{
+            console.log("Turning oon override at sensor ",this.state.id);
             this.setState({buttonText: "Remove Override"});
             this.setState({override: 1})
+            this.props.setOverride(this.state.sensor,1);
         }
 
     };
@@ -83,6 +93,8 @@ class SensorScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const details = navigation.getParam('details', 3)
+      console.log("This sensor's id is: ",this.state.id);
+      console.log("The full sensor is",this.state.sensor);
     return (
         <ScrollView>
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -97,7 +109,7 @@ class SensorScreen extends React.Component {
             <Divider style={styles.sectionDivider}/>
             <View style={styles.container}>
                 <View style={styles.detailslistcontainer}>
-                    <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}}>
+                    <TouchableHighlight onPress={() => {}}>
                         <Detail name = {this.state.sensorName} detail={this.state.detail}
                         style = {styles.statusLightStyle}
                         image = {this.getLightColor(this.state.detail,this.state.override)}
@@ -115,4 +127,25 @@ class SensorScreen extends React.Component {
   }
 }
 
-export default SensorScreen;
+const mapStateToProps = state => {
+    return {
+
+        /*errorResponse: email.errorResponse,
+        errorMessage: email.errorMessage,
+        errorResponse: approveUser.errorResponse,
+        errorMessage: approveUser.errorMessage,*/
+    };
+};
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            setOverride,
+        },
+        dispatch
+    );
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SensorScreen);

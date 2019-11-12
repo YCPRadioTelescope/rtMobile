@@ -5,6 +5,7 @@ import sensorReducer from "./src/screens/SensorScreen/SensorReducer";
 import weatherReducer from "./src/screens/StatusScreen/WeatherReducer";
 import denyUserReducer from "./src/reducers/denyUserReducer";
 import approveUserReducer from "./src/reducers/approveUserReducer";
+import overrideReducer from "./src/screens/SensorScreen/OverrideReducer"
 
 const reducer = combineReducers({
   //user: AuthReducer,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   approveUser: approveUserReducer,
   sensor: sensorReducer,
   weather: weatherReducer,
+  override: overrideReducer
 });
 
 export default reducer;
