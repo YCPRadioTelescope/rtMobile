@@ -95,71 +95,35 @@ class SensorScreen extends React.Component {
     const details = navigation.getParam('details', 3)
       //console.log("This sensor's id is: ",this.state.id);
       console.log("The state.sensor in sensor screen",this.state.sensor);
-    //if light is not red then grey out the override button
-    if(this.state.detail != 0 && !this.state.override){
-        return (
-            <ScrollView>
-                <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-                    <Image
-                        source={require("../../../assets/images/back.png")}
-                    />
-                </TouchableHighlight>
-                <View style={{marginTop: '10%', alignItems: 'center',}}>
-                    <Text style = {styles.header}> {this.state.sensorName}</Text>
+    return (
+        <ScrollView>
+            <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+                <Image
+                    source={require("../../../assets/images/back.png")}
+                />
+            </TouchableHighlight>
+            <View style={{marginTop: '10%', alignItems: 'center',}}>
+                <Text style = {styles.header}> {this.state.sensorName}</Text>
 
+            </View>
+            <Divider style={styles.sectionDivider}/>
+            <View style={styles.container}>
+                <View style={styles.detailslistcontainer}>
+                    <TouchableHighlight onPress={() => {}}>
+                        <Detail name = {this.state.sensorName} detail={this.state.detail}
+                        style = {styles.statusLightStyle}
+                        image = {this.getLightColor(this.state.detail,this.state.override)}
+                        />
+                    </TouchableHighlight>
                 </View>
-                <Divider style={styles.sectionDivider}/>
-                <View style={styles.container}>
-                    <View style={styles.detailslistcontainer}>
-                        <TouchableHighlight onPress={() => {}}>
-                            <Detail name = {this.state.sensorName} detail={this.state.detail}
-                                    style = {styles.statusLightStyle}
-                                    image = {this.getLightColor(this.state.detail,this.state.override)}
-                            />
-                        </TouchableHighlight>
-                    </View>
+            </View>
+            <TouchableHighlight onPress={this.updateOverride} style={styles.button}>
+                <View>
+                    <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                 </View>
-                <TouchableHighlight onPress={() => {}} style={styles.greyButton}>
-                    <View>
-                        <Text style={{color: 'white'}}> Activate Override </Text>
-                    </View>
-                </TouchableHighlight>
-            </ScrollView>
-        );
-    }
-    //if light it red override button should be orange
-    else{
-        return (
-            <ScrollView>
-                <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-                    <Image
-                        source={require("../../../assets/images/back.png")}
-                    />
-                </TouchableHighlight>
-                <View style={{marginTop: '10%', alignItems: 'center',}}>
-                    <Text style = {styles.header}> {this.state.sensorName}</Text>
-
-                </View>
-                <Divider style={styles.sectionDivider}/>
-                <View style={styles.container}>
-                    <View style={styles.detailslistcontainer}>
-                        <TouchableHighlight onPress={() => {}}>
-                            <Detail name = {this.state.sensorName} detail={this.state.detail}
-                                    style = {styles.statusLightStyle}
-                                    image = {this.getLightColor(this.state.detail,this.state.override)}
-                            />
-                        </TouchableHighlight>
-                    </View>
-                </View>
-                <TouchableHighlight onPress={this.updateOverride} style={styles.button}>
-                    <View>
-                        <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
-                    </View>
-                </TouchableHighlight>
-            </ScrollView>
-        );
-    }
-
+            </TouchableHighlight>
+        </ScrollView>
+    );
   }
 }
 

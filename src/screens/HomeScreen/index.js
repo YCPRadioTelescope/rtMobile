@@ -60,8 +60,9 @@ class HomeScreen extends React.Component {
      unsubscribe();
   }
   componentDidMount() {
+      this.getData();
 
-    if (Platform.OS === 'android') {
+      if (Platform.OS === 'android') {
       this.getToken();
     }
 
@@ -71,9 +72,8 @@ class HomeScreen extends React.Component {
       let elevation = this.props.navigation.getParam("elevation", 45);
       this.setState({azimuth: azimuth});
       this.setState({elevation: elevation});
-
+      this.getData();
     });
-    this.getData();
     /*this.focusListener = this.props.navigation.addListener("didBlur", () => {
       this.setState({isLoading: true})
     });*/
