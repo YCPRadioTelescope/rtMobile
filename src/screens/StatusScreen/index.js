@@ -96,8 +96,8 @@ class StatusScreen extends React.Component {
                 </View>
             )
         } else {
-            console.log("isLoading is ",this.state.isLoading);
-            console.log("Done Loading! Sensor Data", this.props.sensor.sensor);
+            //console.log("isLoading is ",this.state.isLoading);
+            console.log("sensor props in status screen", this.props.sensor.sensor);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>

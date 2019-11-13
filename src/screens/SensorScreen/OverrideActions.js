@@ -23,11 +23,16 @@ export const overrideFailure = error => {
 };
 
 export const setOverride = (sensor, setting) => {
-    let reqBody = sensor;
-    reqBody.override = setting;
+    let reqBody = {
+        "UUID": config.UUID,
+        "name": sensor,
+        "override": setting
+    };
+
+
     return dispatch => {
         return axios
-            .put(`${url}/sensorStatus/${sensor.id}`,reqBody)
+            .post(`${url}/setOverride`,reqBody)
             .then(response => {
                 //console.log(JSON.stringify(response));
                 return dispatch(overrideSuccess(response.data));

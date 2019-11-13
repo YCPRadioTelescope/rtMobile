@@ -79,13 +79,13 @@ class SensorScreen extends React.Component {
             console.log("Turning off override at sensor ",this.state.id);
             this.setState({buttonText: "Activate Override"});
             this.setState({override: 0})
-            this.props.setOverride(this.state.sensor,0);
+            this.props.setOverride(this.state.sensor.name,0);
         }
         else{
             console.log("Turning oon override at sensor ",this.state.id);
             this.setState({buttonText: "Remove Override"});
             this.setState({override: 1})
-            this.props.setOverride(this.state.sensor,1);
+            this.props.setOverride(this.state.sensor.name,1);
         }
 
     };
@@ -93,8 +93,8 @@ class SensorScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const details = navigation.getParam('details', 3)
-      console.log("This sensor's id is: ",this.state.id);
-      console.log("The full sensor is",this.state.sensor);
+      //console.log("This sensor's id is: ",this.state.id);
+      console.log("The state.sensor in sensor screen",this.state.sensor);
     return (
         <ScrollView>
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -117,7 +117,7 @@ class SensorScreen extends React.Component {
                     </TouchableHighlight>
                 </View>
             </View>
-            <TouchableHighlight onPress={() => {this.updateOverride()}} style={styles.button}>
+            <TouchableHighlight onPress={this.updateOverride} style={styles.button}>
                 <View>
                     <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                 </View>

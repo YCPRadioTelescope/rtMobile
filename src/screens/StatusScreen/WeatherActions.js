@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
+import config from '../../../config';
 
 
 const url = "http:127.0.0.1:3000";
@@ -21,11 +22,13 @@ export const weatherFailure = error => {
     };
 };
 
-export const getWeatherData = (email, password) => {
-
+export const getWeatherData = ( ) => {
+    let reqBody = {
+        "UUID": config.UUID,
+    };
     return dispatch => {
         return axios
-            .get(`${url}/weather`)
+            .post(`${url}/weather`, reqBody)
             .then(response => {
                 //console.log(JSON.stringify(response));
                 return dispatch(weatherSuccess(response.data));
