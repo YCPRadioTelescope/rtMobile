@@ -30,6 +30,7 @@ class HomeScreen extends React.Component {
     windDirection: '',
     temperature: '',
     users: 0,
+    sensorArray:[],
 
   };
 
@@ -47,6 +48,7 @@ class HomeScreen extends React.Component {
       this.setState({isLoading: false});
     })
       await this.props.getSensorData().then(response => {
+          this.setState({sensorArray: this.props.sensor})
           this.setState({isLoading3: false});
       })
   }
@@ -129,13 +131,13 @@ class HomeScreen extends React.Component {
     getStatusLightColor = () =>{
         let count = 0;
         let numYellow = 0;
-        while(count < this.props.sensor.length){
+        while(count < this.state.sensorArray.length){
             //if at least 1 sensor is red set status to Red
-            if(this.props.sensor[count].details == 0){
+            if(this.state.sensorArray[count].details == 0){
                 return require("../../../assets/images/redStatus.png");
             }
             //check if there are any yellows
-            else if(this.props.sensor[count].details == 1){
+            else if(this.state.sensorArray[count].details == 1){
                 numYellow ++;
             }
             count++;
