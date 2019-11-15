@@ -25,10 +25,12 @@ class HomeScreen extends React.Component {
     elevation: this.props.navigation.getParam("elevation", 45),
     isLoading: true,
     isLoading2: true,
+    isLoading3: true,
     windSpeed: '',
     windDirection: '',
     temperature: '',
     users: 0,
+
   };
 
   async getData(){
@@ -44,6 +46,9 @@ class HomeScreen extends React.Component {
       this.setState({temperature: this.props.weather[2].detail});
       this.setState({isLoading: false});
     })
+      await this.props.getSensorData().then(response => {
+          this.setState({isLoading3: false});
+      })
   }
 
    async getToken () {
@@ -121,8 +126,33 @@ class HomeScreen extends React.Component {
     );
   };
 
+    getStatusLightColor = () =>{
+        let count = 0;
+        let numYellow = 0;
+        while(count < this.props.sensor.length){
+            //if at least 1 sensor is red set status to Red
+            if(this.props.sensor[count].details == 0){
+                return require("../../../assets/images/redStatus.png");
+            }
+            //check if there are any yellows
+            else if(this.props.sensor[count].details == 1){
+                numYellow ++;
+            }
+            count++;
+        }
+        //if there are any yellow sensors set the status to yellow
+        if(numYellow > 0){
+            return require("../../../assets/images/mediumyellowstatus.png");
+        }
+        //if there are no red or yellow sensors return green
+        else{
+            return require("../../../assets/images/meduimgreenstatus.png");
+        }
+
+    }
+
   render() {
-    if (this.state.isLoading === true || this.state.isLoading2 === true) {
+    if (this.state.isLoading === true || this.state.isLoading2 === true || this.state.isLoading3 === true) {
       //console.log("Loading data from database");
       return (
           <View style={styles.loading}>
@@ -131,14 +161,15 @@ class HomeScreen extends React.Component {
           </View>
       )
     }
-    if(this.state.isLoading === false && this.state.isLoading2 === false){
+    if(this.state.isLoading === false && this.state.isLoading2 === false && this.state.isLoading3 === false){
       //console.log('windddddd', this.state.windSpeed);
       //console.log("Done loading: updateing weather variables then rendering page");
       //this.updateState();
       /*console.log('user length', this.state.users);
       console.log('isloading', this.state.isLoading);
       console.log('loading 2', this.state.isLoading2);*/
-
+      //this holds the image for the status light. setting the image source to this.getStatusLightColor directly does not work
+        let statusLightColor = this.getStatusLightColor()
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -146,7 +177,7 @@ class HomeScreen extends React.Component {
                 <Text style={styles.navTitle}>Status: </Text>
               </TouchableHighlight>
               <Image
-                  source={require("../../../assets/images/redStatus.png")}
+                  source={statusLightColor}
                   style={styles.mainStatusLight}/>
             </View>
             <View>
@@ -209,7 +240,7 @@ class HomeScreen extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const { weather, users } = state;
+  const { weather, users,sensor } = state;
   //console.log("Getting weather = state in MapStateToProps",weather);
   console.log("weather.weather is:",weather.weather.weather);
   console.log('users bottom -> ', users);
@@ -217,6 +248,7 @@ const mapStateToProps = state => {
   return {
     users: users,
     weather: weather.weather.weather,
+    sensor: sensor.sensor.sensor,
     errorResponse: weather.errorResponse,
     errorMessage: weather.errorMessage
   };
@@ -227,6 +259,7 @@ const mapDispatchToProps = dispatch =>
         {
           getWeatherData,
           getUsers,
+          getSensorData,
         },
         dispatch
     );
