@@ -1,8 +1,10 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
+import config from '../../../config';
 
 
-const url = "http:127.0.0.1:3000";
+//const url = "http:127.0.0.1:3000";
+const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 export const LOGIN = "LOGIN";
 export const SENSOR_SUCCESS = "SENSOR_SUCCESS";
 export const SENSOR_FAILURE = "SENSOR_FAILURE";
@@ -21,13 +23,15 @@ export const sensorFailure = error => {
     };
 };
 
-export const getSensorData = (email, password) => {
-
+export const getSensorData = ( ) => {
+    let reqBody = {
+        "UUID": config.UUID,
+    };
     return dispatch => {
         return axios
-            .get(`${url}/sensorStatus`)
+            .post(`${url}/sensorStatus`, reqBody)
             .then(response => {
-                //console.log(JSON.stringify(response));
+                console.log(JSON.stringify('sensor response in action',response));
                 return dispatch(sensorSuccess(response.data));
             })
             .catch(error => {

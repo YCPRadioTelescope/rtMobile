@@ -2,20 +2,26 @@ import {Image, Text, TouchableHighlight, View, ScrollView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
-
+import {setOverride} from "./OverrideActions";
+import {bindActionCreators} from "redux";
+import {email} from "../../actions/emailAction";
+import {approveUser} from "../../actions/approveUserAction";
+import connect from "react-redux/lib/connect/connect";
 
 
 const Detail = ({
                     key,
                     detail,
                     name,
-                    style
+                    style,
+                    image
+
                 })=>(
     <View>
         <View style = {{flexDirection: 'row',justifyContent: 'space-between',}}>
             <Text style = {{alignSelf: 'flex-start', paddingLeft: '5%'}}>{name}</Text>
             <Image
-                source={require("../../../assets/images/meduimgreenstatus.png")}
+                source={image}
                 style = {style}
             />
         </View>
@@ -23,11 +29,72 @@ const Detail = ({
     </View>
 );
 
+
+
 class SensorScreen extends React.Component {
+
+
+        state = {
+            //this is the array that holds information the the sensor components
+            buttonText: "Activate Override",
+            //azimuth: this.props.navigation.getParam("azimuth", 45),
+            sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
+            detail:  this.props.navigation.getParam('details', 3),
+            override: this.props.navigation.getParam('override',0),
+            id: this.props.navigation.getParam('id',-1),
+            sensor: this.props.navigation.getParam('sensor')
+        }
+
+
+    getLightColor = (detail,override) =>{
+        /*
+        This function sets the image of the sensor
+        if override is 1 it returns orange
+        if 0 the func returns based on the integer parameter 'detail'
+        0 returns red, 1 returns yellow, 2 returns green, returns grey if anything else
+         */
+        if(override){
+            this.state.buttonText = "Remove Override"
+            return require("../../../assets/images/orangeStatus.png");
+        }
+        else{
+            this.state.buttonText = "Activate Override"
+            if(detail == 0){//0 = red
+                return require("../../../assets/images/redStatus.png");
+            }
+            else if (detail == 1){//1 = yellow
+                return require("../../../assets/images/mediumyellowstatus.png");
+            }
+            else if (detail == 2){// 2 = green
+                return require("../../../assets/images/meduimgreenstatus.png");
+            }
+            else{//anything else should be a grey light to show something is wrong
+                return require("../../../assets/images/greyStatus.png");
+            }
+        }
+    };
+
+    updateOverride = () =>{
+        if(this.state.override){
+            console.log("Turning off override at sensor ",this.state.id);
+            this.setState({buttonText: "Activate Override"});
+            this.setState({override: 0})
+            this.props.setOverride(this.state.sensor.name,0);
+        }
+        else{
+            console.log("Turning oon override at sensor ",this.state.id);
+            this.setState({buttonText: "Remove Override"});
+            this.setState({override: 1})
+            this.props.setOverride(this.state.sensor.name,1);
+        }
+
+    };
 
   render() {
     const { navigation } = this.props;
-    const details = navigation.getParam('details', 'fallback_detail')
+    const details = navigation.getParam('details', 3)
+      //console.log("This sensor's id is: ",this.state.id);
+      console.log("The state.sensor in sensor screen",this.state.sensor);
     return (
         <ScrollView>
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -36,22 +103,23 @@ class SensorScreen extends React.Component {
                 />
             </TouchableHighlight>
             <View style={{marginTop: '10%', alignItems: 'center',}}>
-                <Text style = {styles.header}> {navigation.getParam('sensorname', 'Sensor')}</Text>
+                <Text style = {styles.header}> {this.state.sensorName}</Text>
 
             </View>
             <Divider style={styles.sectionDivider}/>
             <View style={styles.container}>
                 <View style={styles.detailslistcontainer}>
-                    <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}}>
-                        <Detail name = {navigation.getParam('sensorname', 'Sensor')} detail={details}
+                    <TouchableHighlight onPress={() => {}}>
+                        <Detail name = {this.state.sensorName} detail={this.state.detail}
                         style = {styles.statusLightStyle}
+                        image = {this.getLightColor(this.state.detail,this.state.override)}
                         />
                     </TouchableHighlight>
                 </View>
             </View>
-            <TouchableHighlight onPress={() => {this.props.navigation.navigate('Override')}} style={styles.button}>
+            <TouchableHighlight onPress={this.updateOverride} style={styles.button}>
                 <View>
-                    <Text style={{color: 'white'}}> Add New Override </Text>
+                    <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                 </View>
             </TouchableHighlight>
         </ScrollView>
@@ -59,4 +127,25 @@ class SensorScreen extends React.Component {
   }
 }
 
-export default SensorScreen;
+const mapStateToProps = state => {
+    return {
+
+        /*errorResponse: email.errorResponse,
+        errorMessage: email.errorMessage,
+        errorResponse: approveUser.errorResponse,
+        errorMessage: approveUser.errorMessage,*/
+    };
+};
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            setOverride,
+        },
+        dispatch
+    );
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SensorScreen);

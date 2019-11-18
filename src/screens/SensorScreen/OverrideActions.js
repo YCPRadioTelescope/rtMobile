@@ -1,44 +1,46 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
-import config from '../../../config';
+import config from "../../../config";
 
 
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 //const url = "http:127.0.0.1:3000";
 const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 export const LOGIN = "LOGIN";
-export const WEATHER_SUCCESS = "SENSOR_SUCCESS";
-export const WEATHER_FAILURE = "SENSOR_FAILURE";
+export const OVERRIDE_SUCCESS = "SENSOR_SUCCESS";
+export const OVERRIDE_FAILURE = "SENSOR_FAILURE";
 
-export const weatherSuccess = weather => {
+export const overrideSuccess = sensor => {
     return {
-        type: WEATHER_SUCCESS,
-        weather
+        type: OVERRIDE_SUCCESS,
+        sensor
     };
 };
 
-export const weatherFailure = error => {
+export const overrideFailure = error => {
     return {
-        type: WEATHER_FAILURE,
+        type: OVERRIDE_FAILURE,
         error
     };
 };
 
-export const getWeatherData = ( ) => {
+export const setOverride = (sensor, setting) => {
     let reqBody = {
         "UUID": config.UUID,
+        "name": sensor,
+        "override": setting
     };
+
+
     return dispatch => {
         return axios
-            .post(`${url}/weather`, reqBody)
+            .post(`${url}/setOverride`,reqBody)
             .then(response => {
                 //console.log(JSON.stringify(response));
-                return dispatch(weatherSuccess(response.data));
+                return dispatch(overrideSuccess(response.data));
             })
             .catch(error => {
                 console.log(error.response.data.message);
-                return dispatch(weatherFailure(error.response.data));
+                return dispatch(overrideFailure(error.response.data));
             });
     };
 };
-

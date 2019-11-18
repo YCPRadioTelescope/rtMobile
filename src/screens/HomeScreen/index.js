@@ -132,9 +132,10 @@ class HomeScreen extends React.Component {
       //console.log('windddddd', this.state.windSpeed);
       //console.log("Done loading: updateing weather variables then rendering page");
       //this.updateState();
-      console.log('user length', this.state.users);
+      /*console.log('user length', this.state.users);
       console.log('isloading', this.state.isLoading);
-      console.log('loading 2', this.state.isLoading2);
+      console.log('loading 2', this.state.isLoading2);*/
+
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
