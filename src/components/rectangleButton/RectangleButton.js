@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
 import {email} from '../../actions/emailAction.js'
+import {denyUser} from '../../actions/denyUserAction.js'
 import {bindActionCreators} from "redux";
 import connect from "react-redux/lib/connect/connect";
 
@@ -16,16 +17,15 @@ class RectangleButton extends Component {
 
 
   onPress = () => {
-    var ID = this.props.userID;
-    // TODO: get email from userID
-    var email = 'amcdevitt97@gmail.com'
-    // TODO: get name from userID
-    var name = 'Alyssa McDevitt';
+    var user = this.props.user;
+    var email = user.email_address;
+    var name = user.first_name+" "+this.props.user.last_name;
     var subject = 'Needs review: Your YCAS radio telescope account was denied';
     var body = "Dear "+name+",  \nYour account for the YCAS radio telescope has"
     +" been denied for the following reason: " + this.props.reason +". If you "
     +"think this was in error, please email important people at an important address.";
     this.props.email(email, subject, body);
+    this.props.denyUser(user.id);
     this.props.navigation.goBack();
   }
 
@@ -73,6 +73,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       email,
+        denyUser,
     },
     dispatch
   );

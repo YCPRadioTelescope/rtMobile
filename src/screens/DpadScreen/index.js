@@ -17,7 +17,7 @@ class DpadScreen extends React.Component {
       elevation: this.props.navigation.getParam("elevation", 45),
       sliderVerticalPic: "",
       sliderHorizontalPic: "",
-    }
+    };
     if (this.state.azimuth <= 5 && this.state.azimuth > 0 || this.state.azimuth < 360 && this.state.azimuth >= 355) {
       this.state.sliderHorizontalPic = require("../../../assets/images/mediumyellowstatus.png");
     } else if (this.state.azimuth === 0 || this.state.azimuth === 360) {

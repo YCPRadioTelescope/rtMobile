@@ -22,7 +22,7 @@ export default StyleSheet.create({
           flex:2,
           justifyContent: 'space-between',
           textAlign: 'left',
-          width: '75%',
+          //width: '75%',
    },
    name: {
           color:'#0c1a42',
@@ -44,7 +44,7 @@ export default StyleSheet.create({
    buttons:{
      position:'absolute',
      top:'0%',
-     right:'0%',
+     right:'5%',
      flexDirection: 'row',
      flex:2,
      marginTop:30,

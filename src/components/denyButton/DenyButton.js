@@ -2,23 +2,21 @@ import React, { Component } from 'react';
 import {StyleSheet, Image, View, TouchableHighlight} from 'react-native';
 
 class DenyButton extends Component {
-  /*constructor(props) {
-    super(props);
-    this.state = {
-      userID: this.props.userID,
-    };
-  }*/
 
-  /*onPress = () => {
-    console.log('pressed deny by ', this.props.userID );
+
+  onPress = () => {
+    console.log('pressed deny by ', this.props.user.id);
     // TODO: Route to denial page
-  }*/
+  }
 
  render() {
-  const navigation = this.props.navigation;
+  //const navigation = this.props.navigation;
+  const user = this.props.user;
     return (
         <View>
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('Denial')}>
+            <TouchableHighlight user={this.props.user} onPress={() => {this.props.navigation.navigate('Denial',{
+                user:user,
+            })}}>
                 <Image
                     style={styles.button}
                     source={require('../../../assets/images/xButton.png')}
