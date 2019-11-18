@@ -8,6 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/cli-platform-android": "^3.0.3",
     "@react-native-community/push-notification-ios": "^1.0.2",
     "@react-native-community/slider": "^2.0.2",
     "@react-native-firebase/app": "^6.0.3",
