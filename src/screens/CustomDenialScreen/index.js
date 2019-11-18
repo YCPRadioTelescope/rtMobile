@@ -30,7 +30,7 @@ class CustomDenialScreen extends React.Component {
         console.log("reason; ",reason);
         this.props.email(email, subject, body);
         this.props.denyUser(user.id);
-        this.props.navigation.goBack();
+        this.props.navigation.navigate('ApprovalDashboard');
     }
 
   render() {
@@ -60,9 +60,7 @@ class CustomDenialScreen extends React.Component {
                   onSubmitEditing={this.onPress}
               />
               <TouchableHighlight onPress={this.onPress} style={styles.submit} >
-                  <Image
-                      source={require("../../../assets/images/forward.png")}
-                  />
+                  <Text style={styles.buttonTitle}>Submit</Text>
               </TouchableHighlight>
 
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>

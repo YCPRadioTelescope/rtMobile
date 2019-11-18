@@ -5,12 +5,13 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection:'column',
     backgroundColor: '#f5f5f5',
+    alignItems: 'center',
   },
   navBar: {
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#cebaff',
-    height:'12%',
+    height:90,
+    width:'100%',
     marginLeft:0,
     marginRight:0,
   },
@@ -23,15 +24,22 @@ export default StyleSheet.create({
   back:{
     position: 'absolute',
     left: '10%',
-    top: '5%',
-  },
-  scroll:{
-    flex:5,
-    marginBottom:'1%',
+    top: 40,
   },
   loading: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input:{
+    width:'90%',
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: '#d6d7da',
+    marginTop:'10%',
+  },
+  submit:{
+    marginTop:'10%',
+    color:'black',
   },
 });
