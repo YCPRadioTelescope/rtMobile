@@ -18,7 +18,7 @@ class DenialScreen extends React.Component {
             <RectangleButton text="Vulgar Name" reason="Vulgar Name" user={this.props.navigation.getParam('user')} navigation={this.props.navigation}/>
             <RectangleButton text="Reason 3" reason="reason3" user={this.props.navigation.getParam('user')} navigation={this.props.navigation}/>
             <RectangleButton text="Reason 4" reason="reason4" user={this.props.navigation.getParam('user')} navigation={this.props.navigation}/>
-            <CustomReason  text="Custom Reason ... "user={this.props.navigation.getParam('user')} navigation={this.props.navigation}/>
+            <CustomReason  text="Custom Reason ..."  reason="tbd" user={this.props.navigation.getParam('user')} navigation={this.props.navigation}/>
 
         </View>
         <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>

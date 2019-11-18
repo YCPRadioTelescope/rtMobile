@@ -1,10 +1,8 @@
 import {Image, Text, View, TouchableHighlight, ActivityIndicator, StatusBar, TextInput} from 'react-native';
 import React from 'react';
 import styles from './styles';
-import ScrollElements from '../../components/scrollView/scrollView.js';
 import {bindActionCreators} from "redux";
 import {denyUser} from '../../actions/denyUserAction.js'
-import {getUsers} from "../../actions/getUsersAction";
 import {email} from '../../actions/emailAction.js'
 import connect from "react-redux/lib/connect/connect";
 
@@ -21,10 +19,10 @@ class CustomDenialScreen extends React.Component {
     }
 
     onPress = () => {
-        var user = this.props.user;
+        var user = this.props.navigation.getParam('user');
         var reason = this.state.text;
         var email = user.email_address;
-        var name = user.first_name+" "+this.props.user.last_name;
+        var name = user.first_name+" "+user.last_name;
         var subject = 'Needs review: Your YCAS radio telescope account was denied';
         var body = "Dear "+name+",  \nYour account for the YCAS radio telescope has"
             +" been denied for the following reason: " + reason +". If you "

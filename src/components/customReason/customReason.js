@@ -21,10 +21,12 @@ class CustomReason extends Component {
         console.log(this.state);
         return (
             <View>
-                <TouchableHighlight style={styles.button}  onPress={() => {this.props.navigation.navigate('CustomReason',{
-                    user:user,
-                })}}>>
-                    <Text style={styles.buttonText}>{this.props.text}</Text>
+                <TouchableHighlight style={styles.button}  onPress={() => {this.props.navigation.navigate('CustomDenial',{
+                    user:this.props.user,
+                })}}>
+                    <Text style={styles.buttonText}>
+                            {this.props.text}
+                    </Text>
                 </TouchableHighlight>
             </View>
         )
