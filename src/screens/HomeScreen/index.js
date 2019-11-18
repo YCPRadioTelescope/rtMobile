@@ -165,7 +165,7 @@ class HomeScreen extends React.Component {
                     Wind: {this.state.windSpeed} mph {this.state.windDirection}
                 </Text>
               </TouchableHighlight>
-              <TouchableHighlight style={{position: 'absolute', bottom: 10, right: 5}}>
+              <TouchableHighlight   onPress={() => this.props.navigation.navigate('Appointment')} style={{position: 'absolute', bottom: 10, right: 5}}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>Appt by: Cody Spath</Text>
               </TouchableHighlight>
             </View>

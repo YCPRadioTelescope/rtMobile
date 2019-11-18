@@ -12,6 +12,7 @@ import TempNavScreen from './src/screens/TempNavScreen';
 import DpadScreen from './src/screens/DpadScreen';
 import OverrideScreen from "./src/screens/OverrideScreen";
 import WeatherScreen from "./src/screens/WeatherScreen";
+import AppointmentScreen from "./src/screens/AppointmentScreen";
 
 const AuthStack = createStackNavigator(
   {
@@ -28,6 +29,7 @@ const AppStack = createStackNavigator(
     TempNav: TempNavScreen,
     Home: HomeScreen,
     ApprovalDashboard: ApprovalDashboardScreen,
+    Appointment: AppointmentScreen,
     Denial: DenialScreen,
     CustomDenial: CustomDenialScreen,
     Sensor: SensorScreen,
