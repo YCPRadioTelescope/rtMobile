@@ -15,15 +15,27 @@ class CoordModal extends Component {
   render() {
     console.log('modal visible in modal', this.props.visible);
     return (
-      <View style={{marginTop: 22}}>
+      <View>
         <Modal
           animationType="slide"
-          transparent={false}
+          transparent={true}
           visible={this.props.visible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
-          <View style={{marginTop: 22}}>
+          <View style={{
+            marginTop: 50,
+            backgroundColor: "#bfbeba",
+            width: "90%",
+            height: 400,
+            margin: "5%",
+            borderRadius: 20,
+            shadowColor: "black",
+            shadowOffset: {height: 2},
+            shadowOpacity: 0.3,
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
             <View>
               <Text>Hello World!</Text>
 
