@@ -53,7 +53,7 @@ export default createAppContainer(
       AuthLoading: AuthLoadingScreen,
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "App"
     }
   )
 );

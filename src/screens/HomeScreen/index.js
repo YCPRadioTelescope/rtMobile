@@ -14,6 +14,7 @@ import {getWeatherData} from "../../actions/WeatherActions";
 import {getUsers} from "../../actions/getUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import CoordModal from "../../components/coordModal"
 
 class HomeScreen extends React.Component {
 
@@ -26,20 +27,21 @@ class HomeScreen extends React.Component {
     windDirection: '',
     temperature: '',
     users: 0,
+    modalVisible: false,
   };
 
   async getData(){
     await this.props.getUsers().then(response => {
-      console.log('response ===', response)
-      console.log('users props -> ', this.props.users);
-      this.setState({users: response.user.data.length});
-      this.setState({isLoading2: false});
-    })
+        console.log('response ===', response);
+        console.log('users props -> ', this.props.users);
+        this.setState({users: response.user.data.length || 0});
+        this.setState({isLoading2: false});
+    });
     await this.props.getWeatherData().then(response => {
-      this.setState({windSpeed: this.props.weather[0].detail});
-      this.setState({windDirection: this.props.weather[1].detail});
-      this.setState({temperature: this.props.weather[2].detail});
-      this.setState({isLoading: false});
+        this.setState({windSpeed: this.props.weather[0].detail});
+        this.setState({windDirection: this.props.weather[1].detail});
+        this.setState({temperature: this.props.weather[2].detail});
+        this.setState({isLoading: false});
     })
   }
 
@@ -71,9 +73,6 @@ class HomeScreen extends React.Component {
 
     });
     this.getData();
-    /*this.focusListener = this.props.navigation.addListener("didBlur", () => {
-      this.setState({isLoading: true})
-    });*/
   }
 
   componentWillUnmount() {
@@ -86,17 +85,22 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
+  changeModal = () => {
+    this.setState({modalVisible: true});
+  }
+
   dpad = () => {
     Alert.alert(
       'Wait',
-      'Are you sure you want to move the telescope?',
+      'Would you Like to move the telescope manually or enter coordinates?',
       [
         {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
+          text: 'Coordinates',
+          onPress: this.changeModal,
         },
-        {text: 'Yes', onPress: this.nav},
+        {
+          text: 'Move',
+          onPress: this.nav},
       ],
       {cancelable: false},
     );
@@ -119,7 +123,7 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    if (this.state.isLoading === true || this.state.isLoading2 === true) {
+    /*if (this.state.isLoading === true || this.state.isLoading2 === true) {
       //console.log("Loading data from database");
       return (
           <View style={styles.loading}>
@@ -128,14 +132,8 @@ class HomeScreen extends React.Component {
           </View>
       )
     }
-    if(this.state.isLoading === false && this.state.isLoading2 === false){
-      //console.log('windddddd', this.state.windSpeed);
-      //console.log("Done loading: updateing weather variables then rendering page");
-      //this.updateState();
-      /*console.log('user length', this.state.users);
-      console.log('isloading', this.state.isLoading);
-      console.log('loading 2', this.state.isLoading2);*/
-
+    if(this.state.isLoading === false && this.state.isLoading2 === false){*/
+    console.log('visible', this.state.modalVisible);
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -199,11 +197,11 @@ class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-
+            <CoordModal visible={this.state.modalVisible} close={() => this.setState({modalVisible: false})}/>
           </View>
       );
     }
-  }
+  //}
 }
 const mapStateToProps = state => {
   const { weather, users } = state;

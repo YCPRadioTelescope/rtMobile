@@ -4,6 +4,12 @@ import AxisPad from 'react-native-axis-pad';
 import Slider from '@react-native-community/slider';
 import VerticalSlider from 'rn-vertical-slider';
 import styles from './styles';
+import TcpSocket from 'react-native-tcp-socket';
+
+const options = {
+  host: '10.127.38.92',
+  port: 8080
+};
 
 class DpadScreen extends React.Component {
   constructor(props) {
@@ -82,6 +88,28 @@ class DpadScreen extends React.Component {
     }
   };
 
+  sendTcp = () =>{
+    var client = TcpSocket.createConnection(options);
+
+    client.on('data', function(data) {
+      console.log('message was received', data);
+    });
+
+    client.on('error', function(error) {
+      console.log(error);
+    });
+
+    client.on('close', function(){
+      console.log('Connection closed!');
+    });
+
+// Write on the socket
+    client.write("Hello server!");
+
+// Close socket
+    client.destroy();
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -126,6 +154,9 @@ class DpadScreen extends React.Component {
           <Image
             source={require("../../../assets/images/back.png")}
           />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.sendTcp}>
+          <Text>Send data</Text>
         </TouchableHighlight>
       </View>
     );
