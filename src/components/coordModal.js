@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert} from 'react-native';
+import {Modal, Text, TouchableHighlight, View, Alert, TextInput, KeyboardAvoidingView, Dimensions} from 'react-native';
+
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
 class CoordModal extends Component {
 
   state = {
     modalVisible: this.props.visible,
+    azimuth: '',
+    elevation: ''
   };
 
 
@@ -13,7 +18,6 @@ class CoordModal extends Component {
   }
 
   render() {
-    console.log('modal visible in modal', this.props.visible);
     return (
       <View>
         <Modal
@@ -25,6 +29,7 @@ class CoordModal extends Component {
           }}>
           <View style={{
             marginTop: 50,
+            paddingTop: 130,
             backgroundColor: "#bfbeba",
             width: "90%",
             height: 400,
@@ -36,14 +41,64 @@ class CoordModal extends Component {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={this.props.close}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
+            <Text style={{marginBottom: 20, fontSize: 18, fontWeight: 'bold'}}>Enter the Coordinates</Text>
+            <KeyboardAvoidingView>
+              <TextInput
+                placeholder="Azimuth"
+                autoCapitalize="none"
+                placeholderTextColor="white"
+                value={this.state.azimuth}
+                onChangeText={emailAddress => this.setState({ emailAddress })}
+                style={{
+                  width: deviceWidth * 0.6,
+                  borderBottomWidth: 1,
+                  height: 40,
+                  fontSize: 18,
+                  color: 'black'
+                }}
+              />
+              <TextInput
+                placeholder="Elevation"
+                autoCapitalize="none"
+                placeholderTextColor="white"
+                value={this.state.elevation}
+                onChangeText={password => this.setState({ password })}
+                style={{
+                  width: deviceWidth * 0.6,
+                  borderBottomWidth: 1,
+                  height: 40,
+                  fontSize: 18,
+                  color: 'black',
+                }}
+              />
+              <View style={{flex: 1, flexDirection: 'row', alignContent: 'space-between', justifyContent: 'space-between'}}>
+                <TouchableHighlight
+                  onPress={this.props.close} style={{
+                    marginTop: 20,
+                    borderWidth: 1,
+                    borderColor: "#ffffff",
+                    borderRadius: 14,
+                    paddingVertical: 6,
+                    paddingHorizontal: 13,
+                    alignItems: 'center',
+                    marginBottom: 122}}>
+                  <Text>Cancel</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  onPress={this.props.close} style={{
+                  marginTop: 20,
+                  borderWidth: 1,
+                  borderColor: "#ffffff",
+                  borderRadius: 14,
+                  paddingVertical: 6,
+                  paddingHorizontal: 13,
+                  alignItems: 'center',
+                  marginBottom: 122
+                }}>
+                  <Text>Move</Text>
+                </TouchableHighlight>
+              </View>
+            </KeyboardAvoidingView>
           </View>
         </Modal>
       </View>

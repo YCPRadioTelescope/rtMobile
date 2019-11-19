@@ -32,8 +32,8 @@ class HomeScreen extends React.Component {
 
   async getData(){
     await this.props.getUsers().then(response => {
-        console.log('response ===', response);
-        console.log('users props -> ', this.props.users);
+        //console.log('response ===', response);
+        //console.log('users props -> ', this.props.users);
         this.setState({users: response.user.data.length || 0});
         this.setState({isLoading2: false});
     });
@@ -47,12 +47,12 @@ class HomeScreen extends React.Component {
 
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
-    console.log('token', fcmToken);
+    //console.log('token', fcmToken);
     const hasPermission = await firebase.messaging().hasPermission();
-    console.log('has permission', hasPermission);
+    //console.log('has permission', hasPermission);
 
     const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
-       console.log('FCM Message Data:', remoteMessage.data);
+       //console.log('FCM Message Data:', remoteMessage.data);
     });
 
 // Unsubscribe from further message events
@@ -65,7 +65,7 @@ class HomeScreen extends React.Component {
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      console.log('az in h0me', this.props.navigation.getParam("azimuth"));
+      //console.log('az in h0me', this.props.navigation.getParam("azimuth"));
       let azimuth = this.props.navigation.getParam("azimuth", 45);
       let elevation = this.props.navigation.getParam("elevation", 45);
       this.setState({azimuth: azimuth});
@@ -80,8 +80,8 @@ class HomeScreen extends React.Component {
   }
 
   nav = ( ) => {
-    console.log('inNav');
-    console.log('az', this.state.azimuth);
+    /*console.log('inNav');
+    console.log('az', this.state.azimuth);*/
     this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
@@ -133,7 +133,6 @@ class HomeScreen extends React.Component {
       )
     }
     if(this.state.isLoading === false && this.state.isLoading2 === false){*/
-    console.log('visible', this.state.modalVisible);
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
