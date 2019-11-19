@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import {Modal, Text, TouchableHighlight, View, Alert, TextInput, KeyboardAvoidingView, Dimensions} from 'react-native';
+import TcpSocket from 'react-native-tcp-socket';
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
+
+const options = {
+  host: '10.0.0.147',
+  port: 8080
+};
 
 class CoordModal extends Component {
 
@@ -12,10 +18,31 @@ class CoordModal extends Component {
     elevation: ''
   };
 
+  move = () =>{
+    var client = TcpSocket.createConnection(options);
 
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
+    client.on('data', function(data) {
+      console.log('message was received', data);
+    });
+
+    client.on('error', function(error) {
+      console.log(error);
+    });
+
+    client.on('close', function(){
+      console.log('Connection closed!');
+    });
+
+// Write on the socket
+    client.write("Hello server! azimuth = " + this.state.azimuth + ' elevation = ' + this.state.elevation);
+
+// Close socket
+    client.destroy();
+
+    this.props.close();
+    this.setState({azimuth: ''});
+    this.setState({elevation: ''});
+  };
 
   render() {
     return (
@@ -48,7 +75,7 @@ class CoordModal extends Component {
                 autoCapitalize="none"
                 placeholderTextColor="white"
                 value={this.state.azimuth}
-                onChangeText={emailAddress => this.setState({ emailAddress })}
+                onChangeText={azimuth => this.setState({ azimuth })}
                 style={{
                   width: deviceWidth * 0.6,
                   borderBottomWidth: 1,
@@ -62,7 +89,7 @@ class CoordModal extends Component {
                 autoCapitalize="none"
                 placeholderTextColor="white"
                 value={this.state.elevation}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={elevation => this.setState({ elevation })}
                 style={{
                   width: deviceWidth * 0.6,
                   borderBottomWidth: 1,
@@ -85,7 +112,8 @@ class CoordModal extends Component {
                   <Text>Cancel</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  onPress={this.props.close} style={{
+                  onPress={this.move}
+                  style={{
                   marginTop: 20,
                   borderWidth: 1,
                   borderColor: "#ffffff",
