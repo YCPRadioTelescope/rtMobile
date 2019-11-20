@@ -57,4 +57,16 @@ export default StyleSheet.create({
     width: '50%',
     marginLeft: '25%',
   },
+  greyButton: {
+    marginTop: '80%',
+    borderWidth: 1,
+    borderColor: "#cbd7dd",
+    borderRadius: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 13,
+    backgroundColor: 'grey',
+    alignItems: 'center',
+    width: '50%',
+    marginLeft: '25%',
+  },
 });

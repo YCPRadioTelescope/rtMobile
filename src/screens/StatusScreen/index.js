@@ -82,6 +82,31 @@ class StatusScreen extends React.Component {
         }
     };
 
+    getStatusLightColor = () =>{
+        let count = 0;
+        let numYellow = 0;
+        while(count < this.props.sensor.length){
+            //if at least 1 sensor is red set status to Red
+            if(this.props.sensor[count].details == 0){
+                return require("../../../assets/images/largeredstatus.png");
+            }
+            //check if there are any yellows
+            else if(this.props.sensor[count].details == 1){
+                numYellow ++;
+            }
+            count++;
+        }
+        //if there are any yellow sensors set the status to yellow
+        if(numYellow > 0){
+            return require("../../../assets/images/largeyellowstatus.png");
+        }
+        //if there are no red or yellow sensors return green
+        else{
+            return require("../../../assets/images/largegreenstatus.png");
+        }
+
+    }
+
     componentWillUnmount() {
         this.focusListener.remove();
     }
@@ -97,7 +122,8 @@ class StatusScreen extends React.Component {
             )
         } else {
             //console.log("isLoading is ",this.state.isLoading);
-            console.log("sensor props in status screen", this.props.sensor.sensor);
+            let statusLightColor = this.getStatusLightColor()
+            console.log("sensor props in status screen", this.props.sensor);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -108,7 +134,7 @@ class StatusScreen extends React.Component {
                     <View style={{marginTop: '10%', alignItems: 'center'}}>
                         <Text style={styles.header}>Status</Text>
                         <Image
-                            source={require("../../../assets/images/largeredstatus.png")}
+                            source = {statusLightColor}
                             style={styles.statusLightStyle}
                         />
                     </View>
@@ -117,7 +143,7 @@ class StatusScreen extends React.Component {
                     <Divider style={styles.listheaderDivider}/>
 
                     <View style={styles.sensorlistcontainer}>
-                        {this.props.sensor.sensor.map(sensorInfo => {
+                        {this.props.sensor.map(sensorInfo => {
                             return (
                                 <TouchableHighlight onPress={() => {
                                     this.props.navigation.navigate('Sensor',
@@ -159,7 +185,7 @@ const mapStateToProps = state => {
     const { sensor } = state;
     console.log("Getting sensor = state in MapStateToProps",sensor);
     return {
-    sensor: sensor.sensor,
+    sensor: sensor.sensor.sensor,
     errorResponse: sensor.errorResponse,
     errorMessage: sensor.errorMessage
     };
