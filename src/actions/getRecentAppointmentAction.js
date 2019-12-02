@@ -4,6 +4,7 @@ import config from "../../config.json";
 const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 //const url = "http://127.0.0.1:3000";
 
+export const RECENT_APPOINTMENTS = "RECENT_APPOINTMENTS";
 export const GET_RECENT_APPOINTMENTS_SUCCESS = "GET_RECENT_APPOINTMENTS_SUCCESS";
 export const GET_RECENT_APPOINTMENTS_FAILURE = "GET_RECENT_APPOINTMENTS_FAILURE";
 

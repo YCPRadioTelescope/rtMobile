@@ -22,15 +22,16 @@ export default StyleSheet.create({
   },
   content:{
     position: 'relative',
+    justifyContent: 'center',
     flexDirection:'column',
     alignItems: 'stretch',
     alignSelf:'center',
-    width:'90%',
+    width:'100%',
     height:'100%'
   },
   back:{
     position: 'absolute',
     left: '10%',
     top: '5%',
-  }
+  },
 });

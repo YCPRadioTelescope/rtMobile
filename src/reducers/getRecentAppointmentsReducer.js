@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import {GET_RECENT_APPOINTMENTS, GET_RECENT_APPOINTMENTS_FAILURE, GET_RECENT_APPOINTMENTS_SUCCESS} from "../actions/getRecentAppointmentActionAppointmentsAction";
+import {RECENT_APPOINTMENTS, GET_RECENT_APPOINTMENTS_FAILURE, GET_RECENT_APPOINTMENTS_SUCCESS} from "../actions/getRecentAppointmentAction";
 
 const INITIAL_STATE = {
     recentAppointment:[],
