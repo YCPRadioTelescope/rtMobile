@@ -5,7 +5,7 @@ import { combineReducers } from "redux";
 import {
     SENSOR_SUCCESS,
     SENSOR_FAILURE,
-} from "./SensorActions";
+} from "../actions/SensorActions";
 
 const INITIAL_STATE = {
     sensor: [{name: "INITIAL_STATE", details: "INITIAL_STATE"}],

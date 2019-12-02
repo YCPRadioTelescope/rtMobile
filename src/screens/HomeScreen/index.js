@@ -14,7 +14,7 @@ import {getWeatherData} from "../../actions/WeatherActions";
 import {getUsers} from "../../actions/getUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {getSensorData} from "../SensorScreen/SensorActions";
+import {getSensorData} from "../../actions/SensorActions";
 
 class HomeScreen extends React.Component {
 

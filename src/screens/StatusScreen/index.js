@@ -5,7 +5,7 @@ import { Divider } from 'react-native-elements';
 import {bindActionCreators} from "redux";
 import {login} from "../LoginScreen/AuthActions";
 import {connect} from "react-redux";
-import {getSensorData} from "../SensorScreen/SensorActions";
+import {getSensorData} from "../../actions/SensorActions";
 
 //component to render each of the sensors in sensorlistcontainer
 const Sensor = ({

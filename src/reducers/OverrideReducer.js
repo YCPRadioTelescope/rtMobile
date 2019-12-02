@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import {OVERRIDE_FAILURE} from "./OverrideActions";
-import {OVERRIDE_SUCCESS} from "./OverrideActions";
+import {OVERRIDE_FAILURE} from "../actions/OverrideActions";
+import {OVERRIDE_SUCCESS} from "../actions/OverrideActions";
 
 let INITIAL_STATE ={
     "id": null ,

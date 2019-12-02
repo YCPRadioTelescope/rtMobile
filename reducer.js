@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import emailReducer from "./src/reducers/emailReducer";
 import getUsersReducer from "./src/reducers/getUsersReducer";
-import sensorReducer from "./src/screens/SensorScreen/SensorReducer";
+import sensorReducer from "./src/reducers/SensorReducer";
 import weatherReducer from "./src/reducers/WeatherReducer";
 import denyUserReducer from "./src/reducers/denyUserReducer";
 import approveUserReducer from "./src/reducers/approveUserReducer";
-import overrideReducer from "./src/screens/SensorScreen/OverrideReducer"
+import overrideReducer from "./src/reducers/OverrideReducer"
 
 const reducer = combineReducers({
   //user: AuthReducer,

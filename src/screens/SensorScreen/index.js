@@ -2,7 +2,7 @@ import {Image, Text, TouchableHighlight, View, ScrollView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { Divider } from 'react-native-elements';
-import {setOverride} from "./OverrideActions";
+import {setOverride} from "../../actions/OverrideActions";
 import {bindActionCreators} from "redux";
 import {email} from "../../actions/emailAction";
 import {approveUser} from "../../actions/approveUserAction";
