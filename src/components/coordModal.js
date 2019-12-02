@@ -6,8 +6,8 @@ const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
 const options = {
-  host: '10.0.0.147',
-  port: 8080
+  host: '10.127.38.127',
+  port: 8090
 };
 
 class CoordModal extends Component {
@@ -19,6 +19,7 @@ class CoordModal extends Component {
   };
 
   move = () =>{
+
     var client = TcpSocket.createConnection(options);
 
     client.on('data', function(data) {
@@ -34,7 +35,8 @@ class CoordModal extends Component {
     });
 
 // Write on the socket
-    client.write("Hello server! azimuth = " + this.state.azimuth + ' elevation = ' + this.state.elevation);
+    //COORDINATE_MOVE ELEV:45.215 AZIM:325.71 ID:todd
+    client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
 
 // Close socket
     client.destroy();
