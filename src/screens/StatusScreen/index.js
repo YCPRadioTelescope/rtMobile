@@ -32,6 +32,7 @@ class StatusScreen extends React.Component {
 
         await this.props.getSensorData().then(response => {
             this.setState({isLoading: false});
+            this.setState({sensorArray: this.props.sensor})
         })
     }
 
@@ -47,8 +48,9 @@ class StatusScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            //this is the array that holds information the the sensor components
-            isLoading: true
+
+            isLoading: true,
+            sensorArray:[],
         }
     }
 
@@ -87,11 +89,11 @@ class StatusScreen extends React.Component {
         let numYellow = 0;
         while(count < this.props.sensor.length){
             //if at least 1 sensor is red set status to Red
-            if(this.props.sensor[count].details == 0){
+            if(this.props.sensor[count].details == 0 && !this.props.sensor[count].override){
                 return require("../../../assets/images/largeredstatus.png");
             }
             //check if there are any yellows
-            else if(this.props.sensor[count].details == 1){
+            else if(this.props.sensor[count].details == 1 && !this.props.sensor[count].override){
                 numYellow ++;
             }
             count++;
