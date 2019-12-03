@@ -1,77 +1,77 @@
-import {Text, View, TouchableHighlight} from 'react-native';
-import React from 'react';
-import {bindActionCreators} from 'redux';
-import {login} from '../LoginScreen/AuthActions';
-import {connect} from 'react-redux';
-import { AsyncStorage } from "react-native";
-import styles from './styles';
+import React, { Component } from 'react';
 
-class TempNavScreen extends React.Component {
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  Button
+} from 'react-native';
+var ws;
+export default class TempNav extends Component {
+  constructor(props) {
+    super(props);
 
-  logout = () => {
-    console.log('logout');
-    AsyncStorage.clear();
-    this.props.navigation.navigate('Login');
-  };
+    this.state = { open: false };
+
+  }
+
+  emit = () => {
+    this.setState(prevState => ({ open: !prevState.open }))
+    ws.send("It worked!")
+  }
 
   render() {
-    console.log('user');
+
+    const LED = {
+      backgroundColor: this.state.open ? 'lightgreen' : 'red',
+      height: 30,
+      position: 'absolute',
+      flexDirection: 'row',
+      bottom: 0,
+      width: 100,
+      top: 120,
+      borderRadius: 40,
+      justifyContent: 'space-between'
+
+    }
+
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{marginBottom: 20, fontSize: 32}}>Temporary Screen</Text>
-        <TouchableHighlight onPress={() => {this.props.navigation.navigate('Home')}} style={styles.button}>
-          <View>
-            <Text> Home Screen  </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => {this.props.navigation.navigate('Sensor')}} style={styles.button}>
-          <View>
-            <Text> Sensor Screen </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => {this.props.navigation.navigate('Status')}} style={styles.button}>
-          <View>
-            <Text> Status Screen </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => {this.props.navigation.navigate('ApprovalDashboard')}} style={styles.button}>
-          <View>
-            <Text> Approval Dashboard Screen </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => {this.props.navigation.navigate('Denial')}} style={styles.button}>
-          <View>
-            <Text> Denial Screen </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.logout} style={styles.logoutButton}>
-          <View>
-            <Text style={{color: 'red'}}> Logout </Text>
-          </View>
-        </TouchableHighlight>
+      <View style={styles.container}>
+        <Button
+          onPress={this.emit}
+          title={this.state.open ? "Turn off" : "Turn on"}
+          color="#21ba45"
+          accessibilityLabel="Learn more about this purple button"
+        />
+        <View style={LED}></View>
       </View>
     );
   }
+
+  componentDidMount() {
+    ws = new WebSocket('ws://10.0.0.147:8090');
+    ws.onopen = () => ws.send(JSON.stringify({ type: 'greet', payload: 'Hello Mr. Server!' }))
+    ws.onmessage = (data) => console.log(data.payload)
+  }
+
 }
 
-const mapStateToProps = state => {
-  const { user } = state;
-  return {
-    /*auth: user.auth,
-    errorResponse: user.auth.errorResponse,
-    errorMessage: user.auth.errorMessage*/
-  };
-};
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      login,
-    },
-    dispatch
-  );
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TempNavScreen);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
