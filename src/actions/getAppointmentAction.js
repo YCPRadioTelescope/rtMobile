@@ -23,8 +23,6 @@ export const getAppointmentsFailure = error => {
 };
 
 export const getAppointment = () => {
-
-    console.log('getappointment action');
     let reqBody = {
         "UUID":config.UUID,
     };
@@ -33,8 +31,6 @@ export const getAppointment = () => {
         return axios
             .post(`${url}/appointments`,reqBody)
             .then(response => {
-                console.log('inside axios returnnnnnnnnnn');
-                console.log(JSON.stringify(response));
                 return dispatch(getAppointmentsSuccess(response));
             })
             .catch(error => {

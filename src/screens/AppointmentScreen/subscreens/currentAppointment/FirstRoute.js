@@ -1,7 +1,5 @@
-import {Image, Text, View, TouchableHighlight, ActivityIndicator, StatusBar} from 'react-native';
+import {View, Text } from 'react-native';
 import React from 'react';
-import styles from './styles';
-import ScrollElements from '../../../../components/scrollView/scrollView.js';
 import {bindActionCreators} from "redux";
 import {getAppointment} from "../../../../actions/getAppointmentAction.js"
 import connect from "react-redux/lib/connect/connect";
@@ -13,13 +11,24 @@ class FirstRoute extends React.Component {
         isLoading: true,
     };
 
+    async getData(){
 
+        await this.props.getAppointment().then(response => {
+            this.setState({isLoading: false});
+        })
+    }
+
+    componentDidMount() {
+        this.getData();
+    }
+
+
+    // Add timestamps, name, celestial body id, and orientation.
     render() {
-        console.log(this.props.appointment);
+        console.log("Appointments: ", this.props.appointment);
             return (
-                <Text>}{this.props.appointment}</Text>
+                <Text>}{this.props.appointment.data[0].status}</Text>
             );
-
     }
 }
 
@@ -28,10 +37,11 @@ class FirstRoute extends React.Component {
 let mapStateToProps = state => {
     const { appointment } = state;
     return {
-        appointment: appointment.data,
+        appointment: appointment.appointment.appointment,
         errorResponse: appointment.errorResponse,
         errorMessage: appointment.errorMessage
     };
+
 };
 
 let mapDispatchToProps = dispatch =>

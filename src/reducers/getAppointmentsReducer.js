@@ -36,5 +36,5 @@ const getAppointmentsReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default combineReducers({
-    user: getAppointmentsReducer
+    appointment: getAppointmentsReducer
 });

@@ -180,6 +180,7 @@ android {
     }
 
    packagingOptions {
+          pickFirst '**/libjsc.so'
           pickFirst 'lib/x86/libswscale.so'
           pickFirst 'lib/x86/libavcodec.so'
           pickFirst 'lib/x86/libavformat.so'
