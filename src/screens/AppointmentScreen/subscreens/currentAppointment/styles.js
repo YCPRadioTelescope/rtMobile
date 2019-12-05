@@ -9,4 +9,16 @@ export default StyleSheet.create({
     flex:5,
     marginBottom:'1%',
   },
+  data:{
+    width:'100%',
+    height:'100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+  },
+  userName:{
+    justifyContent: 'center',
+    fontSize:25,
+    fontWeight:'bold',
+  }
 });

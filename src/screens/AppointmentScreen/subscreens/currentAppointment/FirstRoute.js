@@ -3,6 +3,7 @@ import React from 'react';
 import {bindActionCreators} from "redux";
 import {getAppointment} from "../../../../actions/getAppointmentAction.js"
 import connect from "react-redux/lib/connect/connect";
+import styles from "./styles";
 
 class FirstRoute extends React.Component {
 
@@ -23,11 +24,18 @@ class FirstRoute extends React.Component {
     }
 
 
-    // Add timestamps, name, celestial body id, and orientation.
+    // Add timestamps, name, celestial body id, and orientation
+    // this.props.appointment.data[0].status
     render() {
-        console.log("Appointments: ", this.props.appointment);
+
             return (
-                <Text>}{this.props.appointment.data[0].status}</Text>
+                <View style={styles.data}>
+                    <Text style={styles.userName}>"User is: "{this.props.appointment.data[0].user_id}</Text>
+                    <Text style={styles.startTime}>{this.props.appointment.data[0].start_time}" - "</Text>
+                    <Text style={styles.endTime}>{this.props.appointment.data[0].end_time}</Text>
+                    <Text style={styles.celestial}>"Celestial body is: "{this.props.appointment.data[0].celestial_body_id}</Text>
+                    <Text style={styles.orientation}>"Orientation is: "{this.props.appointment.data[0].orientation_id}</Text>
+                </View>
             );
     }
 }
