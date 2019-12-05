@@ -8,8 +8,8 @@ import {
   Button
 } from 'react-native';
 var ws;
-export default class TempNav extends Component {
-  constructor(props) {
+export default class TempNav extends Component {}
+  /*constructor(props) {
     super(props);
 
     this.state = { open: false };
@@ -75,3 +75,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+*/

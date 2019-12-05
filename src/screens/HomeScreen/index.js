@@ -90,8 +90,8 @@ class HomeScreen extends React.Component {
   }
 
   dpad = () => {
-    this.props.navigation.navigate("TempNav");
-    /*Alert.alert(
+    //this.props.navigation.navigate("TempNav");
+    Alert.alert(
       'Wait',
       'Would you Like to move the telescope manually or enter coordinates?',
       [
@@ -104,7 +104,7 @@ class HomeScreen extends React.Component {
           onPress: this.nav},
       ],
       {cancelable: false},
-    );*/
+    );
   };
 
   stop = () => {

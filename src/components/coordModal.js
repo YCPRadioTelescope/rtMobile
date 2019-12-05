@@ -6,7 +6,7 @@ const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
 const options = {
-  host: '10.127.38.127',
+  host: '10.0.0.147',
   port: 8090
 };
 
@@ -21,7 +21,7 @@ class CoordModal extends Component {
   move = () =>{
 
     // http://localhost:12345.
-    var ws = new WebSocket('http://10.0.0.147:8090');
+    /*var ws = new WebSocket('http://10.0.0.147:8090');
 
     ws.onopen = () => {
       // connection opened
@@ -44,9 +44,9 @@ class CoordModal extends Component {
     ws.onclose = (e) => {
       // connection closed
       console.log(e.code, e.reason);
-    };
+    };*/
 
-    /*var client = TcpSocket.createConnection(options);
+    var client = TcpSocket.createConnection(options);
 
     client.on('data', function(data) {
       console.log('message was received', data);
@@ -58,14 +58,14 @@ class CoordModal extends Component {
 
     client.on('close', function(){
       console.log('Connection closed!');
-    });*/
+    });
 
 // Write on the socket
     //COORDINATE_MOVE ELEV:45.215 AZIM:325.71 ID:todd
-    //client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
+    client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
 
 // Close socket
-    //client.destroy();
+    client.destroy();
 
     this.props.close();
     this.setState({azimuth: ''});
