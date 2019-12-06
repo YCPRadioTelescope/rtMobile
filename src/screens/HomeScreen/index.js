@@ -59,7 +59,6 @@ class HomeScreen extends React.Component {
      unsubscribe();
   }
   componentDidMount() {
-
     if (Platform.OS === 'android') {
       this.getToken();
     }
@@ -89,6 +88,35 @@ class HomeScreen extends React.Component {
     this.setState({modalVisible: true});
   }
 
+  snowDump = () => {
+    /*var ws = new WebSocket('ws://10.127.7.121:80', {
+      perMessageDeflate: false
+    });
+
+    ws.onopen = () => {
+      // connection opened
+      console.log('connection opened');
+      ws.send('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd'); // send a message
+      console.log('message sent');
+      ws.close();
+    };
+
+    ws.onmessage = (e) => {
+      // a message was received
+      console.log(e.data);
+    };
+
+    ws.onerror = (e) => {
+      // an error occurred
+      console.log(e.message);
+    };
+
+    ws.onclose = (e) => {
+      // connection closed
+      console.log(e.code, e.reason);
+    };*/
+  };
+
   dpad = () => {
     //this.props.navigation.navigate("TempNav");
     Alert.alert(
@@ -101,7 +129,8 @@ class HomeScreen extends React.Component {
         },
         {
           text: 'Move',
-          onPress: this.nav},
+          onPress: this.nav
+        },
       ],
       {cancelable: false},
     );
@@ -118,6 +147,24 @@ class HomeScreen extends React.Component {
           style: 'cancel',
         },
         {text: 'Yes', onPress: () => console.log('yes Pressed')},
+      ],
+      {cancelable: false},
+    );
+  };
+
+  dump = () => {
+    Alert.alert(
+      'Wait',
+      'Are you sure you want to dump snow from the telescope?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes', onPress: this.snowDump
+        },
       ],
       {cancelable: false},
     );
@@ -177,6 +224,11 @@ class HomeScreen extends React.Component {
                                   style={styles.button}>
                 <View>
                   <Text> Approve Users </Text>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.dump} style={styles.button}>
+                <View>
+                  <Text> Snow Dump </Text>
                 </View>
               </TouchableHighlight>
               {this.state.users > 0 && (

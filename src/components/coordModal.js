@@ -5,11 +5,6 @@ import TcpSocket from 'react-native-tcp-socket';
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
-const options = {
-  host: '10.0.0.147',
-  port: 8090
-};
-
 class CoordModal extends Component {
 
   state = {
@@ -18,10 +13,13 @@ class CoordModal extends Component {
     elevation: ''
   };
 
-  move = () =>{
-
-    // http://localhost:12345.
-    /*var ws = new WebSocket('http://10.0.0.147:8090');
+  move = () => {
+    /*
+    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
+    BELOW is the working websocket connection to be used in the future.... websockets are blocked by york college
+    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
+     */
+    /*var ws = new WebSocket('ws://10.0.0.147:8090');
 
     ws.onopen = () => {
       // connection opened
@@ -45,8 +43,19 @@ class CoordModal extends Component {
       // connection closed
       console.log(e.code, e.reason);
     };*/
+    /*
+    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
+    ABOVE is the working websocket connection to be used in the future.... websockets are blocked by york college
+    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
+    */
 
-    var client = TcpSocket.createConnection(options);
+    let options = {
+      host: '10.0.0.147',
+      //host: '1.2.3.456',
+      port: 8090
+    };
+
+    let client = TcpSocket.createConnection(options);
 
     client.on('data', function(data) {
       console.log('message was received', data);
@@ -60,12 +69,12 @@ class CoordModal extends Component {
       console.log('Connection closed!');
     });
 
-// Write on the socket
-    //COORDINATE_MOVE ELEV:45.215 AZIM:325.71 ID:todd
+    // Write on the socket
     client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
 
-// Close socket
+    // Close socket
     client.destroy();
+
 
     this.props.close();
     this.setState({azimuth: ''});
