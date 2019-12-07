@@ -1,10 +1,12 @@
-import {Image, Text, TouchableHighlight, View} from 'react-native';
+import {Dimensions, Image, Text, TouchableHighlight, View} from 'react-native';
 import React from 'react';
 import AxisPad from 'react-native-axis-pad';
 import Slider from '@react-native-community/slider';
 import VerticalSlider from 'rn-vertical-slider';
 import styles from './styles';
 
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
 class DpadScreen extends React.Component {
   constructor(props) {
@@ -86,7 +88,15 @@ class DpadScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.navBar}>
+          <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+            <Image
+              source={require("../../../assets/images/back.png")}
+            />
+          </TouchableHighlight>
+          <Text style={styles.navTitle}>Manual Move</Text>
+        </View>
+        <View style={{marginTop: '5%'}}>
           <Text>Azimuth : {this.state.azimuth} </Text>
           <Slider
             style={{width: 300, height: 40, marginRight: '20%'}}
@@ -100,7 +110,7 @@ class DpadScreen extends React.Component {
           />
         </View>
         <Text style={{marginLeft: '60%'}}>Elevation : {this.state.elevation} </Text>
-        <View style={{ marginLeft:'80%', transform: [{ rotate: '270deg'}]}}>
+        <View style={{ marginLeft:'80%', marginTop: '40%', transform: [{ rotate: '270deg'}]}}>
           <Slider
             style={{width: 300, height: 40}}
             minimumValue={-10}
@@ -112,25 +122,34 @@ class DpadScreen extends React.Component {
             maximumTrackTintColor="#000000"
           />
         </View>
-        <View style={{marginTop: '10%'}}>
-          <AxisPad
-            resetOnRelease={true}
-            autoCenter={false}
-            onValue={({ x, y }) => {
-              // values are between -1 and 1
-              console.log(x, y);
-              this.move(x,y);
-            }}>
-          </AxisPad>
+          <View style={{transform: [{ rotate: '90deg'}], position: 'absolute', top: '50%', left: '50%'}}>
+            <TouchableHighlight style={styles.back}>
+              <Image
+                source={require("../../../assets/images/back.png")}
+              />
+            </TouchableHighlight>
+          </View>
+        <View style={{position: 'absolute', top: '57%', left: '36%'}}>
+          <TouchableHighlight style={styles.back}>
+            <Image
+              source={require("../../../assets/images/back.png")}
+            />
+          </TouchableHighlight>
         </View>
-        <TouchableHighlight onPress={this.nav} style={styles.back}>
-          <Image
-            source={require("../../../assets/images/back.png")}
-          />
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.sendTcp}>
-          <Text>Send data</Text>
-        </TouchableHighlight>
+          <View style={{transform: [{ rotate: '180deg'}], position: 'absolute', top: '59.5%', left: '59%'}}>
+            <TouchableHighlight style={styles.back}>
+              <Image
+                source={require("../../../assets/images/back.png")}
+              />
+            </TouchableHighlight>
+          </View>
+          <View style={{transform: [{ rotate: '270deg'}], position: 'absolute', top: '67%', left: '46%'}}>
+            <TouchableHighlight style={styles.back}>
+              <Image
+                source={require("../../../assets/images/back.png")}
+              />
+            </TouchableHighlight>
+          </View>
       </View>
     );
   }

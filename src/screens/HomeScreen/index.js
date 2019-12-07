@@ -89,6 +89,7 @@ class HomeScreen extends React.Component {
   }
 
   snowDump = () => {
+    this.props.navigation.navigate("TempNav");
     /*var ws = new WebSocket('ws://10.127.7.121:80', {
       perMessageDeflate: false
     });
