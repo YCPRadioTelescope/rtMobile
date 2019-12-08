@@ -21,6 +21,8 @@ class DpadScreen extends React.Component {
       sliderVerticalPic: "",
       sliderHorizontalPic: "",
     };
+    this.timer = null;
+
     if (this.state.azimuth <= 5 && this.state.azimuth > 0 || this.state.azimuth < 360 && this.state.azimuth >= 355) {
       this.state.sliderHorizontalPic = require("../../../assets/images/mediumyellowstatus.png");
     } else if (this.state.azimuth === 0 || this.state.azimuth === 360) {
@@ -41,55 +43,60 @@ class DpadScreen extends React.Component {
     this.props.navigation.navigate("Home", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
-  move = (x, y) => {
-    let verticalNum = this.state.elevation;
-    let horizontalNum = this.state.azimuth;
-    //while loop is very very bad here
-    if(y < -.75 && x < .25 && x > -.25){ //up
-      if(verticalNum < 90 ) {
-        verticalNum = verticalNum + .5;
+  move = ( direction ) => {
+      let verticalNum = this.state.elevation;
+      let horizontalNum = this.state.azimuth;
+
+      if (direction === 'up') { //up
+        if (verticalNum < 90) {
+          verticalNum = verticalNum + .5;
+        }
+        this.setState({elevation: verticalNum});
       }
-      this.setState({elevation: verticalNum});
-    }
-    if(y > .75 && x < .25 && x > -.25){ // down
-      if(verticalNum > -10) {
-        verticalNum = verticalNum - .5;
+      if (direction === 'down') { // down
+        if (verticalNum > -10) {
+          verticalNum = verticalNum - .5;
+        }
+        this.setState({elevation: verticalNum})
       }
-      this.setState({elevation: verticalNum})
-    }
-    if(x < -.75 && y > -.25 && y < .25){  // left
-      if(horizontalNum > 0) {
-        horizontalNum = horizontalNum - .5;
+      if (direction === 'left') {  // left
+        if (horizontalNum > 0) {
+          horizontalNum = horizontalNum - 1;
+        }
+        this.setState({azimuth: horizontalNum});
       }
-      this.setState({azimuth: horizontalNum})
-    }
-    if(x > .75 && y > -.25 && y < .25){ // right
-      if(horizontalNum < 360) {
-        horizontalNum = horizontalNum + .5;
+      if (direction === 'right') { // right
+        if (horizontalNum < 360) {
+          horizontalNum = horizontalNum + 1;
+        }
+        this.setState({azimuth: horizontalNum})
       }
-      this.setState({azimuth: horizontalNum})
-    }
-    if (this.state.azimuth <= 5 && this.state.azimuth > 0 || this.state.azimuth < 360 && this.state.azimuth >= 355) {
-      this.setState({sliderHorizontalPic: require("../../../assets/images/mediumyellowstatus.png")});
-    } else if (this.state.azimuth === 0 || this.state.azimuth === 360) {
-      this.setState({sliderHorizontalPic: require("../../../assets/images/redStatus.png")});
-    } else {
-      this.setState({sliderHorizontalPic: require("../../../assets/images/meduimgreenstatus.png")});
-    }
-    if (this.state.elevation <= 0 && this.state.elevation > -10 || this.state.elevation < 90 && this.state.elevation >= 85) {
-      this.setState({sliderVerticalPic: require("../../../assets/images/mediumyellowstatus.png")});
-    } else if (this.state.elevation === -10 || this.state.elevation === 90) {
-      this.setState({sliderVerticalPic: require("../../../assets/images/redStatus.png")});
-    } else {
-      this.setState({sliderVerticalPic: require("../../../assets/images/meduimgreenstatus.png")});
-    }
+      if (this.state.azimuth <= 5 && this.state.azimuth > 0 || this.state.azimuth < 360 && this.state.azimuth >= 355) {
+        this.setState({sliderHorizontalPic: require("../../../assets/images/mediumyellowstatus.png")});
+      } else if (this.state.azimuth === 0 || this.state.azimuth === 360) {
+        this.setState({sliderHorizontalPic: require("../../../assets/images/redStatus.png")});
+      } else {
+        this.setState({sliderHorizontalPic: require("../../../assets/images/meduimgreenstatus.png")});
+      }
+      if (this.state.elevation <= 0 && this.state.elevation > -10 || this.state.elevation < 90 && this.state.elevation >= 85) {
+        this.setState({sliderVerticalPic: require("../../../assets/images/mediumyellowstatus.png")});
+      } else if (this.state.elevation === -10 || this.state.elevation === 90) {
+        this.setState({sliderVerticalPic: require("../../../assets/images/redStatus.png")});
+      } else {
+        this.setState({sliderVerticalPic: require("../../../assets/images/meduimgreenstatus.png")});
+      }
+    this.timer = setTimeout(() => this.move(direction), 10);
+  };
+
+  stopTimer = () => {
+    clearTimeout(this.timer);
   };
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
-          <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+          <TouchableHighlight onPress={this.nav} style={styles.back}>
             <Image
               source={require("../../../assets/images/back.png")}
             />
@@ -122,31 +129,31 @@ class DpadScreen extends React.Component {
             maximumTrackTintColor="#000000"
           />
         </View>
-          <View style={{transform: [{ rotate: '90deg'}], position: 'absolute', top: '50%', left: '50%'}}>
-            <TouchableHighlight style={styles.back}>
+          <View style={{position: 'absolute', top: '50%', left: '48%'}}>
+            <TouchableHighlight style={styles.back} onPressIn={() => this.move('up')} onPressOut={this.stopTimer}>
               <Image
-                source={require("../../../assets/images/back.png")}
+                source={require("../../../assets/images/up.png")}
               />
             </TouchableHighlight>
           </View>
         <View style={{position: 'absolute', top: '57%', left: '36%'}}>
-          <TouchableHighlight style={styles.back}>
+          <TouchableHighlight style={styles.back} onPressIn={() => this.move('left')} onPressOut={this.stopTimer}>
             <Image
               source={require("../../../assets/images/back.png")}
             />
           </TouchableHighlight>
         </View>
-          <View style={{transform: [{ rotate: '180deg'}], position: 'absolute', top: '59.5%', left: '59%'}}>
-            <TouchableHighlight style={styles.back}>
+          <View style={{position: 'absolute', top: '57%', left: '59%'}}>
+            <TouchableHighlight style={styles.back} onPressIn={() => this.move('right')} onPressOut={this.stopTimer}>
               <Image
-                source={require("../../../assets/images/back.png")}
+                source={require("../../../assets/images/right.png")}
               />
             </TouchableHighlight>
           </View>
-          <View style={{transform: [{ rotate: '270deg'}], position: 'absolute', top: '67%', left: '46%'}}>
-            <TouchableHighlight style={styles.back}>
+          <View style={{position: 'absolute', top: '65%', left: '48%'}}>
+            <TouchableHighlight style={styles.back} onPressIn={() => this.move('down')} onPressOut={this.stopTimer}>
               <Image
-                source={require("../../../assets/images/back.png")}
+                source={require("../../../assets/images/down.png")}
               />
             </TouchableHighlight>
           </View>
