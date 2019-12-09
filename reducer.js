@@ -9,11 +9,13 @@ import overrideReducer from "./src/screens/SensorScreen/OverrideReducer";
 import getAppointmentsReducer from "./src/reducers/getAppointmentsReducer";
 import getRecentAppointmentsReducer from "./src/reducers/getRecentAppointmentsReducer";
 import getFutureAppointmentsReducer from "./src/reducers/getFutureAppointmentsReducer";
+import getPendingUsersReducer from "./src/reducers/getFutureAppointmentsReducer";
 
 const reducer = combineReducers({
   //user: AuthReducer,
   email: emailReducer,
   user: getUsersReducer,
+  pendingUser: getPendingUsersReducer,
   denyUser: denyUserReducer,
   approveUser: approveUserReducer,
   sensor: sensorReducer,
@@ -21,7 +23,7 @@ const reducer = combineReducers({
   override: overrideReducer,
   appointment: getAppointmentsReducer,
   futureAppointment: getFutureAppointmentsReducer,
-  recentAppointment: getRecentAppointmentsReducer
+  recentAppointment: getRecentAppointmentsReducer,
 });
 
 export default reducer;

@@ -8,8 +8,6 @@ import styles from './styles';
 
 class ScrollElements extends Component {
 
-
-
    render() {
       const navigation = this.props.navigation;
       const users = this.props.users;

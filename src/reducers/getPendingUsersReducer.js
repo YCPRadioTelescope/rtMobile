@@ -1,28 +1,28 @@
 import { combineReducers } from "redux";
 
-import {RECENT_APPOINTMENTS, GET_RECENT_APPOINTMENTS_FAILURE, GET_RECENT_APPOINTMENTS_SUCCESS} from "../actions/getRecentAppointmentAction";
+import {GET_USERS, GET_USERS_FAILURE, GET_USERS_SUCCESS} from "../actions/getUsersAction";
 
 const INITIAL_STATE = {
-    recentAppointment:[],
+    pendingUser:[],
     loading: false,
     error: false,
     errorMessage: null,
 };
 
-const getRecentAppointmentsReducer = (state = INITIAL_STATE, action) => {
-    console.log("ACTION appointments", action);
+const getPendingUsersReducer = (state = INITIAL_STATE, action) => {
+    console.log("ACTION pendingusers", action);
     switch (action.type) {
         // Take all returned user info and put it in store
-        case GET_RECENT_APPOINTMENTS_SUCCESS:
+        case GET_PENDING_USERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: false,
                 errorMessage: null,
-                recentAppointment: action.recentAppointment,
+                pendingUser: action.pendingUser,
             };
         // Extract error message to display
-        case GET_RECENT_APPOINTMENTS_FAILURE:
+        case GET_PENDING_USERS_FAILURE:
             return {
                 ...state,
                 loading: false,
@@ -36,5 +36,5 @@ const getRecentAppointmentsReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default combineReducers({
-    appointment: getRecentAppointmentsReducer
+    pendingUser: getPendingUsersReducer
 });

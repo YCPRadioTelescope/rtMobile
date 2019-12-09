@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import {FUTURE_APPOINTMENTs, GET_FUTURE_APPOINTMENTS_FAILURE, GET_FUTURE_APPOINTMENTS_SUCCESS} from "../actions/getFutureAppointmentAction";
+import {FUTURE_APPOINTMENTS, GET_FUTURE_APPOINTMENTS_FAILURE, GET_FUTURE_APPOINTMENTS_SUCCESS} from "../actions/getFutureAppointmentAction";
 
 const INITIAL_STATE = {
     futureAppointment:[],
@@ -36,5 +36,5 @@ const getFutureAppointmentsReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default combineReducers({
-    user: getFutureAppointmentsReducer
+    appointment: getFutureAppointmentsReducer
 });

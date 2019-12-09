@@ -11,9 +11,9 @@ import React from 'react';
 import styles from './styles';
 import { firebase } from '@react-native-firebase/messaging';
 import {getWeatherData} from "../../actions/WeatherActions";
-import {getUsers} from "../../actions/getUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {getPendingUsers} from "../../actions/getPendingUsersAction";
 
 class HomeScreen extends React.Component {
 
@@ -29,10 +29,10 @@ class HomeScreen extends React.Component {
   };
 
   async getData(){
-    await this.props.getUsers().then(response => {
+    await this.props.getPendingUsers().then(response => {
       console.log('response ===', response)
       console.log('users props -> ', this.props.users);
-      this.setState({users: response.user.data.length});
+      this.setState({users: response.pendingUser.data.length});
       this.setState({isLoading2: false});
     })
     await this.props.getWeatherData().then(response => {
@@ -165,7 +165,7 @@ class HomeScreen extends React.Component {
                     Wind: {this.state.windSpeed} mph {this.state.windDirection}
                 </Text>
               </TouchableHighlight>
-              <TouchableHighlight   onPress={() => this.props.navigation.navigate('Appointment')} style={{position: 'absolute', bottom: 10, right: 5}}>
+              <TouchableHighlight   onPress={() => this.props.navigation.navigate('Appointment', {"users": this.props.users})} style={{position: 'absolute', bottom: 10, right: 5}}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>Appt by: Cody Spath</Text>
               </TouchableHighlight>
             </View>
@@ -206,13 +206,13 @@ class HomeScreen extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const { weather, users } = state;
+  const { weather, pendingUsers } = state;
   //console.log("Getting weather = state in MapStateToProps",weather);
   console.log("weather.weather is:",weather.weather.weather);
-  console.log('users bottom -> ', users);
+  console.log('users bottom -> ', pendingUsers);
 
   return {
-    users: users,
+    users: pendingUsers,
     weather: weather.weather.weather,
     errorResponse: weather.errorResponse,
     errorMessage: weather.errorMessage
@@ -223,7 +223,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
           getWeatherData,
-          getUsers,
+          getPendingUsers,
         },
         dispatch
     );

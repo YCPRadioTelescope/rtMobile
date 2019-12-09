@@ -1,4 +1,4 @@
-import {View, Text } from 'react-native';
+import {View, Text, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import {bindActionCreators} from "redux";
 import {getAppointment} from "../../../../actions/getAppointmentAction.js"
@@ -12,19 +12,38 @@ class FirstRoute extends React.Component {
         appointment:[],
         user:[],
         isLoading: true,
+        isLoading2: true,
         startTime:null,
         endTime:null,
+        displayName: "null",
     };
 
     async getData(){
 
-        await this.props.getAppointment().then(response => {
-            this.setState({isLoading: false});
-        });
-       /* await this.props.getUsers().then(response => {
-            this.setState({isLoading: false});
-        })*/
 
+       await this.props.getUsers().then(response => {
+           console.log('user response: ', response);
+           this.setState({users: response});
+           this.setState({isLoading2: false});
+       });
+        await this.props.getAppointment().then(response => {
+            console.log('appt. response: ', response);
+
+            // parse real date and time from timestamp
+            let start_Time = this.parseTime(this.props.appointment.data[2].start_time);
+            console.log('start time: ', start_Time);
+            this.setState({startTime: start_Time});
+            let end_Time = this.parseTime(this.props.appointment.data[2].end_time);
+            this.setState({endTime: end_Time});
+            console.log('end time: ', end_Time);
+
+            // set user's name
+            let userName = this.parseName(this.props.appointment.data[2].user_id);
+            this.setState({displayName: userName});
+
+            this.setState({isLoading: false});
+
+        });
     }
 
     parseTime= (timestamp)=>{
@@ -52,56 +71,63 @@ class FirstRoute extends React.Component {
        return time;
     }
 
+    parseName= (userID)=>{
+        console.log(this.props.user);
+        for(let i=0; i< this.props.user.length; i++){
+            if(this.props.user[i].id === userID){
+                return this.props.user[i].first_name+' '+this.props.user[i].last_name;
+            }
+        }
+        return "Anonymous user";
+    }
+
     componentDidMount() {
         this.getData();
-        console.log("USER ID IS:",this.props.appointment.data[0].user_id);
-        //console.log("USER DATA IS :",this.props.user);
 
-        // parse real date and time from timestamp
-        let start_Time = this.parseTime(this.props.appointment.data[0].start_time);
-        console.log('start time: ', start_Time);
-        this.setState({startTime: start_Time});
-        let end_Time = this.parseTime(this.props.appointment.data[0].end_time);
-        console.log('end time: ', end_Time);
     }
 
     // Add timestamps, name, celestial body id, and orientation
     // this.props.appointment.data[0].status
     render() {
-
+        if (this.state.isLoading === true || this.state.isLoading2 === true) {
+            return (
+                <View style={styles.loading}>
+                    <ActivityIndicator/>
+                    <StatusBar barStyle="default"/>
+                </View>
+            )
+        }
+        else {
             return (
                 <View style={styles.data}>
-                    <Text style={styles.userName}>"User is: "{this.props.appointment.data[0].user_id}</Text>
+                    <Text style={styles.userName}>{this.state.displayName}'s Appointment.</Text>
                     <Text style={styles.startTime}>{this.state.startTime}" - "</Text>
                     <Text style={styles.endTime}>{this.state.endTime}</Text>
-                    <Text style={styles.celestial}>"Celestial body is: "{this.props.appointment.data[0].celestial_body_id}</Text>
-                    <Text style={styles.orientation}>"Orientation is: "{this.props.appointment.data[0].orientation_id}</Text>
+                    <Text style={styles.celestial}>"Celestial body is:
+                        "{this.props.appointment.data[2].celestial_body_id}</Text>
+                    <Text style={styles.orientation}>"Orientation is:
+                        "{this.props.appointment.data[2].orientation_id}</Text>
                 </View>
             );
+        }
     }
 }
 
 // Need the below code for responses when using a reducer
 
-let mapStateToProps1 = state => {
-    const { appointment} = state;
+let mapStateToProps = state => {
+    const { appointment, user} = state;
     return {
         appointment: appointment.appointment.appointment,
         errorResponse: appointment.errorResponse,
-        errorMessage: appointment.errorMessage
-    };
-
-};
-
-/*let mapStateToProps2 = state => {
-    const { user } = state;
-    return {
+        errorMessage: appointment.errorMessage,
         user: user.user.user.data,
         ErrorResponse: user.errorResponse,
         ErrorMessage: user.errorMessage,
     };
 
-};*/
+};
+
 
 let mapDispatchToProps = dispatch =>
     bindActionCreators(
@@ -114,8 +140,7 @@ let mapDispatchToProps = dispatch =>
 
 
 export default connect(
-    mapStateToProps1,
-    //mapStateToProps2,
+    mapStateToProps,
     mapDispatchToProps
 )(FirstRoute);
 
