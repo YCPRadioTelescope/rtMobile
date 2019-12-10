@@ -15,6 +15,7 @@ import {getUsers} from "../../actions/getUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
+import CoordModal from "../../components/coordModal"
 
 class HomeScreen extends React.Component {
 
@@ -30,20 +31,21 @@ class HomeScreen extends React.Component {
     users: 0,
     sensorArray:[],
 
+    modalVisible: false,
   };
 
   async getData(){
     await this.props.getUsers().then(response => {
-      console.log('response ===', response)
-      console.log('users props -> ', this.props.users);
-      this.setState({users: response.user.data.length});
-      this.setState({isLoading2: false});
-    })
+        //console.log('response ===', response);
+        //console.log('users props -> ', this.props.users);
+        this.setState({users: response.user.data.length || 0});
+        this.setState({isLoading2: false});
+    });
     await this.props.getWeatherData().then(response => {
-      this.setState({windSpeed: this.props.weather[0].detail});
-      this.setState({windDirection: this.props.weather[1].detail});
-      this.setState({temperature: this.props.weather[2].detail});
-      this.setState({isLoading: false});
+        this.setState({windSpeed: this.props.weather[0].detail});
+        this.setState({windDirection: this.props.weather[1].detail});
+        this.setState({temperature: this.props.weather[2].detail});
+        this.setState({isLoading: false});
     })
       await this.props.getSensorData().then(response => {
           this.setState({sensorArray: this.props.sensor})
@@ -53,35 +55,31 @@ class HomeScreen extends React.Component {
 
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
-    console.log('token', fcmToken);
+    //console.log('token', fcmToken);
     const hasPermission = await firebase.messaging().hasPermission();
-    console.log('has permission', hasPermission);
+    //console.log('has permission', hasPermission);
 
     const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
-       console.log('FCM Message Data:', remoteMessage.data);
+       //console.log('FCM Message Data:', remoteMessage.data);
     });
 
 // Unsubscribe from further message events
      unsubscribe();
   }
   componentDidMount() {
-      this.getData();
-
-      if (Platform.OS === 'android') {
+    if (Platform.OS === 'android') {
       this.getToken();
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      console.log('az in h0me', this.props.navigation.getParam("azimuth"));
+      //console.log('az in h0me', this.props.navigation.getParam("azimuth"));
       let azimuth = this.props.navigation.getParam("azimuth", 45);
       let elevation = this.props.navigation.getParam("elevation", 45);
       this.setState({azimuth: azimuth});
       this.setState({elevation: elevation});
-      this.getData();
+
     });
-    /*this.focusListener = this.props.navigation.addListener("didBlur", () => {
-      this.setState({isLoading: true})
-    });*/
+    this.getData();
   }
 
   componentWillUnmount() {
@@ -89,22 +87,58 @@ class HomeScreen extends React.Component {
   }
 
   nav = ( ) => {
-    console.log('inNav');
-    console.log('az', this.state.azimuth);
+    /*console.log('inNav');
+    console.log('az', this.state.azimuth);*/
     this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
+  changeModal = () => {
+    this.setState({modalVisible: true});
+  }
+
+  snowDump = () => {
+    /*var ws = new WebSocket('ws://10.127.7.121:80', {
+      perMessageDeflate: false
+    });
+
+    ws.onopen = () => {
+      // connection opened
+      console.log('connection opened');
+      ws.send('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd'); // send a message
+      console.log('message sent');
+      ws.close();
+    };
+
+    ws.onmessage = (e) => {
+      // a message was received
+      console.log(e.data);
+    };
+
+    ws.onerror = (e) => {
+      // an error occurred
+      console.log(e.message);
+    };
+
+    ws.onclose = (e) => {
+      // connection closed
+      console.log(e.code, e.reason);
+    };*/
+  };
+
   dpad = () => {
+    //this.props.navigation.navigate("TempNav");
     Alert.alert(
       'Wait',
-      'Are you sure you want to move the telescope?',
+      'Would you Like to move the telescope manually or enter coordinates?',
       [
         {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
+          text: 'Coordinates',
+          onPress: this.changeModal,
         },
-        {text: 'Yes', onPress: this.nav},
+        {
+          text: 'Move',
+          onPress: this.nav
+        },
       ],
       {cancelable: false},
     );
@@ -121,6 +155,24 @@ class HomeScreen extends React.Component {
           style: 'cancel',
         },
         {text: 'Yes', onPress: () => console.log('yes Pressed')},
+      ],
+      {cancelable: false},
+    );
+  };
+
+  dump = () => {
+    Alert.alert(
+      'Wait',
+      'Are you sure you want to dump snow from the telescope?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes', onPress: this.snowDump
+        },
       ],
       {cancelable: false},
     );
@@ -215,6 +267,11 @@ class HomeScreen extends React.Component {
                   <Text> Approve Users </Text>
                 </View>
               </TouchableHighlight>
+              <TouchableHighlight onPress={this.dump} style={styles.button}>
+                <View>
+                  <Text> Snow Dump </Text>
+                </View>
+              </TouchableHighlight>
               {this.state.users > 0 && (
               <Image
                   source={require("../../../assets/images/redStatus.png")}
@@ -233,7 +290,7 @@ class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-
+            <CoordModal visible={this.state.modalVisible} close={() => this.setState({modalVisible: false})}/>
           </View>
       );
     }

@@ -35,7 +35,7 @@ export const getWeatherData = ( ) => {
                 return dispatch(weatherSuccess(response.data));
             })
             .catch(error => {
-                console.log(error.response.data.message);
+                //console.log(error.response.data.message);
                 return dispatch(weatherFailure(error.response.data));
             });
     };

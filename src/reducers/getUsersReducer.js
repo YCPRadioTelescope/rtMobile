@@ -3,7 +3,14 @@ import { combineReducers } from "redux";
 import {GET_USERS, GET_USERS_FAILURE, GET_USERS_SUCCESS} from "../actions/getUsersAction";
 
 const INITIAL_STATE = {
-    user:[],
+    user:[
+        {
+            name: "name"
+        },
+        {
+            name: 'name'
+        }
+    ],
     loading: false,
     error: false,
     errorMessage: null,
