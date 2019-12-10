@@ -85,9 +85,6 @@ class DpadScreen extends React.Component {
       } else {
         this.setState({sliderVerticalPic: require("../../../assets/images/meduimgreenstatus.png")});
       }
-
-      //tcp stuff goes here!!!!!///////
-    
     this.timer = setTimeout(() => this.move(direction), 10);
   };
 
