@@ -36,8 +36,6 @@ class HomeScreen extends React.Component {
 
   async getData(){
     await this.props.getUsers().then(response => {
-        //console.log('response ===', response);
-        //console.log('users props -> ', this.props.users);
         this.setState({users: response.user.data.length || 0});
         this.setState({isLoading2: false});
     });
@@ -48,7 +46,7 @@ class HomeScreen extends React.Component {
         this.setState({isLoading: false});
     })
       await this.props.getSensorData().then(response => {
-          this.setState({sensorArray: this.props.sensor})
+          this.setState({sensorArray: this.props.sensor});
           this.setState({isLoading3: false});
       })
   }
@@ -72,7 +70,6 @@ class HomeScreen extends React.Component {
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      //console.log('az in h0me', this.props.navigation.getParam("azimuth"));
       let azimuth = this.props.navigation.getParam("azimuth", 45);
       let elevation = this.props.navigation.getParam("elevation", 45);
       this.setState({azimuth: azimuth});
@@ -87,8 +84,6 @@ class HomeScreen extends React.Component {
   }
 
   nav = ( ) => {
-    /*console.log('inNav');
-    console.log('az', this.state.azimuth);*/
     this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
@@ -97,32 +92,7 @@ class HomeScreen extends React.Component {
   }
 
   snowDump = () => {
-    /*var ws = new WebSocket('ws://10.127.7.121:80', {
-      perMessageDeflate: false
-    });
-
-    ws.onopen = () => {
-      // connection opened
-      console.log('connection opened');
-      ws.send('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd'); // send a message
-      console.log('message sent');
-      ws.close();
-    };
-
-    ws.onmessage = (e) => {
-      // a message was received
-      console.log(e.data);
-    };
-
-    ws.onerror = (e) => {
-      // an error occurred
-      console.log(e.message);
-    };
-
-    ws.onclose = (e) => {
-      // connection closed
-      console.log(e.code, e.reason);
-    };*/
+    // send tcp message here
   };
 
   dpad = () => {
@@ -183,11 +153,11 @@ class HomeScreen extends React.Component {
         let numYellow = 0;
         while(count < this.state.sensorArray.length){
             //if at least 1 sensor is red set status to Red
-            if(this.state.sensorArray[count].details == 0 && !this.state.sensorArray[count].override){
+            if(this.state.sensorArray[count].details === 0 && !this.state.sensorArray[count].override){
                 return require("../../../assets/images/redStatus.png");
             }
             //check if there are any yellows
-            else if(this.state.sensorArray[count].details == 1 && !this.state.sensorArray[count].override){
+            else if(this.state.sensorArray[count].details === 1 && !this.state.sensorArray[count].override){
                 numYellow ++;
             }
             count++;
@@ -214,14 +184,8 @@ class HomeScreen extends React.Component {
       )
     }
     if(this.state.isLoading === false && this.state.isLoading2 === false && this.state.isLoading3 === false){
-      //console.log('windddddd', this.state.windSpeed);
-      //console.log("Done loading: updateing weather variables then rendering page");
-      //this.updateState();
-      /*console.log('user length', this.state.users);
-      console.log('isloading', this.state.isLoading);
-      console.log('loading 2', this.state.isLoading2);*/
       //this holds the image for the status light. setting the image source to this.getStatusLightColor directly does not work
-        let statusLightColor = this.getStatusLightColor()
+        let statusLightColor = this.getStatusLightColor();
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -298,9 +262,8 @@ class HomeScreen extends React.Component {
 }
 const mapStateToProps = state => {
   const { weather, users,sensor } = state;
-  //console.log("Getting weather = state in MapStateToProps",weather);
-  console.log("weather.weather is:",weather.weather.weather);
-  console.log('users bottom -> ', users);
+  /*console.log("weather.weather is:",weather.weather.weather);
+  console.log('users bottom -> ', users);*/
 
   return {
     users: users,
