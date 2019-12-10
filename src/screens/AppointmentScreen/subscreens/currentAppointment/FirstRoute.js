@@ -18,8 +18,8 @@ class FirstRoute extends React.Component {
         celestialBodyDisplay: null,
     };
 
-    handleData(users, appointment){
-
+    handleData(appointment){
+            console.log(appointment);
             // parse real date and time from starting timestamp
             let start_Time = this.parseTime(appointment.data[2].start_time);
             let start_Date = this.parseDate(appointment.data[2].start_time);
@@ -60,8 +60,8 @@ class FirstRoute extends React.Component {
         //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
         timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
         console.log(timeValue);
-       return timeValue;
-    }
+        return timeValue;
+    };
 
     parseDate= (timestamp)=>{
         var a = new Date(timestamp);
@@ -71,7 +71,7 @@ class FirstRoute extends React.Component {
         var date = a.getDate();
         var calDate = month + ' ' + date + ' ' + year ;
         return calDate;
-    }
+    };
 
     parseName= (userID)=>{
         console.log(this.props.users);
@@ -81,7 +81,7 @@ class FirstRoute extends React.Component {
             }
         }
         return "Anonymous user";
-    }
+    };
 
 
     // Add timestamps, name, celestial body id, and orientation

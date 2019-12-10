@@ -7,7 +7,6 @@ class ScrollAppointments extends Component {
     state = {
         user:[],
         isLoading: true,
-        isLoading2: true,
         startTime:[],
         endTime:[],
         startDate:[],
@@ -58,7 +57,7 @@ class ScrollAppointments extends Component {
             this.setState({isLoading: false});
         }
 
-    }
+    };
 
     parseTime= (timestamp)=>{
         var a = new Date(timestamp);
@@ -80,7 +79,7 @@ class ScrollAppointments extends Component {
         timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
         console.log(timeValue);
         return timeValue;
-    }
+    };
 
     parseDate= (timestamp)=>{
         var a = new Date(timestamp);
@@ -90,7 +89,7 @@ class ScrollAppointments extends Component {
         var date = a.getDate();
         var calDate = month + ' ' + date + ' ' + year ;
         return calDate;
-    }
+    };
 
     parseName= (userID)=>{
         console.log(this.props.user);
@@ -100,7 +99,7 @@ class ScrollAppointments extends Component {
             }
         }
         return "Anonymous user";
-    }
+    };
 
     componentDidMount() {
         this.getData();

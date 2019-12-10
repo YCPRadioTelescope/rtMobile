@@ -19,6 +19,12 @@ class AppointmentScreen extends React.Component {
         isLoading1: true,
         isLoading2: true,
         isLoading3: true,
+        index: 0,
+        routes: [
+            { key: 'first', title: 'Current' },
+            { key: 'second', title: 'Future' },
+            { key: 'third', title: 'Previous' },
+        ],
     };
 
     async getData() {
@@ -35,15 +41,6 @@ class AppointmentScreen extends React.Component {
         });
         this.setState({isLoading3: false});
     }
-
-    state = {
-        index: 0,
-        routes: [
-            { key: 'first', title: 'Current' },
-            { key: 'second', title: 'Future' },
-            { key: 'third', title: 'Previous' },
-        ],
-    };
 
     componentDidMount() {
         this.getData();
@@ -118,8 +115,8 @@ let mapStateToProps = state => {
         errorResponse: appointment.errorResponse,
         errorMessage: appointment.errorMessage,
         recentAppointment: recentAppointment.recentAppointment,
-        recentAppointmenterrorResponse: recentAppointment.errorResponse,
-        recentAppointmenterrorMessage: recentAppointment.errorMessage,
+        recentAppointmentErrorResponse: recentAppointment.errorResponse,
+        recentAppointmentErrorMessage: recentAppointment.errorMessage,
         user: user.user.user.data,
         ErrorResponse: user.errorResponse,
         ErrorMessage: user.errorMessage,
@@ -142,4 +139,4 @@ let mapDispatchToProps = dispatch =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(FirstRoute);
+)(AppointmentScreen);
