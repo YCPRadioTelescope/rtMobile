@@ -33,8 +33,8 @@ export const getFutureAppointments = () => {
         return axios
             .post(`${url}/futureAppointments`,reqBody)
             .then(response => {
-                console.log('inside axios returnnnnnnnnnn');
-                console.log(JSON.stringify(response));
+                //console.log('inside axios returnnnnnnnnnn');
+                //console.log(JSON.stringify(response));
                 return dispatch(getFutureAppointmentsSuccess(response));
             })
             .catch(error => {

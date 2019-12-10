@@ -32,7 +32,7 @@ export const getUsers = () => {
         return axios
             .post(`${url}/users`,reqBody)
             .then(response => {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 return dispatch(getUsersSuccess(response));
             })
             .catch(error => {

@@ -5,11 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#3c324a'
   },
-  scroll:{
-    flex:5,
-    marginBottom:'1%',
-  },
   data:{
+    backgroundColor: '#d9e3f0',
     width:'100%',
     height:'100%',
     display: 'flex',
@@ -17,8 +14,10 @@ export default StyleSheet.create({
     alignContent: 'center',
   },
   userName:{
-    justifyContent: 'center',
+    textAlign: 'center',
+    alignContent: 'center',
     fontSize:25,
     fontWeight:'bold',
+    color: '#3c324a',
   }
 });

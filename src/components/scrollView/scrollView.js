@@ -11,8 +11,8 @@ class ScrollElements extends Component {
    render() {
       const navigation = this.props.navigation;
       const users = this.props.users;
-      console.log(users);
-       console.log("TOP LEVEL ",this.props.buttonPushed);
+      //console.log(users);
+       //console.log("TOP LEVEL ",this.props.buttonPushed);
       return (
          <View>
             <ScrollView style = {styles.element}>

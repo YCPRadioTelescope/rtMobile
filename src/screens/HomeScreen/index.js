@@ -26,13 +26,15 @@ class HomeScreen extends React.Component {
     windDirection: '',
     temperature: '',
     users: 0,
+    pendingUsers: []
   };
 
   async getData(){
     await this.props.getPendingUsers().then(response => {
-      console.log('response ===', response)
-      console.log('users props -> ', this.props.users);
+      //console.log('response ===', response)
+      //console.log('users props -> ', this.props.users);
       this.setState({users: response.pendingUser.data.length});
+      this.setState({pendingUsers: response.pendingUser.data});
       this.setState({isLoading2: false});
     })
     await this.props.getWeatherData().then(response => {
@@ -45,12 +47,12 @@ class HomeScreen extends React.Component {
 
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
-    console.log('token', fcmToken);
+    //console.log('token', fcmToken);
     const hasPermission = await firebase.messaging().hasPermission();
-    console.log('has permission', hasPermission);
+    //console.log('has permission', hasPermission);
 
     const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
-       console.log('FCM Message Data:', remoteMessage.data);
+       //console.log('FCM Message Data:', remoteMessage.data);
     });
 
 // Unsubscribe from further message events
@@ -81,8 +83,8 @@ class HomeScreen extends React.Component {
   }
 
   nav = ( ) => {
-    console.log('inNav');
-    console.log('az', this.state.azimuth);
+    //console.log('inNav');
+    //console.log('az', this.state.azimuth);
     this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
@@ -175,7 +177,7 @@ class HomeScreen extends React.Component {
                   <Text> Stop Telescope </Text>
                 </View>
               </TouchableHighlight>
-              <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard")}
+              <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard", {pendingUsers: this.state.pendingUsers})}
                                   style={styles.button}>
                 <View>
                   <Text> Approve Users </Text>

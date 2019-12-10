@@ -6,8 +6,6 @@ import {bindActionCreators} from "redux";
 import {getPendingUsers} from "../../actions/getPendingUsersAction";
 import connect from "react-redux/lib/connect/connect";
 
-
-
 class ApprovalDashboardScreen extends React.Component {
 
     state = {
@@ -16,19 +14,15 @@ class ApprovalDashboardScreen extends React.Component {
     };
 
     async getData() {
-        await this.props.getPendingUsers().then(response => {
-            this.setState({pendingUsers: response.data});
-            this.setState({isLoading: false});
-            this.setState()
-        });
+        this.setState({pendingUsers: this.props.navigation.getParam("pendingUsers")});
     }
-
 
     componentDidMount() {
         this.focusListener = this.props.navigation.addListener("didFocus", () => {
             this.getData();
         });
         this.getData();
+        console.log('PPPPPendingusers', this.state.pendingUsers);
     }
 
     componentDidUpdate() {
@@ -47,24 +41,13 @@ class ApprovalDashboardScreen extends React.Component {
     }
 
     render() {
-        console.log("Parent:",this.props.navigation.getParam('buttonPushed'));
-        console.log("PROPS:",this.props);
-        if(this.state.isLoading){
-            return(
-                <View style={styles.loading}>
-                    <ActivityIndicator />
-                    <StatusBar barStyle="default" />
-                </View>
-            )
-        }
-        else {
+        console.log('PPPPPendingusers', this.state.pendingUsers);
             return (
                 <View style={styles.container}>
                     <View style={styles.navBar}>
                         <Text style={styles.navTitle}>Approve Users</Text>
                     </View>
-
-                    <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.props.pendingUser} buttonPushed={0}/>
+                    <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.state.pendingUsers} buttonPushed={0}/>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
                         <Image
                             source={require("../../../assets/images/back.png")}
@@ -73,7 +56,6 @@ class ApprovalDashboardScreen extends React.Component {
                 </View>
             );
         }
-    }
 }
 
 // Need the below code for responses when using a reducer
