@@ -64,7 +64,7 @@ class AppointmentScreen extends React.Component {
         </View>
           <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
               <Image
-                  source={require("../../../assets/images/back_white.png")}
+                  source={require("../../../assets/images/back.png")}
               />
           </TouchableHighlight>
       </View>

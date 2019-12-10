@@ -11,7 +11,7 @@ import React from 'react';
 import styles from './styles';
 import { firebase } from '@react-native-firebase/messaging';
 import {getWeatherData} from "../../actions/WeatherActions";
-import {getUsers} from "../../actions/getUsersAction";
+import {getPendingUsers} from "../../actions/getPendingUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
@@ -35,9 +35,10 @@ class HomeScreen extends React.Component {
   };
 
   async getData(){
-    await this.props.getUsers().then(response => {
-        this.setState({users: response.user.data.length || 0});
-        this.setState({pendingUsers: response.user.data});
+    await this.props.getPendingUsers().then(response => {
+      console.log('pendinguser in hime', response);
+        this.setState({users: response.pendingUser.data.length || 0});
+        this.setState({pendingUsers: response.pendingUser.data});
         this.setState({isLoading2: false});
     });
     await this.props.getWeatherData().then(response => {
@@ -263,12 +264,12 @@ class HomeScreen extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const { weather, users,sensor } = state;
+  const { weather, users, sensor, pendingUsers } = state;
   /*console.log("weather.weather is:",weather.weather.weather);
   console.log('users bottom -> ', users);*/
 
   return {
-    users: users,
+    pendingUsers: pendingUsers,
     weather: weather.weather.weather,
     sensor: sensor.sensor.sensor,
     errorResponse: weather.errorResponse,
@@ -280,7 +281,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
           getWeatherData,
-          getUsers,
+          getPendingUsers,
           getSensorData,
         },
         dispatch

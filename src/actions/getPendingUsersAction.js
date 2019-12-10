@@ -32,7 +32,7 @@ export const getPendingUsers = () => {
         return axios
             .post(`${url}/pendingUsers`,reqBody)
             .then(response => {
-                //console.log(JSON.stringify(response));
+                console.log('pendingUser', JSON.stringify(response));
                 return dispatch(getPendingUsersSuccess(response));
             })
             .catch(error => {
