@@ -11,10 +11,10 @@ export default StyleSheet.create({
   navBar: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5',
-    height:'12%',
-    marginLeft:0,
-    marginRight:0,
+    backgroundColor: '#19214d',
+    height: '12%',
+    marginLeft: 0,
+    marginRight: 0,
   },
   navContainer:{
     position: 'absolute',
@@ -22,6 +22,7 @@ export default StyleSheet.create({
     left:'35%',
   },
   navTitle:{
+    color:'#daddf0',
     fontSize:25,
     fontWeight:'bold',
   },

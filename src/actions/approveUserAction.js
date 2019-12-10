@@ -31,7 +31,7 @@ export const approveUser = (id) => {
         return axios
             .post(`${url}/approveUser`,reqBody)
             .then(response => {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 return dispatch(approveUserSuccess(response.data));
             })
             .catch(error => {

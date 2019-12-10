@@ -3,30 +3,26 @@ import React from 'react';
 import styles from './styles';
 import ScrollElements from '../../components/scrollView/scrollView.js';
 import {bindActionCreators} from "redux";
-import {getUsers} from "../../actions/getUsersAction";
+import {getPendingUsers} from "../../actions/getPendingUsersAction";
 import connect from "react-redux/lib/connect/connect";
-
-
 
 class ApprovalDashboardScreen extends React.Component {
 
     state = {
-        users:[],
+        pendingUsers:[],
         isLoading: true,
     };
 
     async getData() {
-        await this.props.getUsers().then(response => {
-            this.setState({isLoading: false});
-        });
+        this.setState({pendingUsers: this.props.navigation.getParam("pendingUsers")});
     }
-
 
     componentDidMount() {
         this.focusListener = this.props.navigation.addListener("didFocus", () => {
             this.getData();
         });
         this.getData();
+        console.log('PPPPPendingusers', this.state.pendingUsers);
     }
 
     componentDidUpdate() {
@@ -44,50 +40,39 @@ class ApprovalDashboardScreen extends React.Component {
         this.focusListener.remove();
     }
 
-  render() {
-        console.log("Parent:",this.props.navigation.getParam('buttonPushed'));
-      if(this.state.isLoading){
-        return(
-          <View style={styles.loading}>
-            <ActivityIndicator />
-            <StatusBar barStyle="default" />
-          </View>
-        )
-      }
-      else {
-        return (
-          <View style={styles.container}>
-            <View style={styles.navBar}>
-              <Text style={styles.navTitle}>Approve Users</Text>
-            </View>
-
-            <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.props.user} buttonPushed={0}/>
-            <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-              <Image
-                source={require("../../../assets/images/back.png")}
-              />
-            </TouchableHighlight>
-          </View>
-        );
-      }
-  }
+    render() {
+        console.log('PPPPPendingusers', this.state.pendingUsers);
+            return (
+                <View style={styles.container}>
+                    <View style={styles.navBar}>
+                        <Text style={styles.navTitle}>Approve Users</Text>
+                    </View>
+                    <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.state.pendingUsers} buttonPushed={0}/>
+                    <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+                        <Image
+                            source={require("../../../assets/images/back.png")}
+                        />
+                    </TouchableHighlight>
+                </View>
+            );
+        }
 }
 
 // Need the below code for responses when using a reducer
 
 const mapStateToProps = state => {
-    const { user } = state;
+    const { pendingUser } = state;
     return {
-        user: user.user.user.data,
-        errorResponse: user.errorResponse,
-        errorMessage: user.errorMessage
+        user: pendingUser,
+        errorResponse: pendingUser.errorResponse,
+        errorMessage: pendingUser.errorMessage
     };
 };
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            getUsers,
+            getPendingUsers,
         },
         dispatch
     );

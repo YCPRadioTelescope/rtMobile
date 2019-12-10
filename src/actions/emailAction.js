@@ -30,7 +30,7 @@ export const email = (destination, subject, message) => {
     return axios
       .post(`${url}/email`,reqBody)
       .then(response => {
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         return dispatch(emailSuccess(response.data));
       })
       .catch(error => {

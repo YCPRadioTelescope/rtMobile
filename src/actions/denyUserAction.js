@@ -31,7 +31,7 @@ export const denyUser = (id) => {
         return axios
             .post(`${url}/denyUser`,reqBody)
             .then(response => {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 return dispatch(denyUserSuccess(response.data));
             })
             .catch(error => {
