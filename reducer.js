@@ -9,7 +9,7 @@ import overrideReducer from "./src/screens/SensorScreen/OverrideReducer";
 import getAppointmentsReducer from "./src/reducers/getAppointmentsReducer";
 import getRecentAppointmentsReducer from "./src/reducers/getRecentAppointmentsReducer";
 import getFutureAppointmentsReducer from "./src/reducers/getFutureAppointmentsReducer";
-import getPendingUsersReducer from "./src/reducers/getFutureAppointmentsReducer";
+import getPendingUsersReducer from "./src/reducers/getPendingUsersReducer";
 
 const reducer = combineReducers({
   //user: AuthReducer,

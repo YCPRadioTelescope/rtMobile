@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import {GET_USERS, GET_USERS_FAILURE, GET_USERS_SUCCESS} from "../actions/getUsersAction";
+import {GET_PENDING_USERS, GET_PENDING_USERS_FAILURE, GET_PENDING_USERS_SUCCESS} from "../actions/getPendingUsersAction";
 
 const INITIAL_STATE = {
     pendingUser:[],
