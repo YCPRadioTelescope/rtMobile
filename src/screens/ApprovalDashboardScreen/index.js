@@ -47,7 +47,7 @@ class ApprovalDashboardScreen extends React.Component {
                     <View style={styles.navBar}>
                         <Text style={styles.navTitle}>Approve Users</Text>
                     </View>
-                    <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.state.pendingUsers} buttonPushed={0}/>
+                    {/*<ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.state.pendingUsers} buttonPushed={0}/>*/}
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
                         <Image
                             source={require("../../../assets/images/back.png")}

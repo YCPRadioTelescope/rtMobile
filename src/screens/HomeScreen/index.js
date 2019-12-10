@@ -30,13 +30,14 @@ class HomeScreen extends React.Component {
     temperature: '',
     users: 0,
     sensorArray:[],
-
+    pendingUsers: [],
     modalVisible: false,
   };
 
   async getData(){
     await this.props.getUsers().then(response => {
         this.setState({users: response.user.data.length || 0});
+        this.setState({pendingUsers: response.user.data});
         this.setState({isLoading2: false});
     });
     await this.props.getWeatherData().then(response => {
@@ -186,6 +187,7 @@ class HomeScreen extends React.Component {
     if(this.state.isLoading === false && this.state.isLoading2 === false && this.state.isLoading3 === false){
       //this holds the image for the status light. setting the image source to this.getStatusLightColor directly does not work
         let statusLightColor = this.getStatusLightColor();
+        console.log('ASKDFALJKHGLJHFLKJAWER')
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -225,7 +227,7 @@ class HomeScreen extends React.Component {
                   <Text> Stop Telescope </Text>
                 </View>
               </TouchableHighlight>
-              <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard")}
+              <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard", {pendingUsers: this.state.pendingUsers})}
                                   style={styles.button}>
                 <View>
                   <Text> Approve Users </Text>
