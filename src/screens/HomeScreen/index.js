@@ -188,17 +188,18 @@ class HomeScreen extends React.Component {
       )
     }
     if(this.state.isLoading === false && this.state.isLoading2 === false && this.state.isLoading3 === false){
+    */
       //this holds the image for the status light. setting the image source to this.getStatusLightColor directly does not work
-        let statusLightColor = this.getStatusLightColor();*/
+        let statusLightColor = this.getStatusLightColor();
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
               <TouchableHighlight style={styles.navContainer} onPress={() => this.props.navigation.navigate("Status")}>
                 <Text style={styles.navTitle}>Status: </Text>
               </TouchableHighlight>
-              {/*<Image
+              <Image
                   source={statusLightColor}
-                  style={styles.mainStatusLight}/>*/}
+                  style={styles.mainStatusLight}/>
             </View>
             <View>
               <Image
