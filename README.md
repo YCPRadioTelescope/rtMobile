@@ -22,6 +22,8 @@ Click on the setting 'gear' at the top left <br/>
 Click on the general tab in the middle<br/>
 Scroll to the bottom and download the google-services.json file<br/>
 Place this file in rtMobile/android/app... do not commit this file on github <br/>
+Get a hold of the UUID from precvious members<br/>
+Create a config.json in the main folder and place the UUID in it.<br/>
 
 Go to https://facebook.github.io/react-native/docs/getting-started and follow their React Native CLI Quickstart guide. 
 
