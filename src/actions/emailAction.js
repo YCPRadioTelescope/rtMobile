@@ -1,7 +1,11 @@
 import axios from "axios";
 
 
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+const url = "http:3.218.80.78";
+
+
+
 export const EMAIL = "EMAIL";
 export const EMAIL_SUCCESS = "EMAIL_SUCCESS";
 export const EMAIL_FAILURE = "EMAIL_FAILURE";

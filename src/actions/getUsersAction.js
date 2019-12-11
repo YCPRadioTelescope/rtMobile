@@ -1,8 +1,10 @@
 import axios from "axios";
 import config from "../../config.json";
 
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 //const url = "http://127.0.0.1:3000";
+const url = "http:3.218.80.78";
+
 
 export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_FAILURE = "GET_USERS_FAILURE";

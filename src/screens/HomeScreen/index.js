@@ -42,12 +42,14 @@ class HomeScreen extends React.Component {
         this.setState({isLoading2: false});
     });
     await this.props.getWeatherData().then(response => {
+      console.log('weather in hime', response);
         this.setState({windSpeed: this.props.weather[0].detail});
         this.setState({windDirection: this.props.weather[1].detail});
         this.setState({temperature: this.props.weather[2].detail});
         this.setState({isLoading: false});
-    })
+    });
       await this.props.getSensorData().then(response => {
+        console.log('sensor in hime', response);
           this.setState({sensorArray: this.props.sensor});
           this.setState({isLoading3: false});
       })
@@ -176,7 +178,7 @@ class HomeScreen extends React.Component {
     }
 
   render() {
-    if (this.state.isLoading === true || this.state.isLoading2 === true || this.state.isLoading3 === true) {
+   /* if (this.state.isLoading === true || this.state.isLoading2 === true || this.state.isLoading3 === true) {
       //console.log("Loading data from database");
       return (
           <View style={styles.loading}>
@@ -187,17 +189,16 @@ class HomeScreen extends React.Component {
     }
     if(this.state.isLoading === false && this.state.isLoading2 === false && this.state.isLoading3 === false){
       //this holds the image for the status light. setting the image source to this.getStatusLightColor directly does not work
-        let statusLightColor = this.getStatusLightColor();
-        console.log('ASKDFALJKHGLJHFLKJAWER')
+        let statusLightColor = this.getStatusLightColor();*/
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
               <TouchableHighlight style={styles.navContainer} onPress={() => this.props.navigation.navigate("Status")}>
                 <Text style={styles.navTitle}>Status: </Text>
               </TouchableHighlight>
-              <Image
+              {/*<Image
                   source={statusLightColor}
-                  style={styles.mainStatusLight}/>
+                  style={styles.mainStatusLight}/>*/}
             </View>
             <View>
               <Image
@@ -261,7 +262,7 @@ class HomeScreen extends React.Component {
           </View>
       );
     }
-  }
+  //}
 }
 const mapStateToProps = state => {
   const { weather, users, sensor, pendingUsers } = state;

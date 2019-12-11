@@ -2,8 +2,10 @@ import axios from "axios";
 import config from "../../config";
 
 
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 //const url = "http://127.0.0.1:3000";
+const url = "http:3.218.80.78";
+
 
 export const DENY_USER_SUCCESS = "DENY_USER_SUCCESS";
 export const DENY_USER_FAILURE = "DENY_USER_FAILURE";
