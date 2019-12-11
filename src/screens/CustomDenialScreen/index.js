@@ -49,7 +49,7 @@ class CustomDenialScreen extends React.Component {
             <View style={styles.navBar}>
               <Text style={styles.navTitle}>Type your reason below</Text>
             </View>
-
+            <View style={styles.frame}>
               <TextInput
                   style={styles.input}
                   placeholder="Type your reason here..."
@@ -62,7 +62,7 @@ class CustomDenialScreen extends React.Component {
               <TouchableHighlight onPress={this.onPress} style={styles.submit} >
                   <Text style={styles.buttonTitle}>Submit</Text>
               </TouchableHighlight>
-
+            </View>
             <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
               <Image
                 source={require("../../../assets/images/back.png")}

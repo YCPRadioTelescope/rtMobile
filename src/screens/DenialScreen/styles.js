@@ -9,16 +9,18 @@ export default StyleSheet.create({
   navBar: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#cebaff',
-    height:'12%',
-    marginLeft:0,
-    marginRight:0,
+    backgroundColor: '#19214d',
+
+    height: '12%',
+    marginLeft: 0,
+    marginRight: 0,
   },
-  navTitle:{
+  navTitle: {
+    color:'#daddf0',
     position: 'absolute',
-    top:'35%',
-    fontSize:20,
-    fontWeight:'bold',
+    top: '35%',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   buttonHolder:{
     position: 'relative',
