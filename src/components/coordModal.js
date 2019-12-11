@@ -14,44 +14,9 @@ class CoordModal extends Component {
   };
 
   move = () => {
-    /*
-    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
-    BELOW is the working websocket connection to be used in the future.... websockets are blocked by york college
-    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
-     */
-    /*var ws = new WebSocket('ws://10.0.0.147:8090');
-
-    ws.onopen = () => {
-      // connection opened
-      console.log('connection opened');
-      ws.send('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd'); // send a message
-      console.log('message sent');
-      ws.close();
-    };
-
-    ws.onmessage = (e) => {
-      // a message was received
-      console.log(e.data);
-    };
-
-    ws.onerror = (e) => {
-      // an error occurred
-      console.log(e.message);
-    };
-
-    ws.onclose = (e) => {
-      // connection closed
-      console.log(e.code, e.reason);
-    };*/
-    /*
-    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
-    ABOVE is the working websocket connection to be used in the future.... websockets are blocked by york college
-    /////////////////   /////////////////   /////////////////   /////////////////   /////////////////   /////////////////
-    */
 
     let options = {
       host: '10.127.8.140',
-      //host: '1.2.3.456',
       port: 8090
     };
 
