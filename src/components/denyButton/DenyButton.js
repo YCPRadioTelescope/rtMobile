@@ -9,20 +9,20 @@ class DenyButton extends Component {
     // TODO: Route to denial page
   }
 
- render() {
-  //const navigation = this.props.navigation;
-  const user = this.props.user;
+  render() {
+    //const navigation = this.props.navigation;
+    const user = this.props.user;
     return (
-        <View>
-            <TouchableHighlight user={this.props.user} onPress={() => {this.props.navigation.navigate('Denial',{
-                user:user,
-            })}}>
-                <Image
-                    style={styles.button}
-                    source={require('../../../assets/images/xButton.png')}
-                />
-            </TouchableHighlight>
-        </View>
+      <View>
+        <TouchableHighlight user={this.props.user} onPress={() => {this.props.navigation.navigate('Denial',{
+          user:user,
+        })}}>
+          <Image
+            style={styles.button}
+            source={require('../../../assets/images/xButton.png')}
+          />
+        </TouchableHighlight>
+      </View>
     )
   }
 }

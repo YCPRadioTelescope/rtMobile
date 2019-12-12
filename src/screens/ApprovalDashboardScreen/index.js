@@ -42,20 +42,20 @@ class ApprovalDashboardScreen extends React.Component {
 
     render() {
         console.log('PPPPPendingusers', this.state.pendingUsers);
-            return (
-                <View style={styles.container}>
-                    <View style={styles.navBar}>
-                        <Text style={styles.navTitle}>Approve Users</Text>
-                    </View>
-                    <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.state.pendingUsers} buttonPushed={0}/>
-                    <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
-                        <Image
-                            source={require("../../../assets/images/back.png")}
-                        />
-                    </TouchableHighlight>
-                </View>
-            );
-        }
+        return (
+          <View style={styles.container}>
+              <View style={styles.navBar}>
+                  <Text style={styles.navTitle}>Approve Users</Text>
+              </View>
+              <ScrollElements style={styles.scroll} navigation={this.props.navigation} users={this.state.pendingUsers} buttonPushed={0}/>
+              <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
+                  <Image
+                    source={require("../../../assets/images/back.png")}
+                  />
+              </TouchableHighlight>
+          </View>
+        );
+    }
 }
 
 // Need the below code for responses when using a reducer
@@ -70,14 +70,14 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getPendingUsers,
-        },
-        dispatch
-    );
+  bindActionCreators(
+    {
+        getPendingUsers,
+    },
+    dispatch
+  );
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ApprovalDashboardScreen);
