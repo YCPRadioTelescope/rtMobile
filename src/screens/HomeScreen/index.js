@@ -78,7 +78,7 @@ class HomeScreen extends React.Component {
       let elevation = this.props.navigation.getParam("elevation", 45);
       this.setState({azimuth: azimuth});
       this.setState({elevation: elevation});
-
+      this.getData();
     });
     this.getData();
   }
