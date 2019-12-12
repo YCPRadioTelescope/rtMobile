@@ -15,7 +15,11 @@ class FirstRoute extends React.Component {
         isLoading2: true,
         startTime:null,
         endTime:null,
+        startDate:null,
+        endDate:null,
         displayName: "null",
+        orientationDisplay: null,
+        celestialBodyDisplay: null,
     };
 
     async getData(){
@@ -23,24 +27,30 @@ class FirstRoute extends React.Component {
 
        await this.props.getUsers().then(response => {
            console.log('user response: ', response);
-           this.setState({users: response});
+           this.setState({users: response.user.data});
            this.setState({isLoading2: false});
        });
         await this.props.getAppointment().then(response => {
             console.log('appt. response: ', response);
-
-            // parse real date and time from timestamp
-            let start_Time = this.parseTime(this.props.appointment.data[2].start_time);
-            console.log('start time: ', start_Time);
+            let appointment = response.appointment;
+            // parse real date and time from starting timestamp
+            let start_Time = this.parseTime(appointment.data[2].start_time);
+            let start_Date = this.parseDate(appointment.data[2].start_time);
             this.setState({startTime: start_Time});
-            let end_Time = this.parseTime(this.props.appointment.data[2].end_time);
+            this.setState({startDate: start_Date});
+            // parse real date and time from ending timestamp
+            let end_Time = this.parseTime(appointment.data[2].end_time);
+            let end_Date = this.parseDate(appointment.data[2].end_time);
             this.setState({endTime: end_Time});
-            console.log('end time: ', end_Time);
+            this.setState({endDate: end_Date});
 
             // set user's name
-            let userName = this.parseName(this.props.appointment.data[2].user_id);
+            let userName = this.parseName(appointment.data[2].user_id);
             this.setState({displayName: userName});
 
+            // get celestial body
+
+            // Good to show screen
             this.setState({isLoading: false});
 
         });
@@ -48,14 +58,11 @@ class FirstRoute extends React.Component {
 
     parseTime= (timestamp)=>{
         var a = new Date(timestamp);
-        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var year = a.getFullYear();
-        var month = months[a.getMonth()];
-        var date = a.getDate();
         var hours = a.getHours();
         var minutes = a.getMinutes();
         //var seconds = a.getSeconds();
         var timeValue;
+
         if (hours > 0 && hours <= 12) {
             timeValue= "" + hours;
         } else if (hours > 12) {
@@ -63,13 +70,23 @@ class FirstRoute extends React.Component {
         } else if (hours == 0) {
             timeValue= "12";
         }
+
         timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
         //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
         timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
         console.log(timeValue);
-        var time = date + ' ' + month + ' ' + year + ' ' + timeValue ;
-       return time;
-    }
+        return timeValue;
+    };
+
+    parseDate= (timestamp)=>{
+        var a = new Date(timestamp);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var calDate = month + ' ' + date + ' ' + year ;
+        return calDate;
+    };
 
     parseName= (userID)=>{
         console.log(this.props.user);
@@ -79,11 +96,11 @@ class FirstRoute extends React.Component {
             }
         }
         return "Anonymous user";
-    }
+    };
+
 
     componentDidMount() {
         this.getData();
-
     }
 
     // Add timestamps, name, celestial body id, and orientation
@@ -101,13 +118,23 @@ class FirstRoute extends React.Component {
             return (
                 <View style={styles.data}>
                     <Text style={styles.userName}>{this.state.displayName}'s Appointment.</Text>
-                    <Text style={styles.startTime}>{this.state.startTime}" - "</Text>
-                    <Text style={styles.endTime}>{this.state.endTime}</Text>
-                    <Text style={styles.celestial}>"Celestial body is:
-                        "{this.props.appointment.data[2].celestial_body_id}</Text>
-                    <Text style={styles.orientation}>"Orientation is:
-                        "{this.props.appointment.data[2].orientation_id}</Text>
+                    <View style={styles.times}>
+                        <View style={styles.startTime}>
+                            <Text style={styles.timingDetail}>Starts at</Text>
+                            <Text style={styles.timingText}>{this.state.startTime}</Text>
+                            <Text style={styles.dateText}>{this.state.startDate}</Text>
+                        </View>
+                        <View style={styles.endTime}>
+                            <Text style={styles.timingDetail}>Ends at</Text>
+                            <Text style={styles.timingText} >{this.state.endTime}</Text>
+                            <Text style={styles.dateText}>{this.state.endDate}</Text>
+                        </View>
+                    </View>
+                    <Text style={styles.celestial}>Looking at {this.props.appointment.data[2].celestial_body_id}</Text>
+                    <Text style={styles.orientation}>Orientation is:
+                        {this.props.appointment.data[2].orientation_id}</Text>
                 </View>
+
             );
         }
     }

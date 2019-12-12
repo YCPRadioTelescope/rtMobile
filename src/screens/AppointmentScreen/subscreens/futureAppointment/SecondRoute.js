@@ -1,51 +1,43 @@
 import {Image, Text, View, TouchableHighlight, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
-import ScrollElements from '../../../../components/scrollView/scrollView.js';
-import {bindActionCreators} from "redux";
-import {getAppointment} from "../../../../actions/getAppointmentAction.js";
+import ScrollAppointments from '../../../../components/scrollAppointments/ScrollAppointments';
 
 
 class SecondRoute extends React.Component {
 
-    /*state = {
-        users:[],
+    state = {
         isLoading: true,
     };
 
     async getData() {
-        await this.props.getUsers().then(response => {
-            this.setState({isLoading: false});
-        });
+        this.setState({isLoading: false});
     }
 
 
     componentDidMount() {
-        this.focusListener = this.props.navigation.addListener("didFocus", () => {
-            this.getData();
-        });
+
         this.getData();
     }
 
-    componentDidUpdate() {
-        // If buttonPushed was set to 1, reload and test buttonPushed back to 0.
-        if (1 === this.props.navigation.getParam('buttonPushed')) {
-            this.getData();
-            this.props.navigation.setParams({ buttonPushed: 0 });
-        }
-
-        //this.getData();
-    }
-
-
-    componentWillUnmount() {
-        this.focusListener.remove();
-    }*/
 
     render() {
-        return (
-            <View style={styles.content} />
-        );
+        if (this.state.isLoading === true) {
+            return (
+              <View style={styles.loading}>
+                  <ActivityIndicator/>
+                  <StatusBar barStyle="default"/>
+              </View>
+            )
+        }
+        else {
+            return(
+              <View>
+                  <ScrollAppointments appointments={this.props.appointment}/>
+              </View>
+            );
+        }
+
     }
 }
 

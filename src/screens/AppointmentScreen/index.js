@@ -3,14 +3,9 @@ import React from 'react';
 import styles from './styles';
 import {TabView, TabBar} from 'react-native-tab-view';
 import FirstRoute from "./subscreens/currentAppointment/FirstRoute";
+import SecondRoute from './subscreens/futureAppointment/SecondRoute';
+import ThirdRoute from "./subscreens/previousAppointment/ThirdRoute";
 
-let SecondRoute = () => (
-    <View style={styles.secondRoute} />
-);
-
-let ThirdRoute = () => (
-    <View style={styles.thirdRoute} />
-);
 
 class AppointmentScreen extends React.Component {
 
@@ -31,10 +26,10 @@ class AppointmentScreen extends React.Component {
         }
 
         if (route.key === 'second') {
-            return <View style={styles.secondRoute} />;
+          return <SecondRoute  />;
         }
         if (route.key === 'third') {
-            return <View style={styles.thirdRoute} />;
+          return <ThirdRoute  />;
         }
     }
 

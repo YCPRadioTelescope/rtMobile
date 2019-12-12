@@ -13,6 +13,9 @@ import DpadScreen from './src/screens/DpadScreen';
 import OverrideScreen from "./src/screens/OverrideScreen";
 import WeatherScreen from "./src/screens/WeatherScreen";
 import AppointmentScreen from "./src/screens/AppointmentScreen";
+import FirstRoute from "./src/screens/AppointmentScreen/subscreens/currentAppointment/FirstRoute";
+import SecondRoute from "./src/screens/AppointmentScreen/subscreens/futureAppointment/SecondRoute";
+import ThirdRoute from "./src/screens/AppointmentScreen/subscreens/previousAppointment/ThirdRoute";
 
 const AuthStack = createStackNavigator(
   {
@@ -30,6 +33,9 @@ const AppStack = createStackNavigator(
     Home: HomeScreen,
     ApprovalDashboard: ApprovalDashboardScreen,
     Appointment: AppointmentScreen,
+      FirstRoute: FirstRoute,
+      SecondRoute: SecondRoute,
+      ThirdRoute: ThirdRoute,
     Denial: DenialScreen,
     CustomDenial: CustomDenialScreen,
     Sensor: SensorScreen,
