@@ -10,11 +10,17 @@ class ApprovalDashboardScreen extends React.Component {
 
     state = {
         pendingUsers:[],
+        pendingUsersss:[],
         isLoading: true,
     };
 
     async getData() {
-        this.setState({pendingUsers: this.props.navigation.getParam("pendingUsers")});
+        await this.props.getPendingUsers().then(response => {
+            console.log('responnnnnnn=>', response);
+            this.setState({pendingUsersss: this.props.navigation.getParam("pendingUsers")});
+            this.setState({pendingUsers: response.pendingUser.data});
+            console.log('repepepepe', this.state.pendingUsersss);
+        })
     }
 
     componentDidMount() {
