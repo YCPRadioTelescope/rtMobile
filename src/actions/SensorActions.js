@@ -4,7 +4,9 @@ import config from '../../config';
 
 
 //const url = "http:127.0.0.1:3000";
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+const url = "http:3.218.80.78";
+
 export const LOGIN = "LOGIN";
 export const SENSOR_SUCCESS = "SENSOR_SUCCESS";
 export const SENSOR_FAILURE = "SENSOR_FAILURE";

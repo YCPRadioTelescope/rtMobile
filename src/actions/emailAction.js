@@ -1,7 +1,13 @@
 import axios from "axios";
+import config from "../../config";
 
 
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+
+//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+const url = "http:3.218.80.78";
+
+
+
 export const EMAIL = "EMAIL";
 export const EMAIL_SUCCESS = "EMAIL_SUCCESS";
 export const EMAIL_FAILURE = "EMAIL_FAILURE";
@@ -22,15 +28,17 @@ export const emailFailure = error => {
 
 export const email = (destination, subject, message) => {
   let reqBody = {
+    "UUID": config.UUID,
     "destination": destination ,
     "message": message,
     "subject": subject,
     };
+  console.log(reqBody);
   return dispatch => {
     return axios
       .post(`${url}/email`,reqBody)
       .then(response => {
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         return dispatch(emailSuccess(response.data));
       })
       .catch(error => {

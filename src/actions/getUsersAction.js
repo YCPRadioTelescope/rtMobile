@@ -1,8 +1,10 @@
 import axios from "axios";
 import config from "../../config.json";
 
-const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
+//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
 //const url = "http://127.0.0.1:3000";
+const url = "http:3.218.80.78";
+
 
 export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_FAILURE = "GET_USERS_FAILURE";
@@ -30,10 +32,9 @@ export const getUsers = () => {
     return dispatch => {
         axios.defaults.headers.common["Content-Type"] = "application/json";
         return axios
-            .post(`${url}/pendingUsers`,reqBody)
+            .post(`${url}/users`,reqBody)
             .then(response => {
-                console.log('inside axios returnnnnnnnnnn');
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 return dispatch(getUsersSuccess(response));
             })
             .catch(error => {
