@@ -52,6 +52,24 @@ class HomeScreen extends React.Component {
         console.log('sensor in hime', response);
           this.setState({sensorArray: this.props.sensor});
           this.setState({isLoading3: false});
+          //set asmuth
+          if(this.state.sensorArray[2].value != null){
+              let azimuth = this.props.navigation.getParam("azimuth", this.state.sensorArray[2].value);
+              this.setState({azimuth: azimuth});
+          }
+          else{
+              let azimuth = this.props.navigation.getParam("azimuth", 90);
+              this.setState({azimuth: azimuth});
+          }
+          //set elevation
+          if(this.state.sensorArray[3].value != null){
+              let elevation = this.props.navigation.getParam("elevation", this.state.sensorArray[3].value);
+              this.setState({elevation: elevation});
+          }
+          else{
+              let elevation = this.props.navigation.getParam("elevation", 90);
+              this.setState({elevation: elevation});
+          }
       })
   }
 
@@ -74,8 +92,8 @@ class HomeScreen extends React.Component {
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      let azimuth = this.props.navigation.getParam("azimuth", 45);
-      let elevation = this.props.navigation.getParam("elevation", 45);
+      let azimuth = this.props.navigation.getParam("azimuth", 90);
+      let elevation = this.props.navigation.getParam("elevation", 90);
       this.setState({azimuth: azimuth});
       this.setState({elevation: elevation});
       this.getData();
