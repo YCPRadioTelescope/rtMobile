@@ -10,6 +10,7 @@ import getAppointmentsReducer from "./src/reducers/getAppointmentsReducer";
 import getRecentAppointmentsReducer from "./src/reducers/getRecentAppointmentsReducer";
 import getFutureAppointmentsReducer from "./src/reducers/getFutureAppointmentsReducer";
 import getPendingUsersReducer from "./src/reducers/getFutureAppointmentsReducer";
+import setValueReducer from "./src/reducers/setValueReducer";
 
 const reducer = combineReducers({
   //user: AuthReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   appointment: getAppointmentsReducer,
   futureAppointment: getFutureAppointmentsReducer,
   recentAppointment: getRecentAppointmentsReducer,
+  setValue: setValueReducer,
 });
 
 export default reducer;

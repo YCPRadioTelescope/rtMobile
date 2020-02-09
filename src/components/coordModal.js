@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Modal, Text, TouchableHighlight, View, Alert, TextInput, KeyboardAvoidingView, Dimensions} from 'react-native';
 import TcpSocket from 'react-native-tcp-socket';
-
+import {setValue} from "../actions/setValueAction";
+import {bindActionCreators} from "redux";
+import connect from "react-redux/lib/connect/connect";
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
@@ -39,7 +41,9 @@ class CoordModal extends Component {
 
     // Close socket
     client.destroy();
-
+    //update fake db. azimuth and elevation need to be cast to floating point or ints or else Dpad will crash
+    this.props.setValue("Azimuth_Motor",parseFloat(this.state.azimuth));
+    this.props.setValue("Elevation_Motor",parseFloat(this.state.elevation));
 
     this.props.close();
     this.setState({azimuth: ''});
@@ -136,4 +140,28 @@ class CoordModal extends Component {
   }
 }
 
-export default CoordModal;
+const mapStateToProps = state => {
+    return {
+
+        /*errorResponse: email.errorResponse,
+        errorMessage: email.errorMessage,
+        errorResponse: approveUser.errorResponse,
+        errorMessage: approveUser.errorMessage,*/
+    };
+};
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            setValue,
+        },
+        dispatch
+    );
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CoordModal);
+
+

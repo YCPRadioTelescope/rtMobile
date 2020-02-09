@@ -3,7 +3,12 @@ import React from 'react';
 import AxisPad from 'react-native-axis-pad';
 import Slider from '@react-native-community/slider';
 import VerticalSlider from 'rn-vertical-slider';
+import {setValue} from "../../actions/setValueAction";
+
 import styles from './styles';
+import connect from "react-redux/lib/connect/connect";
+import {bindActionCreators} from "redux";
+import {setOverride} from "../../actions/OverrideActions";
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
@@ -86,6 +91,9 @@ class DpadScreen extends React.Component {
         this.setState({sliderVerticalPic: require("../../../assets/images/meduimgreenstatus.png")});
       }
     this.timer = setTimeout(() => this.move(direction), 10);
+
+    this.props.setValue("Azimuth_Motor",this.state.azimuth);
+    this.props.setValue("Elevation_Motor",this.state.elevation);
   };
 
   stopTimer = () => {
@@ -162,4 +170,26 @@ class DpadScreen extends React.Component {
   }
 }
 
-export default DpadScreen;
+const mapStateToProps = state => {
+    return {
+
+        /*errorResponse: email.errorResponse,
+        errorMessage: email.errorMessage,
+        errorResponse: approveUser.errorResponse,
+        errorMessage: approveUser.errorMessage,*/
+    };
+};
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            setValue,
+        },
+        dispatch
+    );
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(DpadScreen);
