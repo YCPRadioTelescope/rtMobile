@@ -175,11 +175,11 @@ class HomeScreen extends React.Component {
         let numYellow = 0;
         while(count < this.state.sensorArray.length){
             //if at least 1 sensor is red set status to Red
-            if(this.state.sensorArray[count].details === 0 && !this.state.sensorArray[count].override){
+            if(this.state.sensorArray[count].status === 0 && !this.state.sensorArray[count].override){
                 return require("../../../assets/images/redStatus.png");
             }
             //check if there are any yellows
-            else if(this.state.sensorArray[count].details === 1 && !this.state.sensorArray[count].override){
+            else if(this.state.sensorArray[count].status === 1 && !this.state.sensorArray[count].override){
                 numYellow ++;
             }
             count++;

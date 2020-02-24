@@ -39,14 +39,14 @@ class SensorScreen extends React.Component {
             buttonText: "Activate Override",
             //azimuth: this.props.navigation.getParam("azimuth", 45),
             sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
-            detail:  this.props.navigation.getParam('details', 3),
+            status:  this.props.navigation.getParam('status', 3),
             override: this.props.navigation.getParam('override',0),
             id: this.props.navigation.getParam('id',-1),
             sensor: this.props.navigation.getParam('sensor')
         }
 
 
-    getLightColor = (detail,override) =>{
+    getLightColor = (status,override) =>{
         /*
         This function sets the image of the sensor
         if override is 1 it returns orange
@@ -59,13 +59,13 @@ class SensorScreen extends React.Component {
         }
         else{
             this.state.buttonText = "Activate Override"
-            if(detail == 0){//0 = red
+            if(status == 0){//0 = red
                 return require("../../../assets/images/redStatus.png");
             }
-            else if (detail == 1){//1 = yellow
+            else if (status == 1){//1 = yellow
                 return require("../../../assets/images/mediumyellowstatus.png");
             }
-            else if (detail == 2){// 2 = green
+            else if (status == 2){// 2 = green
                 return require("../../../assets/images/meduimgreenstatus.png");
             }
             else{//anything else should be a grey light to show something is wrong
@@ -92,7 +92,7 @@ class SensorScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const details = navigation.getParam('details', 3)
+    const status = navigation.getParam('details', 3)
       //console.log("This sensor's id is: ",this.state.id);
       console.log("The state.sensor in sensor screen",this.state.sensor);
     return (
@@ -110,9 +110,9 @@ class SensorScreen extends React.Component {
             <View style={styles.container}>
                 <View style={styles.detailslistcontainer}>
                     <TouchableHighlight onPress={() => {}}>
-                        <Detail name = {this.state.sensorName} detail={this.state.detail}
+                        <Detail name = {this.state.sensorName} status={this.state.status}
                         style = {styles.statusLightStyle}
-                        image = {this.getLightColor(this.state.detail,this.state.override)}
+                        image = {this.getLightColor(this.state.status,this.state.override)}
                         />
                     </TouchableHighlight>
                 </View>
