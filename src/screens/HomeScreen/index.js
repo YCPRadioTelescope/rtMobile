@@ -15,7 +15,8 @@ import {getPendingUsers} from "../../actions/getPendingUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
-import CoordModal from "../../components/coordModal"
+import CoordModal from "../../components/coordModal";
+import PushNotification from "react-native-push-notification";
 
 class HomeScreen extends React.Component {
 
@@ -32,6 +33,7 @@ class HomeScreen extends React.Component {
     sensorArray:[],
     pendingUsers: [],
     modalVisible: false,
+    token: '',
   };
 
   async getData(){
@@ -75,7 +77,7 @@ class HomeScreen extends React.Component {
 
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
-    console.log('token', fcmToken);
+//    console.log('token', fcmToken);
     const hasPermission = await firebase.messaging().hasPermission();
     console.log('has permission', hasPermission);
 
@@ -89,6 +91,45 @@ class HomeScreen extends React.Component {
   componentDidMount() {
     if (Platform.OS === 'android') {
       this.getToken();
+
+      PushNotification.configure({
+        // (optional) Called when Token is generated (iOS and Android)
+        onRegister: function(token) {
+          console.log("TOKEN:", token);
+        },
+
+        // (required) Called when a remote or local notification is opened or received
+        onNotification: function(notification) {
+          console.log("NOTIFICATION:", notification);
+
+          // process the notification
+
+          // required on iOS only (see fetchCompletionHandler docs: https://github.com/react-native-community/react-native-push-notification-ios)
+          notification.finish(PushNotificationIOS.FetchResult.NoData);
+        },
+
+        // ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)
+        senderID: "40573680400",
+
+        // IOS ONLY (optional): default: all - Permissions to register.
+        permissions: {
+          alert: true,
+          badge: true,
+          sound: true
+        },
+
+        // Should the initial notification be popped automatically
+        // default: true
+        popInitialNotification: true,
+
+        /**
+         * (optional) default: true
+         * - Specified if permissions (ios) and token (android and ios) will requested or not,
+         * - if not, you must call PushNotificationsHandler.requestPermissions() later
+         */
+        requestPermissions: true
+      });
+
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
