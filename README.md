@@ -8,6 +8,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
+Install the latest version of Node.js https://nodejs.org/en/
+
+Install Chocolatey: https://chocolatey.org/install<br>
+Or brew if you are on a Mac: https://docs.brew.sh/Installation <br>
+Then Install Yarn: https://classic.yarnpkg.com/en/docs/install/#windows-stable
+
 Clone the project<br/>
 In the terminal navigate into the project folder<br/>
 run npm install<br/> 
