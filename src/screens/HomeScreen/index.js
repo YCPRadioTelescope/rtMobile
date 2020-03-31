@@ -15,6 +15,8 @@ import {getUsers} from "../../actions/getUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
+import {move} from "../../components/move";
+
 
 class HomeScreen extends React.Component {
 
@@ -126,6 +128,24 @@ class HomeScreen extends React.Component {
     );
   };
 
+  dump = () => {
+    Alert.alert(
+      'Wait',
+      'Are you sure you want to dump snow from the telescope?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes', onPress: move(90,90)
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
     getStatusLightColor = () =>{
         let count = 0;
         let numYellow = 0;
@@ -207,6 +227,11 @@ class HomeScreen extends React.Component {
               <TouchableHighlight onPress={this.stop} style={styles.button}>
                 <View>
                   <Text> Stop Telescope </Text>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.dump} style={styles.button}>
+                <View>
+                  <Text> Snow Dump </Text>
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard")}
