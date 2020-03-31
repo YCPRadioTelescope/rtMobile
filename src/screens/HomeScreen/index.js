@@ -11,10 +11,11 @@ import React from 'react';
 import styles from './styles';
 import { firebase } from '@react-native-firebase/messaging';
 import {getWeatherData} from "../../actions/WeatherActions";
-import {getUsers} from "../../actions/getUsersAction";
+import {getPendingUsers} from "../../actions/getPendingUsersAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
+import CoordModal from "../../components/coordModal"
 import {move} from "../../components/move";
 
 
@@ -31,25 +32,46 @@ class HomeScreen extends React.Component {
     temperature: '',
     users: 0,
     sensorArray:[],
-
+    pendingUsers: [],
+    modalVisible: false,
   };
 
   async getData(){
-    await this.props.getUsers().then(response => {
-      console.log('response ===', response)
-      console.log('users props -> ', this.props.users);
-      this.setState({users: response.user.data.length});
-      this.setState({isLoading2: false});
-    })
+    await this.props.getPendingUsers().then(response => {
+      console.log('pendinguser in hime', response);
+        this.setState({users: response.pendingUser.data.length || 0});
+        this.setState({pendingUsers: response.pendingUser.data});
+        this.setState({isLoading2: false});
+    });
     await this.props.getWeatherData().then(response => {
-      this.setState({windSpeed: this.props.weather[0].detail});
-      this.setState({windDirection: this.props.weather[1].detail});
-      this.setState({temperature: this.props.weather[2].detail});
-      this.setState({isLoading: false});
-    })
+      console.log('weather in hime', response);
+        this.setState({windSpeed: this.props.weather[0].detail});
+        this.setState({windDirection: this.props.weather[1].detail});
+        this.setState({temperature: this.props.weather[2].detail});
+        this.setState({isLoading: false});
+    });
       await this.props.getSensorData().then(response => {
-          this.setState({sensorArray: this.props.sensor})
+        console.log('sensor in hime', response);
+          this.setState({sensorArray: this.props.sensor});
           this.setState({isLoading3: false});
+          //set asmuth
+          if(this.state.sensorArray[2].value != null){
+              let azimuth = this.props.navigation.getParam("azimuth", this.state.sensorArray[2].value);
+              this.setState({azimuth: azimuth});
+          }
+          else{
+              let azimuth = this.props.navigation.getParam("azimuth", 90);
+              this.setState({azimuth: azimuth});
+          }
+          //set elevation
+          if(this.state.sensorArray[3].value != null){
+              let elevation = this.props.navigation.getParam("elevation", this.state.sensorArray[3].value);
+              this.setState({elevation: elevation});
+          }
+          else{
+              let elevation = this.props.navigation.getParam("elevation", 90);
+              this.setState({elevation: elevation});
+          }
       })
   }
 
@@ -67,23 +89,18 @@ class HomeScreen extends React.Component {
      unsubscribe();
   }
   componentDidMount() {
-      this.getData();
-
-      if (Platform.OS === 'android') {
+    if (Platform.OS === 'android') {
       this.getToken();
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      console.log('az in h0me', this.props.navigation.getParam("azimuth"));
-      let azimuth = this.props.navigation.getParam("azimuth", 45);
-      let elevation = this.props.navigation.getParam("elevation", 45);
+      let azimuth = this.props.navigation.getParam("azimuth", 90);
+      let elevation = this.props.navigation.getParam("elevation", 90);
       this.setState({azimuth: azimuth});
       this.setState({elevation: elevation});
       this.getData();
     });
-    /*this.focusListener = this.props.navigation.addListener("didBlur", () => {
-      this.setState({isLoading: true})
-    });*/
+    this.getData();
   }
 
   componentWillUnmount() {
@@ -91,22 +108,31 @@ class HomeScreen extends React.Component {
   }
 
   nav = ( ) => {
-    console.log('inNav');
-    console.log('az', this.state.azimuth);
     this.props.navigation.navigate("Dpad", {"azimuth": this.state.azimuth, "elevation": this.state.elevation});
   };
 
+  changeModal = () => {
+    this.setState({modalVisible: true});
+  }
+
+  snowDump = () => {
+    // send tcp message here
+  };
+
   dpad = () => {
+    //this.props.navigation.navigate("TempNav");
     Alert.alert(
       'Wait',
-      'Are you sure you want to move the telescope?',
+      'Would you Like to move the telescope manually or enter coordinates?',
       [
         {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
+          text: 'Coordinates',
+          onPress: this.changeModal,
         },
-        {text: 'Yes', onPress: this.nav},
+        {
+          text: 'Move',
+          onPress: this.nav
+        },
       ],
       {cancelable: false},
     );
@@ -151,11 +177,11 @@ class HomeScreen extends React.Component {
         let numYellow = 0;
         while(count < this.state.sensorArray.length){
             //if at least 1 sensor is red set status to Red
-            if(this.state.sensorArray[count].details == 0 && !this.state.sensorArray[count].override){
+            if(this.state.sensorArray[count].status === 0 && !this.state.sensorArray[count].override){
                 return require("../../../assets/images/redStatus.png");
             }
             //check if there are any yellows
-            else if(this.state.sensorArray[count].details == 1 && !this.state.sensorArray[count].override){
+            else if(this.state.sensorArray[count].status === 1 && !this.state.sensorArray[count].override){
                 numYellow ++;
             }
             count++;
@@ -172,7 +198,7 @@ class HomeScreen extends React.Component {
     }
 
   render() {
-    if (this.state.isLoading === true || this.state.isLoading2 === true || this.state.isLoading3 === true) {
+   /* if (this.state.isLoading === true || this.state.isLoading2 === true || this.state.isLoading3 === true) {
       //console.log("Loading data from database");
       return (
           <View style={styles.loading}>
@@ -182,14 +208,9 @@ class HomeScreen extends React.Component {
       )
     }
     if(this.state.isLoading === false && this.state.isLoading2 === false && this.state.isLoading3 === false){
-      //console.log('windddddd', this.state.windSpeed);
-      //console.log("Done loading: updateing weather variables then rendering page");
-      //this.updateState();
-      /*console.log('user length', this.state.users);
-      console.log('isloading', this.state.isLoading);
-      console.log('loading 2', this.state.isLoading2);*/
+    */
       //this holds the image for the status light. setting the image source to this.getStatusLightColor directly does not work
-        let statusLightColor = this.getStatusLightColor()
+        let statusLightColor = this.getStatusLightColor();
       return (
           <View style={styles.container}>
             <View style={styles.navBar}>
@@ -229,15 +250,15 @@ class HomeScreen extends React.Component {
                   <Text> Stop Telescope </Text>
                 </View>
               </TouchableHighlight>
-              <TouchableHighlight onPress={this.dump} style={styles.button}>
-                <View>
-                  <Text> Snow Dump </Text>
-                </View>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard")}
+              <TouchableHighlight onPress={() => this.props.navigation.navigate("ApprovalDashboard", {pendingUsers: this.state.pendingUsers})}
                                   style={styles.button}>
                 <View>
                   <Text> Approve Users </Text>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.dump} style={styles.button}>
+                <View>
+                  <Text> Snow Dump </Text>
                 </View>
               </TouchableHighlight>
               {this.state.users > 0 && (
@@ -258,20 +279,19 @@ class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-
+            <CoordModal visible={this.state.modalVisible} close={() => this.setState({modalVisible: false})}/>
           </View>
       );
     }
-  }
+  //}
 }
 const mapStateToProps = state => {
-  const { weather, users,sensor } = state;
-  //console.log("Getting weather = state in MapStateToProps",weather);
-  console.log("weather.weather is:",weather.weather.weather);
-  console.log('users bottom -> ', users);
+  const { weather, users, sensor, pendingUsers } = state;
+  /*console.log("weather.weather is:",weather.weather.weather);
+  console.log('users bottom -> ', users);*/
 
   return {
-    users: users,
+    pendingUsers: pendingUsers,
     weather: weather.weather.weather,
     sensor: sensor.sensor.sensor,
     errorResponse: weather.errorResponse,
@@ -283,7 +303,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
           getWeatherData,
-          getUsers,
+          getPendingUsers,
           getSensorData,
         },
         dispatch

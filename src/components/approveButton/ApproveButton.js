@@ -16,7 +16,7 @@ class ApproveButton extends Component {
 
 
   onPress = () => {
-      console.log("Bottom LEVEL ",this.props.buttonPushed);
+    console.log("Bottom LEVEL ",this.props.buttonPushed);
     var user = this.props.user;
     this.props.approveUser(user.id);
     var email = user.email_address;
@@ -25,21 +25,21 @@ class ApproveButton extends Component {
     var body = "Dear "+name+",  \nYour account for the YCAS radio telescope been approved. You may now sign in.";
     this.props.email(email, subject, body);
     this.props.navigation.navigate('ApprovalDashboard',{
-          buttonPushed:1,
+      buttonPushed:1,
     });
   };
 
 
- render() {
+  render() {
     return (
-        <View>
-            <TouchableHighlight onPress={this.onPress} >
-                <Image
-                    style={styles.button}
-                    source={require('../../../assets/images/checkmarkButton.png')}
-                />
-            </TouchableHighlight>
-        </View>
+      <View>
+        <TouchableHighlight onPress={this.onPress} >
+          <Image
+            style={styles.button}
+            source={require('../../../assets/images/checkmarkButton.png')}
+          />
+        </TouchableHighlight>
+      </View>
     )
   }
 }
@@ -58,25 +58,25 @@ const styles = StyleSheet.create({
 // Need the below code for responses when using a reducer
 
 const mapStateToProps = state => {
-    return {
+  return {
 
-        /*errorResponse: email.errorResponse,
-        errorMessage: email.errorMessage,
-        errorResponse: approveUser.errorResponse,
-        errorMessage: approveUser.errorMessage,*/
-    };
+    /*errorResponse: email.errorResponse,
+    errorMessage: email.errorMessage,
+    errorResponse: approveUser.errorResponse,
+    errorMessage: approveUser.errorMessage,*/
+  };
 };
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            email,
-            approveUser,
-        },
-        dispatch
-    );
+  bindActionCreators(
+    {
+      email,
+      approveUser,
+    },
+    dispatch
+  );
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ApproveButton);
