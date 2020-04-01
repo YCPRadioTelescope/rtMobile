@@ -18,26 +18,32 @@ class CoordModal extends Component {
   move = () => {
 
     let options = {
-      host: '10.127.8.140',
-      port: 8090
+      host: '34.197.102.80',
+      port: 25565,
+      reuseAddress: true,
     };
 
-    let client = TcpSocket.createConnection(options);
-
-    client.on('data', function(data) {
-      console.log('message was received', data);
+    let client = TcpSocket.createConnection(options, (address) => {
+      console.log(address);
+      console.log('Connection made!');
+      // Write on the socket
+      client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
     });
 
-    client.on('error', function(error) {
-      console.log(error);
+    client.on('data', (data) => {
+      console.log('Received: ', data);
+      client.destroy(); // kill client after server's response
     });
 
-    client.on('close', function(){
+    client.on('error', (error)=>{
+      console.log('Error: ', error);
+    });
+
+    client.on('close', ()=>{
       console.log('Connection closed!');
     });
 
-    // Write on the socket
-    client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
+
 
     // Close socket
     client.destroy();

@@ -165,7 +165,8 @@ class HomeScreen extends React.Component {
           style: 'cancel',
         },
         {
-          text: 'Yes', onPress: move(90,90)
+          text: 'Yes',
+          onPress: () => move(90,90),
         },
       ],
       {cancelable: true},
