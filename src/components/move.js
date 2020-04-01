@@ -1,6 +1,6 @@
 import TcpSocket from 'react-native-tcp-socket';
 
-  export const move = (elevation, azimuth) =>{
+  export const move = (keyword) =>{
 
 
   let options = {
@@ -11,8 +11,8 @@ import TcpSocket from 'react-native-tcp-socket';
 
   let client = TcpSocket.createConnection(options, (address) => {
     console.log(address);
-      console.log('Connection made!');
-      client.write('COORDINATE_MOVE ELEV:' + elevation + ' AZIM:' + azimuth + ' ID:todd');
+      console.log('Connection made! Sending ', keyword );
+      client.write(keyword);
   });
 
   //console.log('client:',client);
