@@ -32,7 +32,7 @@ class ScriptsModal extends Component {
     );
   };
 move(scriptName){
-  console.log('Build updated for sure!');
+  console.log('Hi Kate!');
     let options = {
       host: config.Host,
       port: config.Port,
@@ -87,29 +87,29 @@ move(scriptName){
               <View style={styles.buttons}>
                 <View style={styles.Col1}>
                   <TouchableHighlight style = {styles.buttonStyle}
-                  onPress={() => this.confirm("SCRIPT: STOW")}>
+                  onPress={() => this.confirm("SCRIPT: STOW\n")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Stow</Text>
                   </TouchableHighlight>
 
                   <TouchableHighlight style = {styles.buttonStyle}
-                    onPress={() => this.confirm("SCRIPT: DUMP")}>
+                    onPress={() => this.confirm("SCRIPT: DUMP\n")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Snow Dump</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_EV")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_EV\n")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Full Elevation</Text>
                   </TouchableHighlight>
                 </View>
                 <View style={styles.Col2}>
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_CLOCK")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_CLOCK\n")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Full 360 Clockwise</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_COUNTER")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_COUNTER\n")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Full 360 Counter Clockwise</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: CALIBRATE")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: CALIBRATE\n")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Calibration</Text>
                   </TouchableHighlight>
                 </View>
