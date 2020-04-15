@@ -122,6 +122,20 @@ class SensorScreen extends React.Component {
                     <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                 </View>
             </TouchableHighlight>
+            <TouchableHighlight onPress={() => {
+                this.props.navigation.navigate('History',
+                    {
+                        sensorname: this.state.sensorName,
+                        status: this.state.status,
+                        id: this.state.id,
+                        sensor: this.state.sensor
+                    }
+                )
+            }} style={styles.button}>
+                <View>
+                    <Text style={{color: 'white'}}> Sensor History </Text>
+                </View>
+            </TouchableHighlight>
         </ScrollView>
     );
   }
