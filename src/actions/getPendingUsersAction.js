@@ -24,7 +24,7 @@ export const getPendingUsersFailure = error => {
 
 export const getPendingUsers = () => {
 
-    console.log('getPendingUser action');
+   // console.log('getPendingUser action');
     let reqBody = {
         "UUID":config.UUID,
     };

@@ -32,7 +32,7 @@ class ScriptsModal extends Component {
     );
   };
 move(scriptName){
-  console.log('Hi Kate!');
+  console.log('Selection made');
     let options = {
       host: config.Host,
       port: config.Port,
@@ -43,11 +43,11 @@ move(scriptName){
       console.log(address);
       console.log('Connection made! Sending ', scriptName);
       // Write on the socket
-      client.write(scriptName);
+      client.write(scriptName+'\n');
     });
 
     client.on('data', (data) => {
-      console.log('Received: ', data);
+      console.log('Received: ', data.toString());
       client.destroy(); // kill client after server's response
     });
 
@@ -60,7 +60,6 @@ move(scriptName){
     });
 
     // Close socket
-    client.destroy();
     this.props.close();
   };
 
