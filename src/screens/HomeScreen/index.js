@@ -16,7 +16,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
 import CoordModal from "../../components/coordModal"
-import {move} from "../../components/move";
+import ScriptsModal from '../../components/scriptsModal/scriptsModal';
 
 
 class HomeScreen extends React.Component {
@@ -34,6 +34,7 @@ class HomeScreen extends React.Component {
     sensorArray:[],
     pendingUsers: [],
     modalVisible: false,
+    modal2Visible: false,
   };
 
   async getData(){
@@ -115,6 +116,11 @@ class HomeScreen extends React.Component {
     this.setState({modalVisible: true});
   }
 
+  toggleScriptsModal = () => {
+    this.setState({modal2Visible: true});
+  }
+
+
   snowDump = () => {
     // send tcp message here
   };
@@ -154,10 +160,10 @@ class HomeScreen extends React.Component {
     );
   };
 
-  dump = () => {
+  script = () => {
     Alert.alert(
       'Wait',
-      'Are you sure you want to dump snow from the telescope?',
+      'Are you sure you want to run a script on the telescope?',
       [
         {
           text: 'No',
@@ -166,10 +172,10 @@ class HomeScreen extends React.Component {
         },
         {
           text: 'Yes',
-          onPress: () => move(90,90),
+          onPress: this.toggleScriptsModal,
         },
       ],
-      {cancelable: true},
+      {cancelable: false},
     );
   };
 
@@ -257,9 +263,9 @@ class HomeScreen extends React.Component {
                   <Text> Approve Users </Text>
                 </View>
               </TouchableHighlight>
-              <TouchableHighlight onPress={this.dump} style={styles.button}>
+              <TouchableHighlight onPress={this.script} style={styles.button}>
                 <View>
-                  <Text> Snow Dump </Text>
+                  <Text> Run script </Text>
                 </View>
               </TouchableHighlight>
               {this.state.users > 0 && (
@@ -281,6 +287,8 @@ class HomeScreen extends React.Component {
               </TouchableOpacity>
             </View>
             <CoordModal visible={this.state.modalVisible} close={() => this.setState({modalVisible: false})}/>
+
+            <ScriptsModal visible={this.state.modal2Visible} close={() => this.setState({modal2Visible: false})}/>
           </View>
       );
     }
