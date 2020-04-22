@@ -37,6 +37,8 @@ target 'rtMobile' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'nodejs-mobile-react-native', :path => '../node_modules/nodejs-mobile-react-native'
+
   target 'rtMobileTests' do
     inherit! :search_paths
     # Pods for testing

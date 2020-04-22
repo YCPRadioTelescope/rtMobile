@@ -4,6 +4,7 @@ import TcpSocket from 'react-native-tcp-socket';
 import {setValue} from "../actions/setValueAction";
 import {bindActionCreators} from "redux";
 import connect from "react-redux/lib/connect/connect";
+import config from '../../config';
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
@@ -18,8 +19,8 @@ class CoordModal extends Component {
   move = () => {
 
     let options = {
-      host: '34.197.102.80',
-      port: 25565,
+      host: config.Host,
+      port: config.Port,
       reuseAddress: true,
     };
 
