@@ -7,7 +7,8 @@ import {bindActionCreators} from "redux";
 import {email} from "../../actions/emailAction";
 import {approveUser} from "../../actions/approveUserAction";
 import connect from "react-redux/lib/connect/connect";
-
+import { LineChart,XAxis, YAxis, Grid } from 'react-native-svg-charts'
+import * as shape from 'd3-shape'
 
 const Detail = ({
                     key,
@@ -42,7 +43,11 @@ class SensorScreen extends React.Component {
             status:  this.props.navigation.getParam('status', 3),
             override: this.props.navigation.getParam('override',0),
             id: this.props.navigation.getParam('id',-1),
-            sensor: this.props.navigation.getParam('sensor')
+            sensor: this.props.navigation.getParam('sensor'),
+            data : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0],
+            verticalContentInset : {  top: 10, bottom: 10 },
+            axesSvg : { fontSize: 10, fill: 'grey' },
+            xAxisHeight : 30,
         }
 
 
@@ -90,8 +95,18 @@ class SensorScreen extends React.Component {
 
     };
 
+    updateChart = (option) => {
+        /*
+        Have one big array that serves as a base. Then chop up based on option provided
+         */
+    };
+
   render() {
     const { navigation } = this.props;
+
+
+
+
     const status = navigation.getParam('details', 3)
       //console.log("This sensor's id is: ",this.state.id);
       console.log("The state.sensor in sensor screen",this.state.sensor);
@@ -122,24 +137,68 @@ class SensorScreen extends React.Component {
                     <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                 </View>
             </TouchableHighlight>
-            <TouchableHighlight onPress={() => {
-                this.props.navigation.navigate('History',
-                    {
-                        sensorname: this.state.sensorName,
-                        status: this.state.status,
-                        id: this.state.id,
-                        sensor: this.state.sensor
-                    }
-                )
-            }} style={styles.button}>
-                <View>
-                    <Text style={{color: 'white'}}> Sensor History </Text>
+
+            <View style={styles.chart}>
+                <YAxis
+                    data={this.state.data}
+                    style={{ marginBottom: this.state.xAxisHeight }}
+                    contentInset={this.state.verticalContentInset}
+                    svg={this.state.axesSvg}
+                />
+                <View style={{ flex: 1, marginLeft: 10 }}>
+                    <LineChart
+                        style={{ flex: 1 }}
+                        data={this.state.data}
+                        contentInset={this.state.verticalContentInset}
+                        svg={{ stroke: 'rgb(134, 65, 244)' }}
+                    >
+                        <Grid/>
+                    </LineChart>
+                    <XAxis
+                        style={{ marginHorizontal: -10, height: this.state.xAxisHeight }}
+                        data={this.state.data}
+                        formatLabel={(value, index) => index}
+                        contentInset={{ left: 10, right: 10 }}
+                        svg={this.state.axesSvg}
+                    />
                 </View>
-            </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+                <TouchableHighlight onPress={this.updateChart(0)} style={styles.histbutton}>
+                    <View>
+                        <Text style={{color: 'white'}}> 1 day </Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={this.updateChart(1)} style={styles.histbutton}>
+                    <View>
+                        <Text style={{color: 'white'}}> 1 Week </Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={this.updateChart(2)} style={styles.histbutton}>
+                    <View>
+                        <Text style={{color: 'white'}}> 1 Month </Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={this.updateChart(3)} style={styles.histbutton}>
+                    <View>
+                        <Text style={{color: 'white'}}> 1 Year </Text>
+                    </View>
+                </TouchableHighlight>
+            </View>
+
+
         </ScrollView>
     );
   }
 }
+
+// Layout of an x-axis together with a y-axis is a problem that stems from flexbox.
+// All react-native-svg-charts components support full flexbox and therefore all
+// layout problems should be approached with the mindset "how would I layout regular Views with flex in this way".
+// In order for us to align the axes correctly we must know the height of the x-axis or the width of the x-axis
+// and then displace the other axis with just as many pixels. Simple but manual.
+//example found at: https://github.com/JesperLekland/react-native-svg-charts-examples/blob/master/storybook/stories/both-axes.js
+
 
 const mapStateToProps = state => {
     return {

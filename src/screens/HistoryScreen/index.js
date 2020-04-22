@@ -40,11 +40,11 @@ class HistoryScreen extends React.Component {
             //this is the array that holds information the the sensor components
             isLoading: false,
             buttonText: "Activate Override",
-            sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
-            status:  this.props.navigation.getParam('status', 3),
-            override: this.props.navigation.getParam('override',0),
-            id: this.props.navigation.getParam('id',-1),
-            sensor: this.props.navigation.getParam('sensor')
+            // sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
+            // status:  this.props.navigation.getParam('status', 3),
+            // override: this.props.navigation.getParam('override',0),
+            // id: this.props.navigation.getParam('id',-1),
+            // sensor: this.props.navigation.getParam('sensor')
         }
     }
 
