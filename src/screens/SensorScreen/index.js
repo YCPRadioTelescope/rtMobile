@@ -99,6 +99,7 @@ class SensorScreen extends React.Component {
         /*
         Have one big array that serves as a base. Then chop up based on option provided
          */
+        alert("Button Number "+option+" Pressed!")
     };
 
   render() {
@@ -164,22 +165,22 @@ class SensorScreen extends React.Component {
                 </View>
             </View>
             <View style={{flexDirection: 'row'}}>
-                <TouchableHighlight onPress={this.updateChart(0)} style={styles.histbutton}>
+                <TouchableHighlight onPress={() =>this.updateChart(0)} style={styles.histbutton}>
                     <View>
                         <Text style={{color: 'white'}}> 1 day </Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.updateChart(1)} style={styles.histbutton}>
+                <TouchableHighlight onPress={() =>this.updateChart(1)} style={styles.histbutton}>
                     <View>
                         <Text style={{color: 'white'}}> 1 Week </Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.updateChart(2)} style={styles.histbutton}>
+                <TouchableHighlight onPress={() =>this.updateChart(2)} style={styles.histbutton}>
                     <View>
                         <Text style={{color: 'white'}}> 1 Month </Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.updateChart(3)} style={styles.histbutton}>
+                <TouchableHighlight onPress={() =>this.updateChart(3)} style={styles.histbutton}>
                     <View>
                         <Text style={{color: 'white'}}> 1 Year </Text>
                     </View>
