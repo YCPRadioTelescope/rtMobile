@@ -17,6 +17,8 @@ import {connect} from "react-redux";
 import {getSensorData} from "../../actions/SensorActions";
 import CoordModal from "../../components/coordModal"
 import ScriptsModal from '../../components/scriptsModal/scriptsModal';
+import config from '../../../config';
+import TcpSocket from 'react-native-tcp-socket';
 
 
 class HomeScreen extends React.Component {
@@ -39,20 +41,20 @@ class HomeScreen extends React.Component {
 
   async getData(){
     await this.props.getPendingUsers().then(response => {
-      console.log('pendinguser in hime', response);
+      //console.log('pendinguser in home', response);
         this.setState({users: response.pendingUser.data.length || 0});
         this.setState({pendingUsers: response.pendingUser.data});
         this.setState({isLoading2: false});
     });
     await this.props.getWeatherData().then(response => {
-      console.log('weather in hime', response);
+      //console.log('weather in home', response);
         this.setState({windSpeed: this.props.weather[0].detail});
         this.setState({windDirection: this.props.weather[1].detail});
         this.setState({temperature: this.props.weather[2].detail});
         this.setState({isLoading: false});
     });
       await this.props.getSensorData().then(response => {
-        console.log('sensor in hime', response);
+        //console.log('sensor in home', response);
           this.setState({sensorArray: this.props.sensor});
           this.setState({isLoading3: false});
           //set asmuth
@@ -78,12 +80,12 @@ class HomeScreen extends React.Component {
 
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
-    console.log('token', fcmToken);
+    //console.log('token', fcmToken);
     const hasPermission = await firebase.messaging().hasPermission();
-    console.log('has permission', hasPermission);
+    //console.log('has permission', hasPermission);
 
     const unsubscribe = firebase.messaging().onMessage(async (remoteMessage) => {
-       console.log('FCM Message Data:', remoteMessage.data);
+      // console.log('FCM Message Data:', remoteMessage.data);
     });
 
 // Unsubscribe from further message events
@@ -121,8 +123,36 @@ class HomeScreen extends React.Component {
   }
 
 
-  snowDump = () => {
-    // send tcp message here
+  stop(){
+    //console.log('Selection made');
+    let options = {
+      host: config.Host,
+      port: config.Port,
+      reuseAddress: true,
+    };
+
+    let client = TcpSocket.createConnection(options, (address) => {
+      //console.log(address);
+      //console.log('Connection made! Sending ', 'SCRIPT: STOP'");
+      // Write on the socket
+      client.write('SCRIPT: STOP \n');
+    });
+
+    client.on('data', (data) => {
+      //console.log('Received: ', data.toString());
+      client.destroy(); // kill client after server's response
+    });
+
+    client.on('error', (error)=>{
+      console.log('Error: ', error);
+    });
+
+    client.on('close', ()=>{
+      //console.log('Connection closed!');
+    });
+
+    // Close socket
+    this.props.close();
   };
 
   dpad = () => {
@@ -154,7 +184,7 @@ class HomeScreen extends React.Component {
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        {text: 'Yes', onPress: () => console.log('yes Pressed')},
+        {text: 'Yes', onPress: () => this.stop()},
       ],
       {cancelable: false},
     );

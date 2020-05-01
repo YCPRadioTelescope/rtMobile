@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 };
 
 const getRecentAppointmentsReducer = (state = INITIAL_STATE, action) => {
-    console.log("ACTION appointments", action);
+   // console.log("ACTION appointments", action);
     switch (action.type) {
         // Take all returned user info and put it in store
         case GET_RECENT_APPOINTMENTS_SUCCESS:

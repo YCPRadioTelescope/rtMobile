@@ -25,14 +25,14 @@ class CoordModal extends Component {
     };
 
     let client = TcpSocket.createConnection(options, (address) => {
-      console.log(address);
-      console.log('Connection made!');
+      //console.log(address);
+     // console.log('Connection made!');
       // Write on the socket
       client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
     });
 
     client.on('data', (data) => {
-      console.log('Received: ', data);
+      //console.log('Received: ', data);
       client.destroy(); // kill client after server's response
     });
 
@@ -41,7 +41,7 @@ class CoordModal extends Component {
     });
 
     client.on('close', ()=>{
-      console.log('Connection closed!');
+      //console.log('Connection closed!');
     });
 
 

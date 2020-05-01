@@ -33,7 +33,7 @@ export const getSensorData = ( ) => {
         return axios
             .post(`${url}/sensorStatus`, reqBody)
             .then(response => {
-                console.log(JSON.stringify('sensor response in action',response));
+                //console.log(JSON.stringify('sensor response in action',response));
                 return dispatch(sensorSuccess(response.data));
             })
             .catch(error => {
