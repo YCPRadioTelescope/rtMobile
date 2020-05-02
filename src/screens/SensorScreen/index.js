@@ -44,7 +44,14 @@ class SensorScreen extends React.Component {
             override: this.props.navigation.getParam('override',0),
             id: this.props.navigation.getParam('id',-1),
             sensor: this.props.navigation.getParam('sensor'),
-            data : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0],
+            initdata : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
+                50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
+                50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35
+            ],
+            data : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
+                50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
+                50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35
+            ],
             verticalContentInset : {  top: 10, bottom: 10 },
             axesSvg : { fontSize: 10, fill: 'grey' },
             xAxisHeight : 30,
@@ -87,7 +94,7 @@ class SensorScreen extends React.Component {
             this.props.setOverride(this.state.sensor.name,0);
         }
         else{
-            console.log("Turning oon override at sensor ",this.state.id);
+            console.log("Turning on override at sensor ",this.state.id);
             this.setState({buttonText: "Remove Override"});
             this.setState({override: 1})
             this.props.setOverride(this.state.sensor.name,1);
@@ -99,7 +106,35 @@ class SensorScreen extends React.Component {
         /*
         Have one big array that serves as a base. Then chop up based on option provided
          */
-        alert("Button Number "+option+" Pressed!")
+        if(option == 0){//1 day
+            //alert("Button Number 0 Pressed!")
+            this.setState({
+                data: this.state.initdata.slice(0,24)
+            });
+        }
+        else if(option == 1){//1 week
+            console.log("option number 1 pressed")
+            this.setState({
+                data: this.state.initdata.slice(0,31)
+            });
+        }
+        else if(option == 2){//1 month
+            console.log("option number 2 pressed")
+            this.setState({
+                data: this.state.initdata.slice(0,31)
+            });
+        }
+        else if (option == 3){// 6 months
+            console.log("option number 3 pressed")
+            this.setState({
+                data: this.state.initdata
+            });
+        }
+        else{
+            alert("Error, Invalid option");
+        }
+
+        //alert("Button Number "+option+" Pressed!")
     };
 
   render() {
@@ -182,7 +217,7 @@ class SensorScreen extends React.Component {
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() =>this.updateChart(3)} style={styles.histbutton}>
                     <View>
-                        <Text style={{color: 'white'}}> 1 Year </Text>
+                        <Text style={{color: 'white'}}> 3 Months </Text>
                     </View>
                 </TouchableHighlight>
             </View>
