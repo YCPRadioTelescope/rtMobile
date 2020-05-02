@@ -27,14 +27,14 @@ class CustomDenialScreen extends React.Component {
         var body = "Dear "+name+",  \nYour account for the YCAS radio telescope has"
             +" been denied for the following reason: " + reason +". If you "
             +"think this was in error, please email important people at an important address.";
-        console.log("reason; ",reason);
+        //console.log("reason; ",reason);
         this.props.email(email, subject, body);
         this.props.denyUser(user.id);
         this.props.navigation.navigate('ApprovalDashboard');
     }
 
   render() {
-        console.log("Parent:",this.props.navigation.getParam('buttonPushed'));
+        //console.log("Parent:",this.props.navigation.getParam('buttonPushed'));
       if(this.state.isLoading){
         return(
           <View style={styles.loading}>

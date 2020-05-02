@@ -16,10 +16,10 @@ class ApprovalDashboardScreen extends React.Component {
 
     async getData() {
         await this.props.getPendingUsers().then(response => {
-            console.log('responnnnnnn=>', response);
+            //console.log('responnnnnnn=>', response);
             this.setState({pendingUsersss: this.props.navigation.getParam("pendingUsers")});
             this.setState({pendingUsers: response.pendingUser.data});
-            console.log('repepepepe', this.state.pendingUsersss);
+           // console.log('repepepepe', this.state.pendingUsersss);
         })
     }
 
@@ -28,7 +28,7 @@ class ApprovalDashboardScreen extends React.Component {
             this.getData();
         });
         this.getData();
-        console.log('PPPPPendingusers', this.state.pendingUsers);
+       // console.log('PPPPPendingusers', this.state.pendingUsers);
     }
 
     componentDidUpdate() {
@@ -47,7 +47,7 @@ class ApprovalDashboardScreen extends React.Component {
     }
 
     render() {
-        console.log('PPPPPendingusers', this.state.pendingUsers);
+        //console.log('PPPPPendingusers', this.state.pendingUsers);
         return (
           <View style={styles.container}>
               <View style={styles.navBar}>

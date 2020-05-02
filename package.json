@@ -16,7 +16,6 @@
     "@react-native-firebase/messaging": "^6.0.3",
     "axios": "^0.19.2",
     "jetifier": "^1.6.5",
-    "nodejs-mobile-react-native": "^0.5.0",
     "react": "16.9.0",
     "react-native": "^0.62.2",
     "react-native-axis-pad": "^0.9.4",

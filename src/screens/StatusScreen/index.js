@@ -115,7 +115,7 @@ class StatusScreen extends React.Component {
 
     render() {
         if (this.state.isLoading) {
-            console.log("isLoading is ",this.state.isLoading);
+            //console.log("isLoading is ",this.state.isLoading);
             return (
                 <View style={styles.loading}>
                     <ActivityIndicator/>
@@ -125,7 +125,7 @@ class StatusScreen extends React.Component {
         } else {
             //console.log("isLoading is ",this.state.isLoading);
             let statusLightColor = this.getStatusLightColor()
-            console.log("sensor props in status screen", this.props.sensor);
+            //console.log("sensor props in status screen", this.props.sensor);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -185,7 +185,7 @@ adb reverse tcp:3000 tcp:3000
  */
 const mapStateToProps = state => {
     const { sensor } = state;
-    console.log("Getting sensor = state in MapStateToProps",sensor);
+    //console.log("Getting sensor = state in MapStateToProps",sensor);
     return {
     sensor: sensor.sensor.sensor,
     errorResponse: sensor.errorResponse,

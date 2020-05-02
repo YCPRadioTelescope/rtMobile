@@ -26,12 +26,12 @@ class FirstRoute extends React.Component {
 
 
        await this.props.getUsers().then(response => {
-           console.log('user response: ', response);
+           //console.log('user response: ', response);
            this.setState({users: response.user.data});
            this.setState({isLoading2: false});
        });
         await this.props.getAppointment().then(response => {
-            console.log('appt. response: ', response);
+            //console.log('appt. response: ', response);
             let appointment = response.appointment;
             // parse real date and time from starting timestamp
             let start_Time = this.parseTime(appointment.data[2].start_time);
@@ -74,7 +74,7 @@ class FirstRoute extends React.Component {
         timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
         //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
         timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
-        console.log(timeValue);
+        //console.log(timeValue);
         return timeValue;
     };
 
@@ -89,7 +89,7 @@ class FirstRoute extends React.Component {
     };
 
     parseName= (userID)=>{
-        console.log(this.props.user);
+        //console.log(this.props.user);
         for(let i=0; i< this.props.user.length; i++){
             if(this.props.user[i].id === userID){
                 return this.props.user[i].first_name+' '+this.props.user[i].last_name;
