@@ -60,7 +60,7 @@ class WeatherScreen extends React.Component {
     };
 
     swapstatuscolor = () => {
-        console.log('Yellow Pressed');
+        //console.log('Yellow Pressed');
         this.setState({statusLightStyle: {
                 width: 50,
                 height: 50,
@@ -128,7 +128,7 @@ adb reverse tcp:3000 tcp:3000
  */
 const mapStateToProps = state => {
     const { weather } = state;
-    console.log("Getting wether = state in MapStateToProps",weather);
+    //console.log("Getting weather = state in MapStateToProps",weather);
     return {
 
         weather: weather.weather.weather,

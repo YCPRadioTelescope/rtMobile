@@ -22,12 +22,12 @@ class ScrollAppointments extends Component {
   async getData(){
 
     await this.props.getUsers().then(response => {
-      console.log('user response: ', response);
+      //console.log('user response: ', response);
       this.setState({users: response});
       this.setState({isLoading2: false});
     });
     await this.props.getAppointment().then(response => {
-      console.log('appt. response: ', response);
+     // console.log('appt. response: ', response);
       let appointments = response.appointment.data;
       let startTimeArray =[];
       let startDateArray =[];
@@ -37,7 +37,7 @@ class ScrollAppointments extends Component {
 
       if(appointments != null){
         for(let i = 0; i<appointments.length; i++){
-          console.log(appointments[i]);
+         // console.log(appointments[i]);
           // parse real date and time from starting timestamp
           let start_Time = this.parseTime(appointments[i].start_time);
           startTimeArray.push(start_Time);
@@ -48,8 +48,8 @@ class ScrollAppointments extends Component {
           endTimeArray.push(end_Time);
           let end_Date = this.parseDate(appointments[i].end_time);
           endDateArray.push(end_Date);
-          console.log(end_Date);
-          console.log(endDateArray);
+          //console.log(end_Date);
+          //console.log(endDateArray);
 
           // set user's name
           let userName = this.parseName(appointments[i].user_id);
@@ -84,7 +84,7 @@ class ScrollAppointments extends Component {
     timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
     //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
     timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
-    console.log(timeValue);
+    //console.log(timeValue);
     return timeValue;
   }
 

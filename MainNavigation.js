@@ -8,7 +8,6 @@ import DenialScreen from './src/screens/DenialScreen';
 import CustomDenialScreen from './src/screens/CustomDenialScreen';
 import SensorScreen from './src/screens/SensorScreen';
 import StatusScreen from './src/screens/StatusScreen';
-import TempNavScreen from './src/screens/TempNavScreen';
 import DpadScreen from './src/screens/DpadScreen';
 import OverrideScreen from "./src/screens/OverrideScreen";
 import WeatherScreen from "./src/screens/WeatherScreen";
@@ -29,7 +28,6 @@ const AuthStack = createStackNavigator(
 
 const AppStack = createStackNavigator(
   {
-    TempNav: TempNavScreen,
     Home: HomeScreen,
     ApprovalDashboard: ApprovalDashboardScreen,
     Appointment: AppointmentScreen,

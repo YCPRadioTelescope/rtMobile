@@ -32,7 +32,7 @@ class ScriptsModal extends Component {
     );
   };
 move(scriptName){
-  console.log('Selection made');
+  //console.log('Selection made');
     let options = {
       host: config.Host,
       port: config.Port,
@@ -40,14 +40,14 @@ move(scriptName){
     };
 
     let client = TcpSocket.createConnection(options, (address) => {
-      console.log(address);
-      console.log('Connection made! Sending ', scriptName);
+      //console.log(address);
+      //console.log('Connection made! Sending ', scriptName);
       // Write on the socket
       client.write(scriptName+'\n');
     });
 
     client.on('data', (data) => {
-      console.log('Received: ', data.toString());
+      //console.log('Received: ', data.toString());
       client.destroy(); // kill client after server's response
     });
 
@@ -56,7 +56,7 @@ move(scriptName){
     });
 
     client.on('close', ()=>{
-      console.log('Connection closed!');
+      //console.log('Connection closed!');
     });
 
     // Close socket
@@ -86,29 +86,29 @@ move(scriptName){
               <View style={styles.buttons}>
                 <View style={styles.Col1}>
                   <TouchableHighlight style = {styles.buttonStyle}
-                  onPress={() => this.confirm("SCRIPT: STOW\n")}>
+                  onPress={() => this.confirm("SCRIPT: STOW")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Stow</Text>
                   </TouchableHighlight>
 
                   <TouchableHighlight style = {styles.buttonStyle}
-                    onPress={() => this.confirm("SCRIPT: DUMP\n")}>
+                    onPress={() => this.confirm("SCRIPT: DUMP")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Snow Dump</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_EV\n")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_EV")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Full Elevation</Text>
                   </TouchableHighlight>
                 </View>
                 <View style={styles.Col2}>
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_CLOCK\n")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_CLOCK")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Full 360 Clockwise</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_COUNTER\n")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: FULL_COUNTER")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Full 360 Counter Clockwise</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: CALIBRATE\n")}>
+                  <TouchableHighlight style = {styles.buttonStyle} onPress={() => this.confirm("SCRIPT: CALIBRATE")}>
                     <Text style={{   fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>Calibration</Text>
                   </TouchableHighlight>
                 </View>
