@@ -9,6 +9,8 @@ import {approveUser} from "../../actions/approveUserAction";
 import connect from "react-redux/lib/connect/connect";
 import { LineChart,XAxis, YAxis, Grid } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
+import config from "../../../config";
+import TcpSocket from "react-native-tcp-socket";
 
 const Detail = ({
                     key,
@@ -48,9 +50,7 @@ class SensorScreen extends React.Component {
             50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
             50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35
         ],
-        data : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
-            50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35,
-            50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35,58,55,55,50,40,35
+        data : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35
         ],
         verticalContentInset : {  top: 10, bottom: 10 },
         axesSvg : { fontSize: 10, fill: 'grey' },
@@ -87,19 +87,68 @@ class SensorScreen extends React.Component {
     };
 
     updateOverride = () =>{
+
         if(this.state.override){
-            console.log("Turning off override at sensor ",this.state.id);
-            this.setState({buttonText: "Activate Override"});
-            this.setState({override: 0})
-            this.props.setOverride(this.state.sensor.name,0);
+            let scriptName = "SET_OVERRIDE: "+this.state.sensorName+" OVR";
+            //console.log("Sending to middleman:  ",scriptName);
+            //only update override if it could be sent to control room
+            if(this.sendOverride(scriptName)){
+                this.setState({buttonText: "Activate Override"});
+                this.setState({override: 0})
+                this.props.setOverride(this.state.sensor.name,0);
+            }
+            else{
+                alert("Error: override could not be changed");
+            }
+
         }
         else{
-            console.log("Turning on override at sensor ",this.state.id);
-            this.setState({buttonText: "Remove Override"});
-            this.setState({override: 1})
-            this.props.setOverride(this.state.sensor.name,1);
+            let scriptName = "SET_OVERRIDE: "+this.state.sensorName;
+            //console.log("Sending to middleman:  ",scriptName);
+            if(this.sendOverride(scriptName)){
+                this.setState({buttonText: "Remove Override"});
+                this.setState({override: 1})
+                this.props.setOverride(this.state.sensor.name,1);
+            }
+            else{
+                alert("Error: override could not be changed");
+            }
+
         }
 
+    };
+
+    sendOverride(scriptName){
+        //console.log('Selection made');
+        let options = {
+            host: config.Host,
+            port: config.Port,
+            reuseAddress: true,
+        };
+
+        let client = TcpSocket.createConnection(options, (address) => {
+            //console.log(address);
+            //console.log('Connection made! Sending ', scriptName);
+            // Write on the socket
+            client.write(scriptName+'\n');
+        });
+
+        client.on('data', (data) => {
+            //console.log('Received: ', data.toString());
+            client.destroy(); // kill client after server's response
+        });
+
+        client.on('error', (error)=>{
+            //console.log('Error: ', error);
+            return false;
+        });
+
+        client.on('close', ()=>{
+            //console.log('Connection closed!');
+        });
+
+        // Close socket
+        return true;
     };
 
     updateChart = (option) => {
@@ -113,19 +162,19 @@ class SensorScreen extends React.Component {
             });
         }
         else if(option == 1){//1 week
-            console.log("option number 1 pressed")
+            //console.log("option number 1 pressed")
             this.setState({
                 data: this.state.initdata.slice(0,31)
             });
         }
         else if(option == 2){//1 month
-            console.log("option number 2 pressed")
+            //console.log("option number 2 pressed")
             this.setState({
                 data: this.state.initdata.slice(0,31)
             });
         }
         else if (option == 3){// 6 months
-            console.log("option number 3 pressed")
+            //console.log("option number 3 pressed")
             this.setState({
                 data: this.state.initdata
             });
@@ -133,19 +182,13 @@ class SensorScreen extends React.Component {
         else{
             alert("Error, Invalid option");
         }
-
         //alert("Button Number "+option+" Pressed!")
     };
 
     render() {
         const { navigation } = this.props;
-
-
-
-
         const status = navigation.getParam('details', 3)
-        //console.log("This sensor's id is: ",this.state.id);
-        console.log("The state.sensor in sensor screen",this.state.sensor);
+        //console.log("The state.sensor in sensor screen",this.state.sensor);
         return (
             <ScrollView>
                 <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -155,7 +198,6 @@ class SensorScreen extends React.Component {
                 </TouchableHighlight>
                 <View style={{marginTop: '10%', alignItems: 'center',}}>
                     <Text style = {styles.header}> {this.state.sensorName}</Text>
-
                 </View>
                 <Divider style={styles.sectionDivider}/>
                 <View style={styles.container}>
@@ -173,7 +215,6 @@ class SensorScreen extends React.Component {
                         <Text style={{color: 'white'}}> {this.state.buttonText} </Text>
                     </View>
                 </TouchableHighlight>
-
                 <View style={styles.chart}>
                     <YAxis
                         data={this.state.data}
@@ -221,8 +262,6 @@ class SensorScreen extends React.Component {
                         </View>
                     </TouchableHighlight>
                 </View>
-
-
             </ScrollView>
         );
     }
@@ -238,7 +277,6 @@ class SensorScreen extends React.Component {
 
 const mapStateToProps = state => {
     return {
-
         /*errorResponse: email.errorResponse,
         errorMessage: email.errorMessage,
         errorResponse: approveUser.errorResponse,
