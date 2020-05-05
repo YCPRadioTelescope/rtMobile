@@ -53,9 +53,19 @@ class SensorScreen extends React.Component {
         data : [50, 10, 40, 95, 20, 0, 85, 91, 35, 53, 6, 24, 50, 10, 0,70,65,62,58,55,55,50,40,35
         ],
         verticalContentInset : {  top: 10, bottom: 10 },
+        xContentInset : 0,
         axesSvg : { fontSize: 10, fill: 'grey' },
         xAxisHeight : 30,
         buttonStyles : [styles.lighthistbutton,styles.greyhistbutton,styles.greyhistbutton,styles.greyhistbutton],
+        xformatLabels : [ (value, index) => this.state.option1Array[index],(value, index) =>"day "+ (index+1),(value, index) => index,(value, index) => this.getMonth(index) ],
+        yformatLabels : [(value, index) => value,(value, index) => value,(value, index) => `${value}ºC`,(value, index) => value],
+        verticalContentInsetStyles : [{  top: 10, bottom: 10, left:10, right:10 },{  top: 10, bottom: 10, left:15, right:15 },{  top: 10, bottom: 10 },{  top: 10, bottom: 10 }],
+
+        xAxisTextStyle : 0,
+        xAxisSvgStyles : [{ fontSize: 7, fill: 'grey' },{ fontSize: 10, fill: 'grey' },{ fontSize: 10, fill: 'grey' },{ fontSize: 10, fill: 'grey' },],
+        option1Array: ["1pm","2pm","3pm","4pm","5pm","6pm","7pm","8pm","9pm","10pm","11pm",
+            "12am","1am","2am","3am","4am","5am","6am","7am","8am","9am","10am","11am","12pm",],
+        currentFormatLabel : 0,
         previousButton: 0,
     }
 
@@ -152,53 +162,66 @@ class SensorScreen extends React.Component {
         // Close socket
         return true;
     };
-
+    getMonth(index){
+        if(index%30 == 0 && index != 0){
+            if(index/30 == 1){
+                return "March"
+            }
+            if(index/30 == 2){
+                return "April"
+            }
+        }
+    }
     updateChart = (option) => {
         /*
         Have one big array that serves as a base. Then chop up based on option provided
          */
         if(option == 0){//1 day
             //alert("Button Number 0 Pressed!")
-            this.setState({
-                data: this.state.initdata.slice(0,24)
-            });
             this.state.buttonStyles[option] = styles.lighthistbutton;
             this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
             this.setState({
-                previousButton: option
+                data: this.state.initdata.slice(0,24),
+                previousButton: option,
+                currentFormatLabel: 0,
+                xContentInset: 0,
+                xAxisTextStyle: 0,
             });
         }
         else if(option == 1){//1 week
             //console.log("option number 1 pressed")
-            this.setState({
-                data: this.state.initdata.slice(0,31)
-            });
             this.state.buttonStyles[option] = styles.lighthistbutton;
             this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
             this.setState({
-                previousButton: option
+                data: this.state.initdata.slice(8,15),
+                previousButton: option,
+                currentFormatLabel: 1,
+                xContentInset: 1,
+                xAxisTextStyle: 1,
             });
         }
         else if(option == 2){//1 month
             //console.log("option number 2 pressed")
-            this.setState({
-                data: this.state.initdata.slice(0,31)
-            });
             this.state.buttonStyles[option] = styles.lighthistbutton;
             this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
             this.setState({
-                previousButton: option
+                data: this.state.initdata.slice(0,31),
+                previousButton: option,
+                currentFormatLabel: 2,
+                xContentInset: 2,
+                xAxisTextStyle: 2,
             });
         }
         else if (option == 3){// 6 months
             //console.log("option number 3 pressed")
-            this.setState({
-                data: this.state.initdata
-            });
             this.state.buttonStyles[option] = styles.lighthistbutton;
             this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
             this.setState({
-                previousButton: option
+                previousButton: option,
+                data: this.state.initdata,
+                currentFormatLabel: 3,
+                xContentInset: 3,
+                xAxisTextStyle: 3,
             });
         }
         else{
@@ -241,6 +264,7 @@ class SensorScreen extends React.Component {
                     <YAxis
                         data={this.state.data}
                         style={{ marginBottom: this.state.xAxisHeight }}
+                        formatLabel={this.state.yformatLabels[this.state.currentFormatLabel]}
                         contentInset={this.state.verticalContentInset}
                         svg={this.state.axesSvg}
                     />
@@ -256,9 +280,9 @@ class SensorScreen extends React.Component {
                         <XAxis
                             style={{ marginHorizontal: -10, height: this.state.xAxisHeight }}
                             data={this.state.data}
-                            formatLabel={(value, index) => index}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={this.state.axesSvg}
+                            formatLabel={this.state.xformatLabels[this.state.currentFormatLabel]}
+                            contentInset={this.state.verticalContentInsetStyles[this.state.xContentInset]}
+                            svg={this.state.xAxisSvgStyles[this.state.xAxisTextStyle]}
                         />
                     </View>
                 </View>
