@@ -89,7 +89,7 @@ class SensorScreen extends React.Component {
     updateOverride = () =>{
 
         if(this.state.override){
-            let scriptName = "SET_OVERRIDE: "+this.state.sensorName+" OVR";
+            let scriptName = "SET_OVERRIDE: "+this.state.sensorName;
             //console.log("Sending to middleman:  ",scriptName);
             //only update override if it could be sent to control room
             if(this.sendOverride(scriptName)){
@@ -103,7 +103,7 @@ class SensorScreen extends React.Component {
 
         }
         else{
-            let scriptName = "SET_OVERRIDE: "+this.state.sensorName;
+            let scriptName = "SET_OVERRIDE: "+this.state.sensorName +" OVR";
             //console.log("Sending to middleman:  ",scriptName);
             if(this.sendOverride(scriptName)){
                 this.setState({buttonText: "Remove Override"});
