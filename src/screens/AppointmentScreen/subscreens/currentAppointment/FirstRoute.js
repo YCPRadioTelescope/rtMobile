@@ -33,19 +33,30 @@ class FirstRoute extends React.Component {
         await this.props.getAppointment().then(response => {
             //console.log('appt. response: ', response);
             let appointment = response.appointment;
+
+            //get date/time closest to today
+            var sortedData = appointment.data.sort(function(a,b){
+                return new Date(b.start_time).getTime()-new Date(a.start_time).getTime()
+            });
+
+            console.log(sortedData[0]);
+
+
+
+
             // parse real date and time from starting timestamp
-            let start_Time = this.parseTime(appointment.data[2].start_time);
-            let start_Date = this.parseDate(appointment.data[2].start_time);
+            let start_Time = this.parseTime(sortedData[0].start_time);
+            let start_Date = this.parseDate(sortedData[0].start_time);
             this.setState({startTime: start_Time});
             this.setState({startDate: start_Date});
             // parse real date and time from ending timestamp
-            let end_Time = this.parseTime(appointment.data[2].end_time);
-            let end_Date = this.parseDate(appointment.data[2].end_time);
+            let end_Time = this.parseTime(sortedData[0].end_time);
+            let end_Date = this.parseDate(sortedData[0].end_time);
             this.setState({endTime: end_Time});
             this.setState({endDate: end_Date});
 
             // set user's name
-            let userName = this.parseName(appointment.data[2].user_id);
+            let userName = this.parseName(appointment.data[0].user_id);
             this.setState({displayName: userName});
 
             // get celestial body
