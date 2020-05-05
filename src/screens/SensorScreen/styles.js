@@ -32,7 +32,7 @@ export default StyleSheet.create({
     //position: 'absolute',
     //top: '10%',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 24,
     paddingRight: '5%'
   },
   sectionDivider: {
