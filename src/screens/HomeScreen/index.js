@@ -19,6 +19,8 @@ import CoordModal from "../../components/coordModal"
 import ScriptsModal from '../../components/scriptsModal/scriptsModal';
 import config from '../../../config';
 import TcpSocket from 'react-native-tcp-socket';
+import {getAppointment} from '../../actions/getAppointmentAction';
+import {getUsers} from '../../actions/getUsersAction';
 
 
 class HomeScreen extends React.Component {
@@ -29,6 +31,10 @@ class HomeScreen extends React.Component {
     isLoading: true,
     isLoading2: true,
     isLoading3: true,
+    isLoading4: true,
+    isLoading5: true,
+    userList:[],
+    currentUser:"",
     windSpeed: '',
     windDirection: '',
     temperature: '',
@@ -39,45 +45,70 @@ class HomeScreen extends React.Component {
     modal2Visible: false,
   };
 
-  async getData(){
+  async getData() {
     await this.props.getPendingUsers().then(response => {
       //console.log('pendinguser in home', response);
-        this.setState({users: response.pendingUser.data.length || 0});
-        this.setState({pendingUsers: response.pendingUser.data});
-        this.setState({isLoading2: false});
+      this.setState({users: response.pendingUser.data.length || 0});
+      this.setState({pendingUsers: response.pendingUser.data});
+      this.setState({isLoading2: false});
     });
     await this.props.getWeatherData().then(response => {
       //console.log('weather in home', response);
-        this.setState({windSpeed: this.props.weather[0].detail});
-        this.setState({windDirection: this.props.weather[1].detail});
-        this.setState({temperature: this.props.weather[2].detail});
-        this.setState({isLoading: false});
+      this.setState({windSpeed: this.props.weather[0].detail});
+      this.setState({windDirection: this.props.weather[1].detail});
+      this.setState({temperature: this.props.weather[2].detail});
+      this.setState({isLoading: false});
     });
-      await this.props.getSensorData().then(response => {
-        //console.log('sensor in home', response);
-          this.setState({sensorArray: this.props.sensor});
-          this.setState({isLoading3: false});
-          //set asmuth
-          if(this.state.sensorArray[2].value != null){
-              let azimuth = this.props.navigation.getParam("azimuth", this.state.sensorArray[2].value);
-              this.setState({azimuth: azimuth});
-          }
-          else{
-              let azimuth = this.props.navigation.getParam("azimuth", 90);
-              this.setState({azimuth: azimuth});
-          }
-          //set elevation
-          if(this.state.sensorArray[3].value != null){
-              let elevation = this.props.navigation.getParam("elevation", this.state.sensorArray[3].value);
-              this.setState({elevation: elevation});
-          }
-          else{
-              let elevation = this.props.navigation.getParam("elevation", 90);
-              this.setState({elevation: elevation});
-          }
-      })
-  }
+    await this.props.getWeatherData().then(response => {
+      //console.log('weather in home', response);
+      this.setState({windSpeed: this.props.weather[0].detail});
+      this.setState({windDirection: this.props.weather[1].detail});
+      this.setState({temperature: this.props.weather[2].detail});
+      this.setState({isLoading: false});
+    });
+    await this.props.getSensorData().then(response => {
+      //console.log('sensor in home', response);
+      this.setState({sensorArray: this.props.sensor});
+      this.setState({isLoading3: false});
+      //set asmuth
+      if (this.state.sensorArray[2].value != null) {
+        let azimuth = this.props.navigation.getParam("azimuth", this.state.sensorArray[2].value);
+        this.setState({azimuth: azimuth});
+      } else {
+        let azimuth = this.props.navigation.getParam("azimuth", 90);
+        this.setState({azimuth: azimuth});
+      }
+      //set elevation
+      if (this.state.sensorArray[3].value != null) {
+        let elevation = this.props.navigation.getParam("elevation", this.state.sensorArray[3].value);
+        this.setState({elevation: elevation});
+      } else {
+        let elevation = this.props.navigation.getParam("elevation", 90);
+        this.setState({elevation: elevation});
+      }
+    });
+    await this.props.getUsers().then(response => {
+      //console.log('user response: ', response);
+      this.setState({userList: response.user.data});
+      this.setState({isLoading4: false});
+    });
+    await this.props.getAppointment().then(response => {
+      //console.log('appt. response: ', response);
+      let appointment = response.appointment;
 
+      //get date/time closest to today
+      var sortedData = appointment.data.sort(function(a, b) {
+        return new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
+      });
+
+      console.log(sortedData[0]);
+      this.setState({currentUser:  this.parseName(sortedData[0].user_id)});
+
+
+
+      this.setState({isLoading5: false});
+    });
+  }
    async getToken () {
     const fcmToken = await firebase.messaging().getToken();
     //console.log('token', fcmToken);
@@ -122,6 +153,14 @@ class HomeScreen extends React.Component {
     this.setState({modal2Visible: true});
   }
 
+  parseName=(userID)=>{
+    for(let i=0; i< this.props.user.length; i++){
+      if(this.props.user[i].id === userID){
+        return this.props.user[i].first_name+' '+this.props.user[i].last_name;
+      }
+    }
+    return "Anonymous user";
+  }
 
   stop(){
     //console.log('Selection made');
@@ -278,7 +317,7 @@ class HomeScreen extends React.Component {
                 </Text>
               </TouchableHighlight>
               <TouchableHighlight   onPress={() => this.props.navigation.navigate('Appointment')} style={{position: 'absolute', bottom: 10, right: 5}}>
-                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>Appt by: Cody Spath</Text>
+                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>Appt by: {this.state.currentUser}</Text>
               </TouchableHighlight>
             </View>
             <View style={{alignItems: 'center'}}>
@@ -325,7 +364,7 @@ class HomeScreen extends React.Component {
   //}
 }
 const mapStateToProps = state => {
-  const { weather, users, sensor, pendingUsers } = state;
+  const { weather, users, sensor, pendingUsers, appointment, user } = state;
   /*console.log("weather.weather is:",weather.weather.weather);
   console.log('users bottom -> ', users);*/
 
@@ -333,6 +372,8 @@ const mapStateToProps = state => {
     pendingUsers: pendingUsers,
     weather: weather.weather.weather,
     sensor: sensor.sensor.sensor,
+    appointment: appointment.appointment.appointment,
+    user: user.user.user.data,
     errorResponse: weather.errorResponse,
     errorMessage: weather.errorMessage
   };
@@ -344,6 +385,8 @@ const mapDispatchToProps = dispatch =>
           getWeatherData,
           getPendingUsers,
           getSensorData,
+          getAppointment,
+          getUsers,
         },
         dispatch
     );

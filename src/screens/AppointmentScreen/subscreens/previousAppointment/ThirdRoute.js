@@ -1,68 +1,76 @@
-import {Image, Text, View, TouchableHighlight, ActivityIndicator, StatusBar} from 'react-native';
+import {View, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
+import connect from "react-redux/lib/connect/connect";
+import {bindActionCreators} from "redux";
 import ScrollAppointments from '../../../../components/scrollAppointments/ScrollAppointments';
-
+import {getFutureAppointments} from "../../../../actions/getFutureAppointmentAction.js";
 
 class ThirdRoute extends React.Component {
 
-    state = {
-        isLoading: true,
-    };
+  state = {
+    isLoading: true,
+    appointments:[],
+  };
 
-    async getData() {
-        this.setState({isLoading: false});
+  async getData() {
+    await this.props.getFutureAppointments().then(response => {
+      this.setState({appointments: response.appointments});
+      this.setState({isLoading: false});
+    });
+
+  }
+
+
+  componentDidMount() {
+
+    this.getData();
+  }
+
+
+  render() {
+    if (this.state.isLoading === true) {
+      return (
+        <View style={styles.loading}>
+          <ActivityIndicator/>
+          <StatusBar barStyle="default"/>
+        </View>
+      )
+    }
+    else {
+      return(
+        <View>
+          <ScrollAppointments appointments={this.state.appointments}/>
+        </View>
+      );
     }
 
-
-    componentDidMount() {
-
-        this.getData();
-    }
-
-
-    render() {
-        if (this.state.isLoading === true) {
-            return (
-              <View style={styles.loading}>
-                  <ActivityIndicator/>
-                  <StatusBar barStyle="default"/>
-              </View>
-            )
-        }
-        else {
-            return(
-              <View>
-                  <ScrollAppointments appointments={this.props.appointment}/>
-              </View>
-            );
-        }
-
-    }
+  }
 }
 
 // Need the below code for responses when using a reducer
-/*
-const mapStateToProps = state => {
-    const { user } = state;
-    return {
-        user: user.user.user.data,
-        errorResponse: user.errorResponse,
-        errorMessage: user.errorMessage
-    };
+
+let mapStateToProps = state => {
+  const { futureAppointment} = state;
+  return {
+    futureAppointment: futureAppointment.appointment.appointment,
+    errorResponse: futureAppointment.errorResponse,
+    errorMessage: futureAppointment.errorMessage,
+  };
+
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getUsers,
-        },
-        dispatch
-    );
+
+let mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getFutureAppointments,
+    },
+    dispatch
+  );
+
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ApprovalDashboardScreen);*/
-
-export default ThirdRoute;
+  mapStateToProps,
+  mapDispatchToProps
+)(ThirdRoute);

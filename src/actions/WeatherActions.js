@@ -2,11 +2,8 @@ import axios from "axios";
 import { AsyncStorage } from "react-native";
 import config from '../../config.json';
 
+const url = config.Webservice;
 
-//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
-const url = "http:3.218.80.78";
-
-export const LOGIN = "LOGIN";
 export const WEATHER_SUCCESS = "SENSOR_SUCCESS";
 export const WEATHER_FAILURE = "SENSOR_FAILURE";
 
