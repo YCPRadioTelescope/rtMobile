@@ -1,10 +1,7 @@
 import axios from "axios";
 import config from "../../config.json";
 
-//const url = "http://rtWebService.us-east-1.elasticbeanstalk.com";
-//const url = "http://127.0.0.1:3000";
-const url = "http:3.218.80.78";
-
+const url = config.Webservice;
 
 export const RECENT_APPOINTMENTS = "RECENT_APPOINTMENTS";
 export const GET_RECENT_APPOINTMENTS_SUCCESS = "GET_RECENT_APPOINTMENTS_SUCCESS";
