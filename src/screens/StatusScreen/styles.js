@@ -27,7 +27,7 @@ export default StyleSheet.create({
     position: 'absolute',
     top: '9.0%',
     alignSelf: 'center',
-    marginTop: '15%',
+    marginTop: '12.5%',
   },
   sensorlistcontainer: {
     flex: 1,

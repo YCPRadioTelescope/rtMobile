@@ -55,6 +55,8 @@ class SensorScreen extends React.Component {
         verticalContentInset : {  top: 10, bottom: 10 },
         axesSvg : { fontSize: 10, fill: 'grey' },
         xAxisHeight : 30,
+        buttonStyles : [styles.lighthistbutton,styles.greyhistbutton,styles.greyhistbutton,styles.greyhistbutton],
+        previousButton: 0,
     }
 
 
@@ -160,11 +162,21 @@ class SensorScreen extends React.Component {
             this.setState({
                 data: this.state.initdata.slice(0,24)
             });
+            this.state.buttonStyles[option] = styles.lighthistbutton;
+            this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
+            this.setState({
+                previousButton: option
+            });
         }
         else if(option == 1){//1 week
             //console.log("option number 1 pressed")
             this.setState({
                 data: this.state.initdata.slice(0,31)
+            });
+            this.state.buttonStyles[option] = styles.lighthistbutton;
+            this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
+            this.setState({
+                previousButton: option
             });
         }
         else if(option == 2){//1 month
@@ -172,11 +184,21 @@ class SensorScreen extends React.Component {
             this.setState({
                 data: this.state.initdata.slice(0,31)
             });
+            this.state.buttonStyles[option] = styles.lighthistbutton;
+            this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
+            this.setState({
+                previousButton: option
+            });
         }
         else if (option == 3){// 6 months
             //console.log("option number 3 pressed")
             this.setState({
                 data: this.state.initdata
+            });
+            this.state.buttonStyles[option] = styles.lighthistbutton;
+            this.state.buttonStyles[this.state.previousButton] = styles.greyhistbutton;
+            this.setState({
+                previousButton: option
             });
         }
         else{
@@ -241,22 +263,22 @@ class SensorScreen extends React.Component {
                     </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <TouchableHighlight onPress={() =>this.updateChart(0)} style={styles.histbutton}>
+                    <TouchableHighlight onPress={() =>this.updateChart(0)} style={this.state.buttonStyles[0]}>
                         <View>
                             <Text style={{color: 'white'}}> 1 day </Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={() =>this.updateChart(1)} style={styles.histbutton}>
+                    <TouchableHighlight onPress={() =>this.updateChart(1)} style={this.state.buttonStyles[1]}>
                         <View>
                             <Text style={{color: 'white'}}> 1 Week </Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={() =>this.updateChart(2)} style={styles.histbutton}>
+                    <TouchableHighlight onPress={() =>this.updateChart(2)} style={this.state.buttonStyles[2]}>
                         <View>
                             <Text style={{color: 'white'}}> 1 Month </Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={() =>this.updateChart(3)} style={styles.histbutton}>
+                    <TouchableHighlight onPress={() =>this.updateChart(3)} style={this.state.buttonStyles[3]}>
                         <View>
                             <Text style={{color: 'white'}}> 3 Months </Text>
                         </View>

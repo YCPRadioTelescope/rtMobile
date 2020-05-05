@@ -57,7 +57,7 @@ export default StyleSheet.create({
     width: '50%',
     marginLeft: '25%',
   },
-  histbutton: {
+  greyhistbutton: {
     borderWidth: 1,
     borderColor: "#cbd7dd",
     borderRadius: 14,
