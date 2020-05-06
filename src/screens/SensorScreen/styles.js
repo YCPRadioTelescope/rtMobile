@@ -32,7 +32,7 @@ export default StyleSheet.create({
     //position: 'absolute',
     //top: '10%',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 24,
     paddingRight: '5%'
   },
   sectionDivider: {
@@ -46,7 +46,7 @@ export default StyleSheet.create({
     width: '100%'
   },
   button: {
-    marginTop: '80%',
+    marginTop: '10%',
     borderWidth: 1,
     borderColor: "#cbd7dd",
     borderRadius: 14,
@@ -57,16 +57,29 @@ export default StyleSheet.create({
     width: '50%',
     marginLeft: '25%',
   },
-  greyButton: {
-    marginTop: '80%',
+  greyhistbutton: {
     borderWidth: 1,
     borderColor: "#cbd7dd",
     borderRadius: 14,
     paddingVertical: 6,
-    paddingHorizontal: 13,
+    paddingHorizontal: 2,
     backgroundColor: 'grey',
     alignItems: 'center',
-    width: '50%',
-    marginLeft: '25%',
+    width: '25%',
   },
+  lighthistbutton: {
+    borderWidth: 1,
+    borderColor: "#cbd7dd",
+    borderRadius: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 2,
+    backgroundColor: 'orange',
+    alignItems: 'center',
+    width: '25%',
+  },
+  chart:{
+    height: 200,
+    padding: 20,
+    flexDirection: 'row'
+  }
 });
