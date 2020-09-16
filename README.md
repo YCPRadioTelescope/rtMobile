@@ -18,7 +18,7 @@ Clone the project<br/>
 In the terminal navigate into the project folder<br/>
 run npm install<br/> 
 If on a mac<br/>
-cd pod<br/>
+cd ios<br/>
 run pod install<br/>
 cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
