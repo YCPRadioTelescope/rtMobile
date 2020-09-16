@@ -50,11 +50,11 @@ Other common issues can be found here https://facebook.github.io/react-native/do
 If you get an error like this:
 [!] /bin/bash -c 
 set -e
-#!/bin/bash
-# Copyright (c) Facebook, Inc. and its affiliates.
-#
-# This source code is licensed under the MIT license found in the
-# LICENSE file in the root directory of this source tree.
+!/bin/bash
+Copyright (c) Facebook, Inc. and its affiliates.
+
+This source code is licensed under the MIT license found in the
+LICENSE file in the root directory of this source tree.
 
 set -e
 
