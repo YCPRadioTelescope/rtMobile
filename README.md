@@ -45,6 +45,9 @@ Generate a keystore file with this command -> keytool -genkey -v -keystore debug
 Place the new file in rtMobile/android/app folder<br/>
 If keytool is not recognized as a command, you will have to navigate to where your keytool is an executable file somewhere in your java jdk folder, and run the command while in that folder.  Cut and paste the new keystore file in rtMobile/android/app<br/>
 <br/>
+
+----
+
 Other common issues can be found here https://facebook.github.io/react-native/docs/troubleshooting
 
 ----
