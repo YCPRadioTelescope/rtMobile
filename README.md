@@ -20,6 +20,7 @@ run npm install<br/>
 If on a mac<br/>
 cd ios<br/>
 run pod install<br/>
+if pod install is not working use https://react-native-community.github.io/upgrade-helper/?from=0.60.6&to=0.62.2 to upgrade the code to match your react native version <br>
 cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
 Go to the firebase console <br/>
