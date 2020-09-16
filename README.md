@@ -47,6 +47,8 @@ If keytool is not recognized as a command, you will have to navigate to where yo
 <br/>
 Other common issues can be found here https://facebook.github.io/react-native/docs/troubleshooting
 
+----
+
 If you get an error like this:
 [!] /bin/bash -c 
 set -e
@@ -65,6 +67,7 @@ use this command:
 git config --global --add core.autocrlf input
 then, pod install
 
+----
 
 ## Deployment
 
