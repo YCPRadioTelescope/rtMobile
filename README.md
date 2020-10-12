@@ -20,6 +20,7 @@ run npm install<br/>
 If on a mac<br/>
 cd ios<br/>
 run pod install<br/>
+if pod install is not working use https://react-native-community.github.io/upgrade-helper/?from=0.60.6&to=0.62.2 to upgrade the code to match your react native version <br>
 cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
 Go to the firebase console <br/>
@@ -44,7 +45,32 @@ Generate a keystore file with this command -> keytool -genkey -v -keystore debug
 Place the new file in rtMobile/android/app folder<br/>
 If keytool is not recognized as a command, you will have to navigate to where your keytool is an executable file somewhere in your java jdk folder, and run the command while in that folder.  Cut and paste the new keystore file in rtMobile/android/app<br/>
 <br/>
+
+----
+
 Other common issues can be found here https://facebook.github.io/react-native/docs/troubleshooting
+
+----
+
+If you get an error like this:
+[!] /bin/bash -c 
+set -e
+!/bin/bash
+Copyright (c) Facebook, Inc. and its affiliates.
+
+This source code is licensed under the MIT license found in the
+LICENSE file in the root directory of this source tree.
+
+set -e
+
+PLATFORM_NAME="${PLATFORM_NAME:-iphoneos}"
+CURRENT_ARCH="${CURRENT_ARCH}"
+........
+use this command:
+git config --global --add core.autocrlf input
+then, pod install
+
+----
 
 ## Deployment
 
