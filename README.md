@@ -15,12 +15,12 @@ Or brew if you are on a Mac: https://docs.brew.sh/Installation <br>
 Then Install Yarn: https://classic.yarnpkg.com/en/docs/install/#windows-stable
 
 Clone the project<br/>
-In the terminal navigate into the project folder<br/>
-run npm install<br/> 
+In the terminal navigate into the project folder<br/> <br/>
+<br/> Verify the version of react-native on your machine matches the version the project is running.  In your terminal run react-native -v.  Match that to the version in your package.json.  It will be under dependencies and look something like this -> "react-native": "0.63.3",  If the versions do not match you will have to use https://reactnative.dev/docs/upgrading to upgrade the project to match the version on your machine. The [upgrade helper](https://react-native-community.github.io/upgrade-helper/) can be very useful for this.<br/>
+<br/> run npm install<br/> 
 If on a mac<br/>
 cd ios<br/>
 run pod install<br/>
-if pod install is not working use https://react-native-community.github.io/upgrade-helper/?from=0.60.6&to=0.62.2 to upgrade the code to match your react native version <br>
 cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
 Go to the firebase console <br/>
