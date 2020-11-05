@@ -15,7 +15,7 @@ Or brew if you are on a Mac: https://docs.brew.sh/Installation <br>
 Then Install Yarn: https://classic.yarnpkg.com/en/docs/install/#windows-stable
 
 Clone the project<br/>
-In the terminal navigate into the project folder<br/> <br/>
+In the terminal navigate into the project folder<br/>
 <br/> Verify the version of react-native on your machine matches the version the project is running.  In your terminal run react-native -v.  Match that to the version in your package.json.  It will be under dependencies and look something like this -> "react-native": "0.63.3",  If the versions do not match you will have to use https://reactnative.dev/docs/upgrading to upgrade the project to match the version on your machine. The [upgrade helper](https://react-native-community.github.io/upgrade-helper/) can be very useful for this.<br/>
 <br/> run npm install<br/> 
 If on a mac<br/>
@@ -29,7 +29,7 @@ Click on the setting 'gear' at the top left <br/>
 Click on the general tab in the middle<br/>
 Scroll to the bottom and download the google-services.json file<br/>
 Place this file in rtMobile/android/app... do not commit this file on github <br/>
-Get a hold of the UUID from precvious members<br/>
+Get a hold of the UUID from previous members<br/>
 Create a config.json in the main folder and place the UUID in it.<br/>
 
 Go to https://facebook.github.io/react-native/docs/getting-started and follow their React Native CLI Quickstart guide. 
@@ -74,4 +74,6 @@ then, pod install
 
 ## Deployment
 
-https://facebook.github.io/react-native/docs/running-on-device
+https://facebook.github.io/react-native/docs/running-on-device<br/> 
+Be very mindful that on android, the app can only be deployed using the same signing as the original upload... for students moving on make sure to pass this signing along to the next class.
+
