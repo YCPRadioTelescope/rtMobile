@@ -49,6 +49,7 @@ class DpadScreen extends React.Component {
   };
 
   move = ( direction ) => {
+
       let verticalNum = this.state.elevation;
       let horizontalNum = this.state.azimuth;
 
@@ -75,6 +76,50 @@ class DpadScreen extends React.Component {
           horizontalNum = horizontalNum + 1;
         }
         this.setState({azimuth: horizontalNum})
+      }
+      if (direction === 'upRight') { // diagonal up and to the right
+          if (horizontalNum < 360) { // right
+              horizontalNum = horizontalNum + 1;
+          }
+          this.setState({azimuth: horizontalNum})
+
+          if (verticalNum < 90) { // up
+              verticalNum = verticalNum + .5;
+          }
+          this.setState({elevation: verticalNum});
+      }
+      if (direction === 'upLeft') { // diagonal up and to the left
+          if (horizontalNum > 0) { // left
+              horizontalNum = horizontalNum - 1;
+          }
+          this.setState({azimuth: horizontalNum})
+
+          if (verticalNum < 90) { // up
+              verticalNum = verticalNum + .5;
+          }
+          this.setState({elevation: verticalNum});
+      }
+      if (direction === 'downRight') { // diagonal down and to the right
+          if (horizontalNum < 360) { // right
+              horizontalNum = horizontalNum + 1;
+          }
+          this.setState({azimuth: horizontalNum})
+
+          if (verticalNum > -10) { // down
+              verticalNum = verticalNum - .5;
+          }
+          this.setState({elevation: verticalNum});
+      }
+      if (direction === 'downLeft') { // diagonal down and to the left
+          if (horizontalNum > -10) { // left
+              horizontalNum = horizontalNum - 1;
+          }
+          this.setState({azimuth: horizontalNum})
+
+          if (verticalNum > -10) { // down
+              verticalNum = verticalNum - .5;
+          }
+          this.setState({elevation: verticalNum});
       }
       if (this.state.azimuth <= 5 && this.state.azimuth > 0 || this.state.azimuth < 360 && this.state.azimuth >= 355) {
         this.setState({sliderHorizontalPic: require("../../../assets/images/mediumyellowstatus.png")});
@@ -158,13 +203,43 @@ class DpadScreen extends React.Component {
               />
             </TouchableHighlight>
           </View>
-          <View style={{position: 'absolute', top: '65%', left: '48%'}}>
+          <View style={{position: 'absolute', top: '64%', left: '48%'}}>
             <TouchableHighlight style={styles.back} onPressIn={() => this.move('down')} onPressOut={this.stopTimer}>
               <Image
                 source={require("../../../assets/images/down.png")}
               />
             </TouchableHighlight>
           </View>
+
+          <View style={{position: 'absolute', top: '63%', left: '35%'}}>
+              <TouchableHighlight style={styles.back} onPressIn={() => this.move('downLeft')} onPressOut={this.stopTimer}>
+                  <Image
+                      source={require("../../../assets/images/downLeft.png")}
+                  />
+              </TouchableHighlight>
+          </View>
+          <View style={{position: 'absolute', top: '63%', left: '58%'}}>
+              <TouchableHighlight style={styles.back} onPressIn={() => this.move('downRight')} onPressOut={this.stopTimer}>
+                  <Image
+                      source={require("../../../assets/images/downRight.png")}
+                  />
+              </TouchableHighlight>
+          </View>
+          <View style={{position: 'absolute', top: '50%', left: '35%'}}>
+              <TouchableHighlight style={styles.back} onPressIn={() => this.move('upLeft')} onPressOut={this.stopTimer}>
+                  <Image
+                      source={require("../../../assets/images/upLeft.png")}
+                  />
+              </TouchableHighlight>
+          </View>
+          <View style={{position: 'absolute', top: '49.5%', left: '58%'}}>
+              <TouchableHighlight style={styles.back} onPressIn={() => this.move('upRight')} onPressOut={this.stopTimer}>
+                  <Image
+                      source={require("../../../assets/images/upRight.png")}
+                  />
+              </TouchableHighlight>
+          </View>
+
       </View>
     );
   }

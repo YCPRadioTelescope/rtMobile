@@ -32,11 +32,11 @@ class ScriptsModal extends Component {
     );
   };
 move(scriptName){
-  //console.log('Selection made');
+    //console.log('Selection made');
     let options = {
-      host: config.Host,
-      port: config.Port,
-      reuseAddress: true,
+        host: config.Host,
+        port: config.Port,
+        reuseAddress: true,
     };
 
     let client = TcpSocket.createConnection(options, (address) => {

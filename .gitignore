@@ -61,3 +61,5 @@ sendgrid.env
 
 google-services.json
 config.json
+
+# Encryption keys
