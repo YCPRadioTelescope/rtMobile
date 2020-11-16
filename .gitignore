@@ -63,3 +63,5 @@ google-services.json
 config.json
 
 # Encryption keys
+AESKey.bin
+IV.bin
