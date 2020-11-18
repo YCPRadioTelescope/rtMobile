@@ -23,14 +23,22 @@ cd ios<br/>
 run pod install<br/>
 cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
-Go to the firebase console <br/>
+
+### Additional Files You Will Need - Do NOT Commit These to GitHub
+<br/>google-services.json:<br/>
+Go to the firebase console (previous team members can give you the login info)<br/>
 Click on the rtMobile project <br/>
 Click on the setting 'gear' at the top left <br/>
 Click on the general tab in the middle<br/>
 Scroll to the bottom and download the google-services.json file<br/>
-Place this file in rtMobile/android/app... do not commit this file on github <br/>
+Place this file in rtMobile/android/app<br/>
+<br/>config.json:<br/>
 Get a hold of the UUID from previous members<br/>
+This should also be available in previous semesters google drives<br/>
 Create a config.json in the main folder and place the UUID in it.<br/>
+<br/>encryption files:<br/>
+Reach out to previous team members (Mobile or Control Room) for these<br/>
+Place these in rtMobile/src/encryption
 
 Go to https://facebook.github.io/react-native/docs/getting-started and follow their React Native CLI Quickstart guide. 
 
