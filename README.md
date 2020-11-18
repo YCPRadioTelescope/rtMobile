@@ -25,7 +25,8 @@ cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
 
 ### Additional Files You Will Need - Do NOT Commit These to GitHub
-<br/>google-services.json:<br/>
+
+google-services.json:<br/>
 Go to the firebase console (previous team members can give you the login info)<br/>
 Click on the rtMobile project <br/>
 Click on the setting 'gear' at the top left <br/>
