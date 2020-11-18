@@ -1,4 +1,4 @@
-# Radio telescope Mobile App
+# Radio Telescope Mobile App
 
 A Mobile app for the admins of the radio telescope
 
@@ -6,7 +6,7 @@ A Mobile app for the admins of the radio telescope
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Installing
+## Installing
 
 Install the latest version of Node.js https://nodejs.org/en/
 
@@ -24,7 +24,7 @@ run pod install<br/>
 cd ..<br/>
 If some libraries don't install, you can also run yarn add <br/>
 
-### Additional Files You Will Need - Do NOT Commit These to GitHub
+## Additional Files You Will Need - Do NOT Commit These to GitHub
 
 google-services.json:<br/>
 Go to the firebase console (previous team members can give you the login info)<br/>
@@ -55,29 +55,23 @@ Place the new file in rtMobile/android/app folder<br/>
 If keytool is not recognized as a command, you will have to navigate to where your keytool is an executable file somewhere in your java jdk folder, and run the command while in that folder.  Cut and paste the new keystore file in rtMobile/android/app<br/>
 <br/>
 
+If you get an error like this:<br/>
+[!] /bin/bash -c<br/> 
+set -e<br/>
+!/bin/bash<br/>
+Copyright (c) Facebook, Inc. and its affiliates.<br/>
+This source code is licensed under the MIT license found in the<br/>
+LICENSE file in the root directory of this source tree.<br/>
+set -e<br/>
+PLATFORM_NAME="${PLATFORM_NAME:-iphoneos}"<br/>
+CURRENT_ARCH="${CURRENT_ARCH}"<br/>
+<br/>use this command:<br/>
+git config --global --add core.autocrlf input<br/>
+then, pod install<br/>
+
 ----
 
 Other common issues can be found here https://facebook.github.io/react-native/docs/troubleshooting
-
-----
-
-If you get an error like this:
-[!] /bin/bash -c 
-set -e
-!/bin/bash
-Copyright (c) Facebook, Inc. and its affiliates.
-
-This source code is licensed under the MIT license found in the
-LICENSE file in the root directory of this source tree.
-
-set -e
-
-PLATFORM_NAME="${PLATFORM_NAME:-iphoneos}"
-CURRENT_ARCH="${CURRENT_ARCH}"
-........
-use this command:
-git config --global --add core.autocrlf input
-then, pod install
 
 ----
 
