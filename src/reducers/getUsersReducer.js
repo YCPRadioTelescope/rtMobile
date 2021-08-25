@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 };
 
 const getUsersReducer = (state = INITIAL_STATE, action) => {
-    console.log("ACTION users", action);
+    //console.log("ACTION users", action);
     switch (action.type) {
         // Take all returned user info and put it in store
         case GET_USERS_SUCCESS:

@@ -58,24 +58,24 @@ class StatusScreen extends React.Component {
         this.props.navigation.navigate('Sensor');
     };
 
-    getLightColor = (detail,override) =>{
+    getLightColor = (status,override) =>{
         /*
         This function sets the image of the sensor
         if override is 1 it returns orange
-        if 0 the func returns based on the integer parameter 'detail'
+        if 0 the func returns based on the integer parameter 'status'
         0 returns red, 1 returns yellow, 2 returns green, returns grey if anything else
          */
         if(override){
             return require("../../../assets/images/orangeStatus.png");
         }
         else{
-            if(detail == 0){//0 = red
+            if(status == 0){//0 = red
                 return require("../../../assets/images/redStatus.png");
             }
-            else if (detail == 1){//1 = yellow
+            else if (status == 1){//1 = yellow
                 return require("../../../assets/images/mediumyellowstatus.png");
             }
-            else if (detail == 2){// 2 = green
+            else if (status == 2){// 2 = green
                 return require("../../../assets/images/meduimgreenstatus.png");
             }
             else{//anything else should be a grey light to show something is wrong
@@ -89,11 +89,11 @@ class StatusScreen extends React.Component {
         let numYellow = 0;
         while(count < this.props.sensor.length){
             //if at least 1 sensor is red set status to Red
-            if(this.props.sensor[count].details == 0 && !this.props.sensor[count].override){
+            if(this.props.sensor[count].status == 0 && !this.props.sensor[count].override){
                 return require("../../../assets/images/largeredstatus.png");
             }
             //check if there are any yellows
-            else if(this.props.sensor[count].details == 1 && !this.props.sensor[count].override){
+            else if(this.props.sensor[count].status == 1 && !this.props.sensor[count].override){
                 numYellow ++;
             }
             count++;
@@ -115,7 +115,7 @@ class StatusScreen extends React.Component {
 
     render() {
         if (this.state.isLoading) {
-            console.log("isLoading is ",this.state.isLoading);
+            //console.log("isLoading is ",this.state.isLoading);
             return (
                 <View style={styles.loading}>
                     <ActivityIndicator/>
@@ -125,7 +125,7 @@ class StatusScreen extends React.Component {
         } else {
             //console.log("isLoading is ",this.state.isLoading);
             let statusLightColor = this.getStatusLightColor()
-            console.log("sensor props in status screen", this.props.sensor);
+            //console.log("sensor props in status screen", this.props.sensor);
             return (
                 <ScrollView>
                     <TouchableHighlight onPress={() => this.props.navigation.goBack()} style={styles.back}>
@@ -151,7 +151,7 @@ class StatusScreen extends React.Component {
                                     this.props.navigation.navigate('Sensor',
                                         {
                                             sensorname: sensorInfo.name,
-                                            details: sensorInfo.details,
+                                            status: sensorInfo.status,
                                             override: sensorInfo.override,
                                             id: sensorInfo.id,
                                             sensor: sensorInfo
@@ -161,7 +161,7 @@ class StatusScreen extends React.Component {
                                     <Sensor
                                         name={sensorInfo.name}
                                         style={styles.sensorLightStyle}
-                                        image = {this.getLightColor(sensorInfo.details,sensorInfo.override)}
+                                        image = {this.getLightColor(sensorInfo.status,sensorInfo.override)}
                                     />
 
 
@@ -185,7 +185,7 @@ adb reverse tcp:3000 tcp:3000
  */
 const mapStateToProps = state => {
     const { sensor } = state;
-    console.log("Getting sensor = state in MapStateToProps",sensor);
+    //console.log("Getting sensor = state in MapStateToProps",sensor);
     return {
     sensor: sensor.sensor.sensor,
     errorResponse: sensor.errorResponse,

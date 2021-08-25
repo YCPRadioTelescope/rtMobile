@@ -4,6 +4,7 @@ import TcpSocket from 'react-native-tcp-socket';
 import {setValue} from "../actions/setValueAction";
 import {bindActionCreators} from "redux";
 import connect from "react-redux/lib/connect/connect";
+import config from '../../config';
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
@@ -18,26 +19,32 @@ class CoordModal extends Component {
   move = () => {
 
     let options = {
-      host: '10.127.8.140',
-      port: 8090
+      host: config.Host,
+      port: config.Port,
+      reuseAddress: true,
     };
 
-    let client = TcpSocket.createConnection(options);
-
-    client.on('data', function(data) {
-      console.log('message was received', data);
+    let client = TcpSocket.createConnection(options, (address) => {
+      //console.log(address);
+     // console.log('Connection made!');
+      // Write on the socket
+      client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
     });
 
-    client.on('error', function(error) {
-      console.log(error);
+    client.on('data', (data) => {
+      //console.log('Received: ', data);
+      client.destroy(); // kill client after server's response
     });
 
-    client.on('close', function(){
-      console.log('Connection closed!');
+    client.on('error', (error)=>{
+      console.log('Error: ', error);
     });
 
-    // Write on the socket
-    client.write('COORDINATE_MOVE ELEV:' + this.state.elevation + 'AZIM:' + this.state.azimuth + 'ID:todd');
+    client.on('close', ()=>{
+      //console.log('Connection closed!');
+    });
+
+
 
     // Close socket
     client.destroy();

@@ -1,17 +1,24 @@
-import {Image, Text, View, TouchableHighlight, ActivityIndicator, StatusBar} from 'react-native';
+import {View, ActivityIndicator, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
+import connect from "react-redux/lib/connect/connect";
+import {bindActionCreators} from "redux";
 import ScrollAppointments from '../../../../components/scrollAppointments/ScrollAppointments';
-
+import {getRecentAppointments} from "../../../../actions/getRecentAppointmentAction.js";
 
 class SecondRoute extends React.Component {
 
     state = {
         isLoading: true,
+        appointments:[],
     };
 
     async getData() {
+      await this.props.getRecentAppointments().then(response => {
+        this.setState({appointments: response.appointments});
         this.setState({isLoading: false});
+      });
+
     }
 
 
@@ -33,7 +40,7 @@ class SecondRoute extends React.Component {
         else {
             return(
               <View>
-                  <ScrollAppointments appointments={this.props.appointment}/>
+                  <ScrollAppointments appointments={this.state.appointments}/>
               </View>
             );
         }
@@ -42,27 +49,28 @@ class SecondRoute extends React.Component {
 }
 
 // Need the below code for responses when using a reducer
-/*
-const mapStateToProps = state => {
-    const { user } = state;
+
+let mapStateToProps = state => {
+    const { recentAppointment} = state;
     return {
-        user: user.user.user.data,
-        errorResponse: user.errorResponse,
-        errorMessage: user.errorMessage
+        recentAppointment: recentAppointment.appointment.appointment,
+        errorResponse: recentAppointment.errorResponse,
+        errorMessage: recentAppointment.errorMessage,
     };
+
 };
 
-const mapDispatchToProps = dispatch =>
+
+let mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            getUsers,
+            getRecentAppointments,
         },
         dispatch
     );
 
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ApprovalDashboardScreen);*/
-
-export default SecondRoute;
+)(SecondRoute);

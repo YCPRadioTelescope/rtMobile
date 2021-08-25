@@ -1,12 +1,12 @@
 import {
-  Image,
-  Text,
-  TouchableHighlight,
-  View,
-  ScrollView,
-  ActivityIndicator,
-  StatusBar,
-  TouchableOpacity,
+    Image,
+    Text,
+    TouchableHighlight,
+    View,
+    ScrollView,
+    ActivityIndicator,
+    StatusBar,
+    TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import styles from './styles';
@@ -32,16 +32,23 @@ const Sensor = ({
     </View>
 );
 
-class WeatherScreen extends React.Component {
+class HistoryScreen extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      //this is the array that holds information the the sensor components
-      isLoading: true,
-
+    constructor() {
+        super();
+        this.state = {
+            //this is the array that holds information the the sensor components
+            isLoading: false,
+            buttonText: "Activate Override",
+            // sensorName: this.props.navigation.getParam('sensorname', 'Sensor'),
+            // status:  this.props.navigation.getParam('status', 3),
+            // override: this.props.navigation.getParam('override',0),
+            // id: this.props.navigation.getParam('id',-1),
+            // sensor: this.props.navigation.getParam('sensor')
+        }
     }
-  }
+
+
 
     async getData(){
 
@@ -57,17 +64,6 @@ class WeatherScreen extends React.Component {
 
     handlepress = ()=>{
         this.props.navigation.navigate('Sensor');
-    };
-
-    swapstatuscolor = () => {
-        //console.log('Yellow Pressed');
-        this.setState({statusLightStyle: {
-                width: 50,
-                height: 50,
-                top: '15.0%',
-                right: '22.5%',
-                position: 'absolute',
-            }})
     };
     drawSensorStatus = () =>{
         return 0;
@@ -93,26 +89,9 @@ class WeatherScreen extends React.Component {
                         />
                     </TouchableHighlight>
                     <View style={{marginTop: '10%', alignItems: 'center'}}>
-                        <Text style={styles.header}>Weather Station</Text>
+                        <Text style={styles.header}>History Screen</Text>
                     </View>
                     <Divider style={styles.sectionDivider}/>
-
-                    <View style={styles.sensorlistcontainer}>
-                        {this.props.weather.map(sensorInfo => {
-                            return (
-                                <TouchableOpacity onPress={() => {
-
-                                }}>
-                                    <Sensor name={sensorInfo.name}
-                                            style={styles.sensorLightStyle}
-                                            detail={sensorInfo.detail}
-                                    />
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-
-
                 </ScrollView>
             );
         }
@@ -128,12 +107,12 @@ adb reverse tcp:3000 tcp:3000
  */
 const mapStateToProps = state => {
     const { weather } = state;
-    //console.log("Getting weather = state in MapStateToProps",weather);
+    console.log("Getting wether = state in MapStateToProps",weather);
     return {
 
-        weather: weather.weather.weather,
-        errorResponse: weather.errorResponse,
-        errorMessage: weather.errorMessage
+        //weather: weather.weather.weather,
+        //errorResponse: weather.errorResponse,
+        //errorMessage: weather.errorMessage
     };
 };
 
@@ -148,4 +127,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(WeatherScreen);
+)(HistoryScreen);
