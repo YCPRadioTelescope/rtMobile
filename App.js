@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import type {Node} from 'react';
 import { Provider } from "react-redux";
 import AppContainer from './MainNavigation';
 import store from "./store";
