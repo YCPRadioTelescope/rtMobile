@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../../config";
 
-const url = config.Webservice;
+const url = config.URL;
 
 export const DENY_USER_SUCCESS = "DENY_USER_SUCCESS";
 export const DENY_USER_FAILURE = "DENY_USER_FAILURE";

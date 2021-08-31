@@ -2,7 +2,7 @@ import axios from "axios";
 import { AsyncStorage } from "react-native";
 import config from "../../config";
 
-const url = config.Webservice;
+const url = config.URL;
 
 export const LOGIN = "LOGIN";
 export const OVERRIDE_SUCCESS = "SENSOR_SUCCESS";

@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../../config.json";
 
-const url = config.Webservice;
+const url = config.URL;
 
 export const GET_PENDING_USERS_SUCCESS = "GET_PENDING_USERS_SUCCESS";
 export const GET_PENDING_USERS_FAILURE = "GET_PENDING_USERS_FAILURE";

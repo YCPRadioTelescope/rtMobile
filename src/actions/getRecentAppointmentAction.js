@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../../config.json";
 
-const url = config.Webservice;
+const url = config.URL;
 
 export const RECENT_APPOINTMENTS = "RECENT_APPOINTMENTS";
 export const GET_RECENT_APPOINTMENTS_SUCCESS = "GET_RECENT_APPOINTMENTS_SUCCESS";

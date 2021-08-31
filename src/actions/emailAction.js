@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../../config";
 
-const url = config.Webservice;
+const url = config.URL;
 
 export const EMAIL = "EMAIL";
 export const EMAIL_SUCCESS = "EMAIL_SUCCESS";
